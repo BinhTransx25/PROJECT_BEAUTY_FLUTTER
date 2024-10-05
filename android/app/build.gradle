@@ -38,7 +38,12 @@ android {
         }
     }
 }
-
+// Thêm khối dependencies vào đây
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:31.0.0') // Thêm dòng này
+    implementation 'com.google.firebase:firebase-analytics' // Thêm dòng này
+}
+apply plugin: 'com.google.gms.google-services'
 flutter {
     source = "../.."
 }

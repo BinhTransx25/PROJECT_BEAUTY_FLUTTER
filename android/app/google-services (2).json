@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "261904720154",
+    "project_id": "test-d06ff",
+    "storage_bucket": "test-d06ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261904720154:android:f9ed43853ded1ee13f0ca3",
+        "android_client_info": {
+          "package_name": "com.cds.beauty"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJNszWCzN0oDduW4olekSc_kYAZZOGUws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
