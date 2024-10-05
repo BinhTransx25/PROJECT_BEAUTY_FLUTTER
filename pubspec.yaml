@@ -1,86 +1,81 @@
 name: beauty
 description: "A new Flutter project."
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none' # Không xuất bản lên pub.dev
 
-# The following defines the version and build number for your application.
-# A version number is three numbers separated by dots, like 1.2.43
-# followed by an optional build number separated by a +.
-# Both the version and the builder number may be overridden in flutter
-# build by specifying --build-name and --build-number, respectively.
-# In Android, build-name is used as versionName while build-number used as versionCode.
-# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
-# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
-# Read more about iOS versioning at
-# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-# In Windows, build-name is used as the major, minor, and patch parts
-# of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 1.0.0+1 # Phiên bản ứng dụng
 
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.5.0 # SDK Flutter tối thiểu yêu cầu
 
-# Dependencies specify other packages that your package needs in order to work.
-# To automatically upgrade your package dependencies to the latest versions
-# consider running `flutter pub upgrade --major-versions`. Alternatively,
-# dependencies can be manually updated by changing the version numbers below to
-# the latest version available on pub.dev. To see which dependencies have newer
-# versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
-    sdk: flutter
-  dio: ^5.7.0
-  retrofit: ^4.4.1
-  retrofit_generator: ^9.1.2
-  build_runner: ^2.4.9
-  json_serializable: ^6.8.0
-  json_annotation: ^4.9.0
-  flutter_launcher_icons: ^0.14.1
-  go_router: ^14.2.9
-  flutter_native_splash: ^2.4.1
-  easy_localization: ^3.0.7
-  firebase_core: ^3.6.0
-  firebase_messaging: ^15.1.3
-  firebase_analytics: ^11.3.3
-  firebase_auth: ^5.3.1
-  flutter_facebook_auth: ^7.1.1
-  google_sign_in: ^6.2.1
-  firebase_remote_config: ^5.1.3
-  qr_code_scanner: ^1.0.1
-  cached_network_image: ^3.4.1
-  
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.8
-  
-  
+    sdk: flutter # Thư viện Flutter
+  bloc: ^8.1.4 # Quản lý trạng thái với Bloc
+  dio: ^5.7.0 # Thư viện HTTP Client
+  retrofit: ^4.4.1 # Thư viện cho API Client với Retrofit
+  json_serializable: ^6.8.0 # Chuyển đổi JSON tự động
+  json_annotation: ^4.9.0 # Đánh dấu cho mã JSON
+  go_router: ^14.2.9 # Quản lý routing trong ứng dụng
+  easy_localization: ^3.0.7 # Địa phương hóa dễ dàng
+  sign_in_with_apple: ^6.1.3 # Đăng nhập với Apple
+  skeletonizer: ^1.4.2 # Tạo giao diện loading
+  connectivity_plus: ^6.0.5 # Kiểm tra trạng thái kết nối Internet
+
+  firebase_core: ^3.6.0 # Thư viện cốt lõi của Firebase
+  firebase_messaging: ^15.1.3 # Thư viện Firebase cho thông báo đẩy
+  firebase_analytics: ^11.3.3 # Phân tích Firebase
+  firebase_auth: ^5.3.1 # Xác thực Firebase
+  firebase_database: ^11.1.4 # Cơ sở dữ liệu Firebase
+  firebase_remote_config: ^5.1.3 # Cấu hình từ xa Firebase
+  firebase_storage: ^12.3.2 # Lưu trữ Firebase
+  cloud_firestore: ^5.4.4 # Cơ sở dữ liệu Firestore
+
+  encrypt: ^5.0.3 # Mã hóa dữ liệu
+  shared_preferences: ^2.3.2 # Lưu trữ dữ liệu cục bộ
+  local_auth: ^2.3.0 # Xác thực sinh trắc học
+
+  flutter_native_splash: ^2.4.1 # Tạo splash screen
+  flutter_animate: ^4.5.0 # Hoạt ảnh cho Flutter
+  flutter_markdown: ^0.7.3+2 # Hiển thị nội dung Markdown
+  flutter_svg: ^2.0.10+1 # Hiển thị hình ảnh SVG
+
+  google_sign_in: ^6.2.1 # Đăng nhập bằng Google
+  qr_code_scanner: ^1.0.1 # Quét mã QR
+  cached_network_image: ^3.4.1 # Hình ảnh mạng với bộ nhớ đệm
+  package_info_plus: ^8.0.2 # Thông tin về gói ứng dụng
+  file_picker: ^8.1.2 # Chọn tệp từ thiết bị
+  cupertino_icons: ^1.0.8 # Biểu tượng iOS
+  mobile_scanner: ^5.2.3 # Quét mã vạch và QR
+  url_launcher: ^6.3.0 # Mở URL trong trình duyệt
 
 dev_dependencies:
-  flutter_test:
+  flutter_test: # Thư viện để kiểm thử Flutter
     sdk: flutter
-   
+  flutter_lints: ^4.0.0 # Bộ quy tắc lint cho Flutter
+  retrofit_generator: ^9.1.2 # Tạo mã Retrofit tự động
+  build_runner: ^2.4.9 # Chạy các tác vụ build, ví dụ như tạo mã tự động
+  flutter_launcher_icons: ^0.14.1 # Tạo biểu tượng ứng dụng
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
-  flutter_lints: ^4.0.0
-
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter packages.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
-  uses-material-design: true
+  uses-material-design: true # Sử dụng thiết kế Material
 
 flutter_icons:
-  android: true
-  ios: true
+  android: true # Tạo biểu tượng cho Android
+  ios: true # Tạo biểu tượng cho iOS
   image_path: "assets/icons/app_icon.png" # Đảm bảo bạn có file icon trong thư mục assets
-
+flutter_native_splash:
+  # dart run flutter_native_splash:create
+  # dart run flutter_native_splash:remove
+  image: "assets/dev/images/splash-light.png"
+  color: "#dddddd"
+  icon_background_color: "#dddddd"
+  image_dark: "assets/dev/images/splash-dark.png"
+  color_dark: "#333333"
+  icon_background_color_dark: "#333333"
+  android_12:
+    image: "assets/dev/images/splash-light.png"
+    color: "#dddddd"
+    icon_background_color: "#dddddd"
+    image_dark: "assets/dev/images/splash-dark.png"
+    color_dark: "#333333"
+    icon_background_color_dark: "#333333"
