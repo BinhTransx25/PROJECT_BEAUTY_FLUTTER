@@ -1,10 +1,19 @@
+import 'package:beauty/core/app_localizations.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'src/widget/splash_widget.dart';
 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
     /** await Firebase.initializeApp();  */ 
-  runApp(const MyApp());
+  runApp(EasyLocalization(
+      supportedLocales: const [AppLocalizations.vietLocale, AppLocalizations.engLocale, AppLocalizations.thaiLocale],
+      path: AppLocalizations.translationFilePath,
+      fallbackLocale: AppLocalizations.vietLocale,
+      startLocale: AppLocalizations.vietLocale,
+      child: const MyApp()));
   
 }
 

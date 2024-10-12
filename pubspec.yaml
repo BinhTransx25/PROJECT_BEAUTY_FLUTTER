@@ -59,6 +59,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true # Sử dụng thiết kế Material
 
+  assets:
+    - assets/translations/
+
 flutter_icons:
   android: true # Tạo biểu tượng cho Android
   ios: true # Tạo biểu tượng cho iOS
