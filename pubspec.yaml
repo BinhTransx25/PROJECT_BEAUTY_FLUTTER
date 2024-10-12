@@ -58,11 +58,12 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true # Sử dụng thiết kế Material
-
+assets:
+    - lib/src/assets/cay.png  # Đường dẫn đến biểu tượng của bạn
 flutter_icons:
   android: true # Tạo biểu tượng cho Android
   ios: true # Tạo biểu tượng cho iOS
-  image_path: "assets/icons/app_icon.png" # Đảm bảo bạn có file icon trong thư mục assets
+  image_path: "lib/src/assets/cay.png" # Đảm bảo bạn có file icon trong thư mục assets
 flutter_native_splash:
   # dart run flutter_native_splash:create
   # dart run flutter_native_splash:remove
@@ -79,3 +80,7 @@ flutter_native_splash:
     image_dark: "assets/dev/images/splash-dark.png"
     color_dark: "#333333"
     icon_background_color_dark: "#333333"
+flutter_launcher_icons:
+  android: true # Tạo biểu tượng cho Android
+  ios: true     # Tạo biểu tượng cho iOS
+  image_path: "lib/src/assets/cay.png" # Đường dẫn đến hình ảnh biểu tượng
