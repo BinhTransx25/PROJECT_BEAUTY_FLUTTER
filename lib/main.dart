@@ -1,7 +1,6 @@
 import 'package:beauty/src/qrcode.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:qr_scanner_overlay/qr_scanner_overlay.dart';
 import 'src/widget/splash_widget.dart';
 
 void main() {
