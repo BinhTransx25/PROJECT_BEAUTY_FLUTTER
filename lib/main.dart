@@ -1,4 +1,3 @@
-import 'package:beauty/src/qrcode.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'src/widget/splash_widget.dart';
@@ -101,7 +100,14 @@ class _ScreenQrCode extends State<MyHomePage> {
         children: [
           Expanded(
               flex: 6,
-              child: QRView(key: qrKey, onQRViewCreated: _onQRViewCreated)),
+              child: QRView(
+                key: qrKey,
+                onQRViewCreated: _onQRViewCreated,
+                overlay: QrScannerOverlayShape(
+                    borderColor: Colors.white,
+                    borderRadius: 8,
+                    borderLength: 20),
+              )),
           Expanded(flex: 1, child: Center(child: Text(result?.code ?? ""))),
         ],
       ),
@@ -115,12 +121,6 @@ class _ScreenQrCode extends State<MyHomePage> {
         result = scanData;
       });
     });
-  }
-
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
   }
 }
 // để sài sau
