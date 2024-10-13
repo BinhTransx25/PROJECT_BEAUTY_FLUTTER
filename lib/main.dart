@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import 'package:beauty/Localization_test.dart';
 import 'package:beauty/core/app_localizations.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -285,6 +286,27 @@ class MyApp extends StatelessWidget {
       ),
       home: const LocalizationTest(),
 >>>>>>> origin/khuong-dev
+=======
+// ignore_for_file: unnecessary_const
+
+import 'package:beauty/src/retrofit/HomeScreen.dart';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp()); // Loại bỏ 'const' ở đây
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomeScreen(), // Loại bỏ 'const' ở đây
+>>>>>>> origin/ngan-dev
     );
   }
 }
@@ -292,6 +314,7 @@ class MyApp extends StatelessWidget {
 >>>>>>> tri-dev
 =======
 
+<<<<<<< HEAD
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
@@ -357,6 +380,8 @@ class LogoWidget extends StatelessWidget {
     );
   }
 }
+=======
+>>>>>>> origin/ngan-dev
 // để sài sau 
 /**
 class GoRouter extends StatelessWidget {
