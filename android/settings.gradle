@@ -21,6 +21,7 @@ plugins {
     id "com.android.application" version "7.3.0" apply false
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 //    id "org.jetbrains.kotlin.android" version "1.7.10" apply false
 >>>>>>> origin/khuong-dev
@@ -28,6 +29,9 @@ plugins {
 =======
     id "org.jetbrains.kotlin.android" version "1.9.0" apply false
 >>>>>>> origin/ngan-dev
+=======
+    id "org.jetbrains.kotlin.android" version "2.0.20" apply false
+>>>>>>> hung-dev
 }
 
 include ":app"
