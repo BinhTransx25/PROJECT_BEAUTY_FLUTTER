@@ -62,6 +62,9 @@ flutter:
     - assets/translations/en.json
     - assets/translations/vi.json
 
+  assets:
+    - assets/translations/
+
 flutter_icons:
   android: true # Tạo biểu tượng cho Android
   ios: true # Tạo biểu tượng cho iOS
