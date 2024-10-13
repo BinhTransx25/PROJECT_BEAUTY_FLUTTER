@@ -1,3 +1,4 @@
+import 'package:beauty/Localization_test.dart';
 import 'package:beauty/core/app_localizations.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +10,15 @@ void main() async {
   await EasyLocalization.ensureInitialized();
     /** await Firebase.initializeApp();  */ 
   runApp(EasyLocalization(
-      supportedLocales: const [AppLocalizations.vietLocale, AppLocalizations.engLocale, AppLocalizations.thaiLocale],
+      supportedLocales:  const [
+        Locale('en', 'US'),
+        Locale('vi'),
+        Locale('th')
+      ],
       path: AppLocalizations.translationFilePath,
-      fallbackLocale: AppLocalizations.vietLocale,
-      startLocale: AppLocalizations.vietLocale,
+      saveLocale: true,
+      fallbackLocale: AppLocalizations.engLocale,
+      startLocale: AppLocalizations.engLocale,
       child: const MyApp()));
   
 }
@@ -24,13 +30,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      locale: context.locale,
+      supportedLocales: context.supportedLocales,
+      localizationsDelegates: context.localizationDelegates,
       title: 'Flutter Demo',
       theme: ThemeData(
    
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const LocalizationTest(),
     );
   }
 }
