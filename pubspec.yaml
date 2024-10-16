@@ -45,13 +45,13 @@ dependencies:
   package_info_plus: ^8.0.2 # Thông tin về gói ứng dụng
   file_picker: ^8.1.2 # Chọn tệp từ thiết bị
   cupertino_icons: ^1.0.8 # Biểu tượng iOS
-  mobile_scanner: ^5.2.3 # Quét mã vạch và QR
+  mobile_scanner: ^6.0.1 # Quét mã vạch và QR
   url_launcher: ^6.3.0 # Mở URL trong trình duyệt
 
 dev_dependencies:
   flutter_test: # Thư viện để kiểm thử Flutter
     sdk: flutter
-  flutter_lints: ^4.0.0 # Bộ quy tắc lint cho Flutter
+  flutter_lints: ^5.0.0 # Bộ quy tắc lint cho Flutter
   retrofit_generator: ^9.1.2 # Tạo mã Retrofit tự động
   build_runner: ^2.4.9 # Chạy các tác vụ build, ví dụ như tạo mã tự động
   flutter_launcher_icons: ^0.14.1 # Tạo biểu tượng ứng dụng
@@ -60,22 +60,21 @@ flutter:
   uses-material-design: true # Sử dụng thiết kế Material
 
 flutter_icons:
-  android: true # Tạo biểu tượng cho Android
-  ios: true # Tạo biểu tượng cho iOS
-  image_path: "assets/icons/app_icon.png" # Đảm bảo bạn có file icon trong thư mục assets
+  android: true 
+  ios: true 
+  image_path: "assets/images/logo.png" 
+
 flutter_native_splash:
-  # dart run flutter_native_splash:create
-  # dart run flutter_native_splash:remove
-  image: "assets/dev/images/splash-light.png"
-  color: "#dddddd"
-  icon_background_color: "#dddddd"
-  image_dark: "assets/dev/images/splash-dark.png"
+  image: "assets/images/logo.png" 
+  color: "#dddddd" 
+  icon_background_color: "#dddddd" 
+  image_dark: "assets/images/logo.png" 
   color_dark: "#333333"
-  icon_background_color_dark: "#333333"
+  icon_background_color_dark: "#333333" 
   android_12:
-    image: "assets/dev/images/splash-light.png"
-    color: "#dddddd"
-    icon_background_color: "#dddddd"
-    image_dark: "assets/dev/images/splash-dark.png"
+    image: "assets/images/logo.png" 
+    color: "#dddddd" 
+    icon_background_color: "#dddddd" 
+    image_dark: "assets/images/logo.png"
     color_dark: "#333333"
     icon_background_color_dark: "#333333"
