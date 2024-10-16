@@ -23,6 +23,7 @@ dependencies:
 
   firebase_core: ^3.6.0 # Thư viện cốt lõi của Firebase
   firebase_messaging: ^15.1.3 # Thư viện Firebase cho thông báo đẩy
+  
   firebase_analytics: ^11.3.3 # Phân tích Firebase
   firebase_auth: ^5.3.1 # Xác thực Firebase
   firebase_database: ^11.1.4 # Cơ sở dữ liệu Firebase
@@ -40,6 +41,7 @@ dependencies:
   flutter_svg: ^2.0.10+1 # Hiển thị hình ảnh SVG
 
   google_sign_in: ^6.2.1 # Đăng nhập bằng Google
+  flutter_facebook_auth: ^5.0.0
   qr_code_scanner: ^1.0.1 # Quét mã QR
   cached_network_image: ^3.4.1 # Hình ảnh mạng với bộ nhớ đệm
   package_info_plus: ^8.0.2 # Thông tin về gói ứng dụng
