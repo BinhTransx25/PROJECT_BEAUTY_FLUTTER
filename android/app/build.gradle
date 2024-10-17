@@ -1,27 +1,13 @@
-
-apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'kotlin-android'
-
 plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-    id 'com.google.gms.google-services'
 }
 
 android {
     namespace = "com.cds.beauty"
-    compileSdkVersion 34
-
-    defaultConfig {
-        applicationId = "com.cds.beauty"
-        minSdkVersion 19 
-        targetSdkVersion 33
-        versionCode 1
-        versionName "1.0"
-        multiDexEnabled true
-    }
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -29,41 +15,23 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+           jvmTarget = "1.8"
     }
 
-<<<<<<< Updated upstream
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.cds.beauty"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 23
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-=======
-    signingConfigs {
-        debug {
-            storeFile file("debug.keystore")
-            storePassword "android"
-            keyAlias "androiddebugkey"
-            keyPassword "android"
-        }
->>>>>>> Stashed changes
     }
 
     buildTypes {
         release {
-            minifyEnabled true   
-            shrinkResources true  
-        }
-        debug {
-             minifyEnabled true 
-            signingConfig signingConfigs.debug
-            shrinkResources true  
+            signingConfig = signingConfigs.debug
         }
     }
+
 }
 
 dependencies {
@@ -71,7 +39,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:32.2.0')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
-
+apply plugin: 'com.google.gms.google-services'
 flutter {
     source = "../.."
 }
