@@ -41,7 +41,7 @@ dependencies:
   flutter_svg: ^2.0.10+1 # Hiển thị hình ảnh SVG
 
   google_sign_in: ^6.2.1 # Đăng nhập bằng Google
-  flutter_facebook_auth: ^5.0.0
+  flutter_facebook_auth: ^7.1.1
   qr_code_scanner: ^1.0.1 # Quét mã QR
   cached_network_image: ^3.4.1 # Hình ảnh mạng với bộ nhớ đệm
   package_info_plus: ^8.0.2 # Thông tin về gói ứng dụng
