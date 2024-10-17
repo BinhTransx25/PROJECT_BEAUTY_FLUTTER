@@ -1,12 +1,13 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 
+<<<<<<< Updated upstream
 class FirebaseRemoteConfigService {
   final FirebaseRemoteConfig _remoteConfig = FirebaseRemoteConfig.instance;
 
   Future<void> init() async {
     await _remoteConfig.setConfigSettings(RemoteConfigSettings(
-      fetchTimeout: Duration(seconds: 10),
-      minimumFetchInterval: Duration(hours: 1),
+      fetchTimeout: const Duration(seconds: 10),
+      minimumFetchInterval: const Duration(hours: 1),
     ));
     await _fetchRemoteConfig();
   }
@@ -22,5 +23,13 @@ class FirebaseRemoteConfigService {
 
   String getStringValue(String key, String defaultValue) {
     return _remoteConfig.getString(key) ?? defaultValue;
+=======
+class RemoteConfigService {
+  final FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.instance;
+
+  Future<String> fetchWelcomeMessage() async {
+    await remoteConfig.fetchAndActivate();
+    return remoteConfig.getString('welcome_message');
+>>>>>>> Stashed changes
   }
 }
