@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'src/firebase/firebase_messaging.dart';
-import 'src/firebase/analytics_screen.dart';  // Màn hình Firebase Analytics
-import 'src/firebase/auth_screen.dart';        // Màn hình Firebase Auth
+import 'src/firebase/analytics_screen.dart'; // Màn hình Firebase Analytics
+import 'src/firebase/auth_screen.dart'; // Màn hình Firebase Auth
 import 'src/firebase/remote_config_screen.dart'; // Màn hình Firebase Remote Config
 
 void main() async {
