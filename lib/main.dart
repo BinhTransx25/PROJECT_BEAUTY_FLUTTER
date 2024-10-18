@@ -4,6 +4,7 @@ import 'src/firebase/firebase_messaging.dart';
 import 'src/firebase/analytics_screen.dart'; // Màn hình Firebase Analytics
 import 'src/firebase/auth_screen.dart'; // Màn hình Firebase Auth
 import 'src/firebase/remote_config_screen.dart'; // Màn hình Firebase Remote Config
+import 'src/widget/check_internet_screen.dart'; // Màn hình Check Internet
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -61,6 +62,15 @@ class MyHomePage extends StatelessWidget {
                 );
               },
               child: Text('Go to Firebase Remote Config'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CheckInternet()),
+                );
+              },
+              child: Text('Go to Check Internet'),
             ),
           ],
         ),
