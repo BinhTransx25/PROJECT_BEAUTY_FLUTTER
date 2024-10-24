@@ -63,9 +63,7 @@ flutter:
   assets:
     - assets/translations/en.json
     - assets/translations/vi.json
-  uses-material-design: true # Sử dụng thiết kế Material
-assets:
-    - lib/src/assets/cay.png  # Đường dẫn đến biểu tượng của bạn
+    - lib/src/assets/cay.png  
 flutter_icons:
   android: true # Tạo biểu tượng cho Android
   ios: true # Tạo biểu tượng cho iOS
