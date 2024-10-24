@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'src/firebase/firebase_messaging.dart';
-import 'src/firebase/analytics_screen.dart'; // Màn hình Firebase Analytics
-import 'src/firebase/auth_screen.dart'; // Màn hình Firebase Auth
-import 'src/firebase/remote_config_screen.dart'; // Màn hình Firebase Remote Config
-import 'src/widget/check_internet_screen.dart'; // Màn hình Check Internet
+import 'src_demo/firebase/firebase_messaging.dart';
+import 'src_demo/firebase/analytics_screen.dart'; // Màn hình Firebase Analytics
+import 'src_demo/firebase/auth_screen.dart'; // Màn hình Firebase Auth
+import 'src_demo/firebase/remote_config_screen.dart'; // Màn hình Firebase Remote Config
+import 'src_demo/widget/check_internet_screen.dart'; // Màn hình Check Internet
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
