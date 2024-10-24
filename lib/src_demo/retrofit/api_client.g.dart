@@ -14,7 +14,7 @@ class _ApiClient implements ApiClient {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'https://yourapi.com';
+    baseUrl ??= 'https://trip-aura-server.vercel.app/category/';
   }
 
   final Dio _dio;
@@ -24,19 +24,19 @@ class _ApiClient implements ApiClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<ResponseType> getData() async {
+  Future<CategoryResponse> getData() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<ResponseType>(Options(
+    final _options = _setStreamType<CategoryResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/endpoint',
+          '/api/getCategory',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -46,14 +46,9 @@ class _ApiClient implements ApiClient {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ResponseType _value;
+    late CategoryResponse _value;
     try {
-      _value = ResponseType.values.firstWhere(
-        (e) => e.name == _result.data,
-        orElse: () => throw ArgumentError(
-          'ResponseType does not contain value ${_result.data}',
-        ),
-      );
+      _value = CategoryResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

@@ -1,3 +1,7 @@
+
+
+// import 'package:beauty/src/retrofit/HomeScreen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'src_demo/firebase/firebase_messaging.dart';
@@ -6,10 +10,12 @@ import 'src_demo/firebase/auth_screen.dart'; // Màn hình Firebase Auth
 import 'src_demo/firebase/remote_config_screen.dart'; // Màn hình Firebase Remote Config
 import 'src_demo/widget/check_internet_screen.dart'; // Màn hình Check Internet
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp()); // Khởi tạo ứng dụng
+
 }
 
 class MyApp extends StatelessWidget {
@@ -18,6 +24,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       home: MyHomePage(),
+      
+      // debugShowCheckedModeBanner: false,
+      // home: HomeScreen(), 
+
     );
   }
 }
@@ -74,7 +84,7 @@ class MyHomePage extends StatelessWidget {
             ),
           ],
         ),
-      ),
+        ),
     );
-  }
+    }
 }
