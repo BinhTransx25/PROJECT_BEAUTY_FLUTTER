@@ -59,7 +59,10 @@ dev_dependencies:
   flutter_launcher_icons: ^0.14.1 
 
 flutter:
-
+  uses-material-design: true # Sử dụng thiết kế Material
+  assets:
+    - assets/translations/en.json
+    - assets/translations/vi.json
   uses-material-design: true # Sử dụng thiết kế Material
 assets:
     - lib/src/assets/cay.png  # Đường dẫn đến biểu tượng của bạn
