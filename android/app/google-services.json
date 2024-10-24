@@ -12,6 +12,7 @@
           "package_name": "com.cds.beauty"
         }
       },
+
       "oauth_client": [
         {
           "client_id": "261904720154-dni6bq7ce83p070gb15rv18cqibfq525.apps.googleusercontent.com",
@@ -26,6 +27,7 @@
           "client_type": 3
         }
       ],
+
       "api_key": [
         {
           "current_key": "AIzaSyAJNszWCzN0oDduW4olekSc_kYAZZOGUws"
@@ -33,6 +35,7 @@
       ],
       "services": {
         "appinvite_service": {
+
           "other_platform_oauth_client": [
             {
               "client_id": "261904720154-oi9dl0ofoavcbnsuv61lm7ko3jphda5o.apps.googleusercontent.com",
@@ -46,6 +49,7 @@
               }
             }
           ]
+
         }
       }
     }

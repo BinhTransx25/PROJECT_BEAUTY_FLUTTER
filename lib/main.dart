@@ -1,21 +1,35 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'src/firebase/firebase_messaging.dart';
-import 'src/firebase/analytics_screen.dart';  // Màn hình Firebase Analytics
-import 'src/firebase/auth_screen.dart';        // Màn hình Firebase Auth
-import 'src/firebase/remote_config_screen.dart'; // Màn hình Firebase Remote Config
+import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'src_demo/widget/LanguageSwitcher.dart'; // Import màn hình chuyển đổi ngôn ngữ
+import 'src_demo/firebase/firebase_messaging.dart';
+import 'src_demo/firebase/analytics_screen.dart'; 
+import 'src_demo/firebase/auth_screen.dart'; 
+import 'src_demo/firebase/remote_config_screen.dart'; 
+import 'src_demo/widget/check_internet_screen.dart'; 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp()); // Khởi tạo ứng dụng
+  await EasyLocalization.ensureInitialized();
+
+  runApp(
+    EasyLocalization(
+      supportedLocales: [Locale('en'), Locale('vi')],
+      path: 'assets/translations', // Đường dẫn tới file ngôn ngữ
+      fallbackLocale: Locale('en'),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       home: MyHomePage(),
     );
   }
@@ -61,6 +75,25 @@ class MyHomePage extends StatelessWidget {
                 );
               },
               child: Text('Go to Firebase Remote Config'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CheckInternet()),
+                );
+              },
+              child: Text('Go to Check Internet'),
+            ),
+            // Nút điều hướng tới LanguageSwitcher
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LanguageSwitcher()),
+                );
+              },
+              child: Text('Go to Language Switcher'),
             ),
           ],
         ),

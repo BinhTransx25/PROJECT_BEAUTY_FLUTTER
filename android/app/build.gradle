@@ -2,8 +2,12 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
+
     id("com.google.gms.google-services")
+
 }
+
+apply plugin: 'com.google.gms.google-services'
 
 android {
     namespace = "com.cds.beauty"
@@ -25,7 +29,6 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-
     }
 
     buildTypes {
@@ -48,13 +51,15 @@ android {
 }
 
 dependencies {
+
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.2'
     implementation platform('com.google.firebase:firebase-bom:32.2.0')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'com.google.firebase:firebase-messaging:23.0.0'
-
+    implementation 'com.google.firebase:firebase-analytics' 
+    implementation 'com.google.firebase:firebase-auth' 
 }
-apply plugin: 'com.google.gms.google-services'
+
 flutter {
     source = "../.."
 }
