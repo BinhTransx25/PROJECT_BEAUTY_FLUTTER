@@ -12,7 +12,22 @@
           "package_name": "com.cds.beauty"
         }
       },
-      "oauth_client": [],
+
+      "oauth_client": [
+        {
+          "client_id": "261904720154-dni6bq7ce83p070gb15rv18cqibfq525.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cds.beauty",
+            "certificate_hash": "2eacc5d6d53a7a21e161126b945256f2a3d541c2"
+          }
+        },
+        {
+          "client_id": "261904720154-oi9dl0ofoavcbnsuv61lm7ko3jphda5o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+
       "api_key": [
         {
           "current_key": "AIzaSyAJNszWCzN0oDduW4olekSc_kYAZZOGUws"
@@ -20,7 +35,21 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261904720154-oi9dl0ofoavcbnsuv61lm7ko3jphda5o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "261904720154-8kt8liroclg6gsspehfrjpgji5udvqar.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cds.beauty"
+              }
+            }
+          ]
+
         }
       }
     }
