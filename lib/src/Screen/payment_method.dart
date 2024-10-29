@@ -96,7 +96,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
                                   child: FittedBox(
                                     fit: BoxFit.scaleDown,
                                     alignment: Alignment.centerLeft,
-                                    // Điều chỉnh văn bản để nhỏ lại nếu cần
                                     child: Text(
                                       '**** **** **** 2525',
                                       style: TextStyle(
