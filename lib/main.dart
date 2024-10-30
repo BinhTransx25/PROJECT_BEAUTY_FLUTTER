@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'src/Screen/helloWorld.dart'; // Import Màn hình mọi người đang test
 import 'src/Screen//MyOrder//Ongoing_complete/Ongoing.dart';
-
+import 'src/Screen//MyOrder//Empty/Empty.dart';
+import 'src/Screen/MyOrder/TrackOrder/TrackOrder.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Ongoing(), // Gọi màn hình Ongoing vào đây
+      home: TrackOrder(), 
     );
   }
 }

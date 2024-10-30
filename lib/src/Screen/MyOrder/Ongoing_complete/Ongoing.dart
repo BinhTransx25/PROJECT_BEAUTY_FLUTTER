@@ -184,8 +184,10 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                                     '${discountedPrice}đ',
                                     style: TextStyle(
                                       color: Colors.pink,
+                                       decoration: TextDecoration
+                                          .lineThrough, 
+                                      decorationColor: Colors.pink,
                                       fontSize: 12,
-                                      decoration: TextDecoration.lineThrough,
                                     ),
                                   ),
                                 ],
@@ -338,7 +340,7 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
               Image.asset(
                 'lib/src/Screen/MyOrder/assets/Arrow_down.png',
                 width: 36,
-                height: 36, 
+                height: 36,
               ),
             ],
           ),
@@ -398,13 +400,13 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.pink, // Màu nền nút
-                minimumSize: Size(double.infinity, 50), // Đặt chiều rộng đầy đủ và chiều cao
-
+                minimumSize: Size(
+                    double.infinity, 50), // Đặt chiều rộng đầy đủ và chiều cao
               ),
               child: Text(
                 'Gửi đánh giá',
-                style: TextStyle(color: Colors.white,
-                fontSize: 20), // Màu chữ nút
+                style:
+                    TextStyle(color: Colors.white, fontSize: 20), // Màu chữ nút
               ),
             ),
           ),

@@ -61,9 +61,14 @@ dev_dependencies:
 flutter:
   uses-material-design: true # Sử dụng thiết kế Material
   assets:
+    - lib/src/Screen/MyOrder/assets/radiogroup.png
+    - lib/src/Screen/MyOrder/assets/unradiogroup.png
+    - lib/src/Screen/MyOrder/assets/goback.png
     - lib/src/Screen/MyOrder/assets/son.png
+    - lib/src/Screen/MyOrder/assets/unorder.png
     - lib/src/Screen/MyOrder/assets/Arrow_down.png
     - lib/src/Screen/MyOrder/assets/star.png
+    - lib/src/Screen/MyOrder/assets/map.png
     - assets/translations/en.json
     - assets/translations/vi.json
     - lib/src/assets/cay.png  
