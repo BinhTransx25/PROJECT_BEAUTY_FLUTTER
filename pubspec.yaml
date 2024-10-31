@@ -63,7 +63,8 @@ flutter:
   assets:
     - assets/translations/en.json
     - assets/translations/vi.json
-    - lib/src/assets/cay.png  
+    - lib/src/assets/cay.png
+    - lib/src/assets/Account/  
 flutter_icons:
   android: true # Tạo biểu tượng cho Android
   ios: true # Tạo biểu tượng cho iOS

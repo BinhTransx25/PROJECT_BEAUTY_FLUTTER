@@ -7,145 +7,73 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        padding:
+            const EdgeInsets.only(top: 50, bottom: 20, right: 20, left: 20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start, // Căn trái
           children: [
-            // Dòng đầu tiên: Hình và tiêu đề
+            // Header
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12.0),
+              padding: const EdgeInsets.only(top: 10, bottom: 10, right: 20),
               child: Row(
                 children: [
-                  Image.network(
-                    'https://example.com/icon.png', // Thay bằng URL hình ảnh
-                    width: 24,
-                    height: 24,
-                  ),
-                  SizedBox(width: 10),
-                  Text(
-                    'Thông Tin Cá Nhân',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
+                  Icon(Icons.arrow_back_ios, size: 24),
+                  const Expanded(
+                    child: Text(
+                      'Thông Tin Cá Nhân',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ],
               ),
             ),
-            // Thanh ngang
-            Divider(color: Color(0xFFD9D9D9)),
+            const Divider(color: Color(0xFFD9D9D9)),
+
             // Hình ảnh đại diện
             Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12.0),
+                padding: const EdgeInsets.symmetric(vertical: 25),
                 child: ClipOval(
-                  child: Image.network(
-                    'https://example.com/profile_image.jpg', // Thay bằng URL hình ảnh
+                  child: Image.asset(
+                    'lib/src/assets/Account/logo.png',
                     width: 100,
                     height: 100,
-                    fit: BoxFit.cover,
                   ),
                 ),
               ),
             ),
-            // Tên đầy đủ
-            Text('Tên đầy đủ', style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold)),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xFFDADADA)),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  hintText: 'Nguyễn Văn A',
-                  hintStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                  contentPadding: EdgeInsets.only(left: 5),
-                ),
-              ),
+
+            // Các trường thông tin
+            _buildTextField(label: 'Tên đầy đủ', hint: 'Nguyễn Văn A'),
+            _buildTextField(label: 'Email', hint: 'abc@gmail.com'),
+            _buildTextField(
+              label: 'Ngày sinh',
+              hint: '9/9/2000',
+              suffixIcon: Icons.calendar_today,
             ),
-            // Email
-            Text('Email', style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold)),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xFFDADADA)),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  hintText: 'abc@gmail.com',
-                  hintStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                  contentPadding: EdgeInsets.only(left: 5),
-                ),
-              ),
+            _buildTextField(
+              label: 'Giới tính',
+              hint: 'Nam',
+              suffixIcon: Icons.arrow_drop_down,
             ),
-            // Ngày sinh
-            Text('Ngày sinh', style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold)),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xFFDADADA)),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  hintText: '9/9/2000',
-                  hintStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                  contentPadding: EdgeInsets.only(left: 5),
-                  suffixIcon: Padding(
-                    padding: const EdgeInsets.only(right: 5.0),
-                    child: Icon(Icons.calendar_today, size: 10),
-                  ),
-                ),
-              ),
-            ),
-            // Giới tính
-            Text('Giới tính', style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold)),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xFFDADADA)),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  hintText: 'Nam',
-                  hintStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                  contentPadding: EdgeInsets.only(left: 5),
-                  suffixIcon: Padding(
-                    padding: const EdgeInsets.only(right: 5.0),
-                    child: Icon(Icons.arrow_drop_down, size: 10),
-                  ),
-                ),
-              ),
-            ),
-            // Số điện thoại
-            Text('Số điện thoại', style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold)),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 12.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xFFDADADA)),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  hintText: '+84 020 234 567',
-                  hintStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                  contentPadding: EdgeInsets.only(left: 5),
-                ),
-              ),
-            ),
+            _buildTextField(label: 'Số điện thoại', hint: '+84 020 234 567'),
+
             // Nút xác nhận
             Padding(
-              padding: const EdgeInsets.only(bottom: 15.0),
-              child: Center(
+              padding: const EdgeInsets.only(bottom: 15.0, top: 15),
+              child: SizedBox(
+                width: double.infinity, // Chiếm toàn bộ chiều rộng
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Color(0xFFD61355), // Màu D61355
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    backgroundColor: Color(0xFFD61355), // Màu D61355
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                   onPressed: () {
                     // Hành động khi nhấn nút Xác nhận
@@ -159,6 +87,57 @@ class ProfileScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  // Widget cho các trường thông tin
+  Widget _buildTextField(
+      {required String label, required String hint, IconData? suffixIcon}) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8), // Khoảng cách giữa các trường
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Tiêu đề label với khoảng cách 5 điểm
+          Padding(
+            padding: const EdgeInsets.only(
+                bottom: 5.0), // Khoảng cách 5 điểm dưới label
+            child: Text(
+              label,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: const Color.fromARGB(255, 149, 145, 145)),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                    color: Color.fromARGB(
+                        255, 182, 221, 243)), // Màu viền khi ô được chọn
+                borderRadius: BorderRadius.circular(8),
+              ),
+              hintText: hint,
+              hintStyle:
+                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              contentPadding: EdgeInsets.only(left: 5),
+              suffixIcon: suffixIcon != null
+                  ? Padding(
+                      padding: const EdgeInsets.only(right: 5.0),
+                      child: Icon(suffixIcon, size: 20),
+                    )
+                  : null,
+            ),
+          ),
+        ],
       ),
     );
   }
