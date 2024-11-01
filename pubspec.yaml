@@ -5,7 +5,7 @@ publish_to: 'none' # Không xuất bản lên pub.dev
 version: 1.0.0+1 # Phiên bản ứng dụng
 
 environment:
-  sdk: ^3.5.0 # SDK Flutter tối thiểu yêu cầu
+  sdk: ">=3.5.0 <4.0.0" # SDK Flutter tối thiểu yêu cầu
 
 dependencies:
   flutter:
@@ -20,25 +20,22 @@ dependencies:
   sign_in_with_apple: ^6.1.3 # Đăng nhập với Apple
   skeletonizer: ^1.4.2 # Tạo giao diện loading
   connectivity_plus: ^6.0.5 # Kiểm tra trạng thái kết nối Internet
-
   firebase_core: ^3.6.0 # Thư viện cốt lõi của Firebase
   firebase_messaging: ^15.1.3 # Thư viện Firebase cho thông báo đẩy
   firebase_analytics: ^11.3.3 # Phân tích Firebase
   firebase_auth: ^5.3.1 # Xác thực Firebase
+  
   firebase_database: ^11.1.4 # Cơ sở dữ liệu Firebase
   firebase_remote_config: ^5.1.3 # Cấu hình từ xa Firebase
   firebase_storage: ^12.3.2 # Lưu trữ Firebase
   cloud_firestore: ^5.4.4 # Cơ sở dữ liệu Firestore
-
   encrypt: ^5.0.3 # Mã hóa dữ liệu
   shared_preferences: ^2.3.2 # Lưu trữ dữ liệu cục bộ
   local_auth: ^2.3.0 # Xác thực sinh trắc học
-
   flutter_native_splash: ^2.4.1 # Tạo splash screen
   flutter_animate: ^4.5.0 # Hoạt ảnh cho Flutter
   flutter_markdown: ^0.7.3+2 # Hiển thị nội dung Markdown
   flutter_svg: ^2.0.10+1 # Hiển thị hình ảnh SVG
-
   google_sign_in: ^6.2.1 # Đăng nhập bằng Google
   qr_code_scanner: ^1.0.1 # Quét mã QR
   cached_network_image: ^3.4.1 # Hình ảnh mạng với bộ nhớ đệm
@@ -47,10 +44,11 @@ dependencies:
   cupertino_icons: ^1.0.8 # Biểu tượng iOS
   mobile_scanner: ^6.0.1 # Quét mã vạch và QR
   url_launcher: ^6.3.0 # Mở URL trong trình duyệt
+  fluttertoast: ^8.2.8
 
 dev_dependencies:
-  flutter_test: # Thư viện để kiểm thử Flutter
-    sdk: flutter
+  flutter_test:
+    sdk: flutter # Thư viện để kiểm thử Flutter
   flutter_lints: ^5.0.0 # Bộ quy tắc lint cho Flutter
   retrofit_generator: ^9.1.2 # Tạo mã Retrofit tự động
   build_runner: ^2.4.9 # Chạy các tác vụ build, ví dụ như tạo mã tự động
@@ -58,44 +56,32 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true # Sử dụng thiết kế Material
-<<<<<<< HEAD
   assets:
     - assets/translations/en.json
     - assets/translations/vi.json
-
-  assets:
-    - assets/translations/
-
-=======
-assets:
+    - lib/src/assets/Ellipse.png
+    - lib/src/assets/Obsidian.png
+    - lib/src/assets/background.png
+    - lib/src/assets/facebook.png
+    - lib/src/assets/google.png
     - lib/src/assets/cay.png  # Đường dẫn đến biểu tượng của bạn
->>>>>>> origin/ngan-dev
-flutter_icons:
-<<<<<<< HEAD
-  android: true 
-  ios: true 
-  image_path: "assets/images/logo.png" 
 
-=======
-  android: true # Tạo biểu tượng cho Android
-  ios: true # Tạo biểu tượng cho iOS
-  image_path: "lib/src/assets/cay.png" # Đảm bảo bạn có file icon trong thư mục assets
->>>>>>> dev
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "lib/src/assets/cay.png" # Đường dẫn đến hình ảnh biểu tượng
+
 flutter_native_splash:
-  image: "assets/images/logo.png" 
-  color: "#dddddd" 
-  icon_background_color: "#dddddd" 
-  image_dark: "assets/images/logo.png" 
+  image: "assets/images/logo.png"
+  color: "#dddddd"
+  icon_background_color: "#dddddd"
+  image_dark: "assets/images/logo.png"
   color_dark: "#333333"
-  icon_background_color_dark: "#333333" 
+  icon_background_color_dark: "#333333"
   android_12:
-    image: "assets/images/logo.png" 
-    color: "#dddddd" 
-    icon_background_color: "#dddddd" 
+    image: "assets/images/logo.png"
+    color: "#dddddd"
+    icon_background_color: "#dddddd"
     image_dark: "assets/images/logo.png"
     color_dark: "#333333"
     icon_background_color_dark: "#333333"
-flutter_launcher_icons:
-  android: true # Tạo biểu tượng cho Android
-  ios: true     # Tạo biểu tượng cho iOS
-  image_path: "lib/src/assets/cay.png" # Đường dẫn đến hình ảnh biểu tượng
