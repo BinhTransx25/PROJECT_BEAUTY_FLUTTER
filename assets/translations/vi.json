@@ -1,8 +1,10 @@
-<<<<<<< HEAD
 {
-  "hello_world": "Xin chào ",
-  "change_language": "Chuyển đổi ngôn ngữ"
+  "translations": {
+    "hello_world": "Xin chào ",
+    "change_language": "Chuyển đổi ngôn ngữ"
+  },
+  "greetings": {
+    "hello": "Xin chào",
+    "welcome": "Chào mừng"
+  }
 }
-=======
-{"hello":"Xin chào","welcome":"Chào mừng"}
->>>>>>> origin/khuong-dev
