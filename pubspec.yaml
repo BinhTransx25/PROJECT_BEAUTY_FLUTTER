@@ -58,12 +58,29 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true # Sử dụng thiết kế Material
+<<<<<<< HEAD
+  assets:
+    - assets/translations/en.json
+    - assets/translations/vi.json
 
+  assets:
+    - assets/translations/
+
+=======
+assets:
+    - lib/src/assets/cay.png  # Đường dẫn đến biểu tượng của bạn
+>>>>>>> origin/ngan-dev
 flutter_icons:
+<<<<<<< HEAD
   android: true 
   ios: true 
   image_path: "assets/images/logo.png" 
 
+=======
+  android: true # Tạo biểu tượng cho Android
+  ios: true # Tạo biểu tượng cho iOS
+  image_path: "lib/src/assets/cay.png" # Đảm bảo bạn có file icon trong thư mục assets
+>>>>>>> dev
 flutter_native_splash:
   image: "assets/images/logo.png" 
   color: "#dddddd" 
@@ -78,3 +95,7 @@ flutter_native_splash:
     image_dark: "assets/images/logo.png"
     color_dark: "#333333"
     icon_background_color_dark: "#333333"
+flutter_launcher_icons:
+  android: true # Tạo biểu tượng cho Android
+  ios: true     # Tạo biểu tượng cho iOS
+  image_path: "lib/src/assets/cay.png" # Đường dẫn đến hình ảnh biểu tượng

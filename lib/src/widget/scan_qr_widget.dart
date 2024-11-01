@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ScanQRWidget extends StatefulWidget {
+  const ScanQRWidget({super.key});
+
   @override
   _ScanQRWidgetState createState() => _ScanQRWidgetState();
 }
@@ -24,7 +26,7 @@ class _ScanQRWidgetState extends State<ScanQRWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Scan QR')),
+      appBar: AppBar(title: const Text('Scan QR')),
       body: QRView(
         key: qrKey,
         onQRViewCreated: _onQRViewCreated,

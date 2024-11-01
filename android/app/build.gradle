@@ -3,8 +3,14 @@ plugins {
     id "kotlin-android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
+<<<<<<< HEAD
     id 'com.google.gms.google-services' 
+=======
+    id 'com.google.gms.google-services'
+>>>>>>> dev
 }
+apply plugin: 'com.google.gms.google-services'
+
 apply plugin: 'com.google.gms.google-services'
 
 android {
@@ -26,10 +32,25 @@ android {
         applicationId = "com.cds.beauty"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
+<<<<<<< HEAD
         minSdkVersion 23
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+//        minSdk = flutter.minSdkVersion
+        minSdk = 23
+=======
+        minSdkVersion 21
+        minSdk 23
+>>>>>>> origin/ngan-dev
+=======
+        minSdk = 23
+>>>>>>> hung-dev
+>>>>>>> dev
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        minSdkVersion = 23  
     }
 
     buildTypes {
@@ -44,7 +65,15 @@ android {
 dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.0.0') // Thêm dòng này
     implementation 'com.google.firebase:firebase-analytics' // Thêm dòng này
+<<<<<<< HEAD
     
+=======
+<<<<<<< HEAD
+    implementation 'com.google.firebase:firebase-auth' // Sử dụng Firebase Auth
+=======
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.0.0'
+>>>>>>> origin/ngan-dev
+>>>>>>> dev
 }
 
 flutter {
