@@ -1,8 +1,8 @@
-import 'package:beauty/src/widget/Onboarding%20-%20Start.dart';
-import 'package:beauty/src/widget/Onboarding.dart';
-import 'package:beauty/src/widget/Signin.dart';
-import 'package:beauty/src/widget/Signup.dart';
-import 'package:beauty/src/widget/splash_widget.dart';
+import 'package:beauty/src/Screen/Onboarding_Signin_up_Splash/Onboarding%20-%20Start.dart';
+import 'package:beauty/src/Screen/Onboarding_Signin_up_Splash/Onboarding.dart';
+import 'package:beauty/src/Screen/Onboarding_Signin_up_Splash/Signin.dart';
+import 'package:beauty/src/Screen/Onboarding_Signin_up_Splash/Signup.dart';
+import 'package:beauty/src/Screen/Onboarding_Signin_up_Splash/splash_widget.dart';
 import 'package:go_router/go_router.dart';
 
 class MyAppRouter {

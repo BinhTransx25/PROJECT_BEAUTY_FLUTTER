@@ -1,4 +1,4 @@
-import 'package:beauty/src/widget/component/button/custom_button.dart';
+import 'package:beauty/src/Screen/Onboarding_Signin_up_Splash/widgets/button/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
