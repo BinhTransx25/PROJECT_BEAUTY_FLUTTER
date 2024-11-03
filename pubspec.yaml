@@ -64,6 +64,29 @@ flutter:
     - assets/translations/en.json
     - assets/translations/vi.json
     - lib/src/assets/cay.png  
+    - lib/src/assets/avatar.png
+    - lib/src/assets/anh1.png
+    - lib/src/assets/anh2.png
+    - lib/src/assets/anh3.png
+    - lib/src/assets/anh4.png
+    - lib/src/assets/anh5.png
+    - lib/src/assets/coupon.png
+    - lib/src/assets/donation.png
+    - lib/src/assets/refund.png
+    - lib/src/assets/freeshipping.png
+    - lib/src/assets/cay.png 
+    - lib/src/assets/son.png
+    - lib/src/assets/Rectangle.png
+    - lib/src/assets/sp1.png
+    - lib/src/assets/sp2.png
+    - lib/src/assets/sp3.png
+    - lib/src/assets/sp4.png
+    - lib/src/assets/discount.png
+    - lib/src/assets/frame.png
+    - lib/src/assets/frame1.png
+    - lib/src/assets/frame2.png
+    - lib/src/assets/frame3.png
+    - lib/src/assets/Ellipse.png
 flutter_icons:
   android: true # Tạo biểu tượng cho Android
   ios: true # Tạo biểu tượng cho iOS

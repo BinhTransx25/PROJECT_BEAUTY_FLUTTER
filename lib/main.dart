@@ -1,4 +1,5 @@
 // import 'package:firebase_core/firebase_core.dart';
+import 'package:beauty/src/Screen/HomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'src/Screen/helloWorld.dart'; // Import Màn hình mọi người đang test nha
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
       locale: context.locale,
       // home: HelloWorld(), // Gọi màn hình mọi người đang code vào đây nha
       // home: shop(),
-      home: shopEmpty(), 
+      home: const HomeScreen(), 
 
     );
   }
