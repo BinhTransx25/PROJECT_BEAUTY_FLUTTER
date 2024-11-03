@@ -1,6 +1,5 @@
 // DemoScreens.dart
 import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'firebase/analytics_screen.dart'; 
 import 'firebase/auth_screen.dart'; 
 import 'firebase/remote_config_screen.dart'; 

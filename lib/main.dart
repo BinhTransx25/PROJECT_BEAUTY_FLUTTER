@@ -1,7 +1,8 @@
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'src/Screen/Product_detail/Product_detail.dart';
+// import 'src/Screen/Product_detail/Product_detail.dart';
+import 'src/app/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,20 +14,23 @@ void main() async {
       supportedLocales: [Locale('en'), Locale('vi')],
       path: 'assets/translations', // Đường dẫn tới file ngôn ngữ
       fallbackLocale: Locale('en'),
+
       child: MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+    final _appRouter = AppRouter();
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      home:
-          ProductDetailScreen(), // Gọi màn hình mọi người đang code vào đây nha
+      // home:ProductDetailScreen(),  Gọi màn hình mọi người đang code vào đây nha
+      routerConfig: _appRouter.router,
     );
   }
 }
