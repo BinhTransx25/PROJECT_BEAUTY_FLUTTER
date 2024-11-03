@@ -1,8 +1,10 @@
 // import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 // import 'src/Screen/Product_detail/Product_detail.dart';
 import 'src/app/app_router.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,8 +31,10 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
+
       // home:ProductDetailScreen(),  Gọi màn hình mọi người đang code vào đây nha
       routerConfig: _appRouter.router,
+
     );
   }
 }
