@@ -11,7 +11,7 @@ class OnboardingScreen extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('lib/src/assets/background.png'),
+            image: AssetImage('lib/src/assets/Onboarding_Signin_up_Splash/background.png'),
             fit: BoxFit.fill,
           ),
         ),

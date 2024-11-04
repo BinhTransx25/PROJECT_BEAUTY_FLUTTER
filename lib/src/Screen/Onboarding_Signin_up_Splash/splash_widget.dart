@@ -41,12 +41,12 @@ class _SplashScreenState extends State<SplashWidget>
               children: [
                 Positioned(
                   child: Image.asset(
-                    'lib/src/assets/Ellipse.png',
+                    'lib/src/assets/Onboarding_Signin_up_Splash/Ellipse.png',
                   ),
                 ),
                 Positioned(
                   child: Image.asset(
-                    'lib/src/assets/Obsidian.png',
+                    'lib/src/assets/Onboarding_Signin_up_Splash/Obsidian.png',
                   ),
                 ),
               ],

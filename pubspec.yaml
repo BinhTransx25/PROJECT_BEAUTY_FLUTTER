@@ -70,12 +70,12 @@ flutter:
     - lib/src/assets/cay.png
     - lib/src/assets/Account/  
     - lib/src/assets/payment/
-    - lib/src/assets/Ellipse.png
-    - lib/src/assets/Obsidian.png
-    - lib/src/assets/background.png
-    - lib/src/assets/facebook.png
-    - lib/src/assets/google.png
-    - lib/src/assets/cay.png  # Đường dẫn đến biểu tượng của bạn
+    - lib/src/assets/Onboarding_Signin_up_Splash/
+    - lib/src/assets/Address/
+    - lib/src/assets/Cart/
+    - lib/src/assets/Checkout/
+    - lib/src/assets/Vouchers/
+    # Đường dẫn đến biểu tượng của bạn
 flutter_icons:
   android: true # Tạo biểu tượng cho Android
   ios: true # Tạo biểu tượng cho iOS

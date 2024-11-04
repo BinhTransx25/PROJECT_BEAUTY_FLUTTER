@@ -94,14 +94,14 @@ class _SignupScreenState extends State<SignupScreen> {
                 children: [
                   Positioned(
                     child: Image.asset(
-                      'lib/src/assets/Ellipse.png',
+                      'lib/src/assets/Onboarding_Signin_up_Splash/Ellipse.png',
                       width: 90,
                       height: 90,
                     ),
                   ),
                   Positioned(
                     child: Image.asset(
-                      'lib/src/assets/Obsidian.png',
+                      'lib/src/assets/Onboarding_Signin_up_Splash/Obsidian.png',
                       width: 45,
                       height: 58,
                     ),

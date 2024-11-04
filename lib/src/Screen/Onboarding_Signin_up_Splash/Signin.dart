@@ -75,14 +75,14 @@ class _SigninScreenState extends State<SigninScreen> {
                 children: [
                   Positioned(
                     child: Image.asset(
-                      'lib/src/assets/Ellipse.png',
+                      'lib/src/assets/Onboarding_Signin_up_Splash/Ellipse.png',
                       width: 90,
                       height: 90,
                     ),
                   ),
                   Positioned(
                     child: Image.asset(
-                      'lib/src/assets/Obsidian.png',
+                      'lib/src/assets/Onboarding_Signin_up_Splash/Obsidian.png',
                       width: 45,
                       height: 58,
                     ),
@@ -168,7 +168,7 @@ class _SigninScreenState extends State<SigninScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          'lib/src/assets/google.png',
+                          'lib/src/assets/Onboarding_Signin_up_Splash/google.png',
                           height: 24,
                           width: 24,
                         ),
@@ -199,7 +199,7 @@ class _SigninScreenState extends State<SigninScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          'lib/src/assets/facebook.png',
+                          'lib/src/assets/Onboarding_Signin_up_Splash/facebook.png',
                           height: 24,
                           width: 24,
                         ),
