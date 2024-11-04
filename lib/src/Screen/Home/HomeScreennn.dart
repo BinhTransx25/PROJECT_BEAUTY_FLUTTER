@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:beauty/src_demo/retrofit/data.dart';
+import '../../models//home//data.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {

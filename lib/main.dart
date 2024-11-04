@@ -1,5 +1,5 @@
 // import 'package:firebase_core/firebase_core.dart';
-import 'package:beauty/src/Screen/HomeScreen.dart';
+import 'package:beauty/src/Screen/Home/HomeScreennn.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 // import 'src/Screen/Product_detail/Product_detail.dart';

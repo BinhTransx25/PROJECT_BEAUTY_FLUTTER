@@ -75,6 +75,9 @@ flutter:
     - lib/src/assets/Cart/
     - lib/src/assets/Checkout/
     - lib/src/assets/Vouchers/
+    - lib/src/assets/Home/
+
+
     # Đường dẫn đến biểu tượng của bạn
 
 flutter_icons:
