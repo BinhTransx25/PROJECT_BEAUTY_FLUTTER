@@ -82,18 +82,16 @@ flutter_icons:
   image_path: "lib/src/assets/cay.png" # Đảm bảo bạn có file icon trong thư mục assets
 
 flutter_native_splash:
-   image: "assets/images/logo.png"
-  #  image: "assets/dev/images/splash-light.png"
-
-  # color: "#dddddd"
-  # icon_background_color: "#dddddd"
-  # image_dark: "assets/images/logo.png"
-  # color_dark: "#333333"
-  # icon_background_color_dark: "#333333"
-  # android_12:
-  #   image: "assets/images/logo.png"
-  #   color: "#dddddd"
-  #   icon_background_color: "#dddddd"
-  #   image_dark: "assets/images/logo.png"
-  #   color_dark: "#333333"
-  #   icon_background_color_dark: "#333333"
+  image: "assets/images/logo.png"
+  color: "#dddddd"
+  icon_background_color: "#dddddd"
+  image_dark: "assets/images/logo.png"
+  color_dark: "#333333"
+  icon_background_color_dark: "#333333"
+  android_12:
+    image: "assets/images/logo.png"
+    color: "#dddddd"
+    icon_background_color: "#dddddd"
+    image_dark: "assets/images/logo.png"
+    color_dark: "#333333"
+    icon_background_color_dark: "#333333"
