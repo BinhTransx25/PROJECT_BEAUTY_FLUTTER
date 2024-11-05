@@ -76,6 +76,8 @@ flutter:
     - lib/src/assets/Checkout/
     - lib/src/assets/Vouchers/
     - lib/src/assets/Home/
+    - lib/src/assets/Category/
+
 
 
     # Đường dẫn đến biểu tượng của bạn

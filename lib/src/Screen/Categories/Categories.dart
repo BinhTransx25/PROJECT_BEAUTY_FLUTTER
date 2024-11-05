@@ -10,37 +10,37 @@ class Categories extends StatelessWidget {
       name: 'Son L\'Oreal',
       price: 150000,
       oldPrice: 160000,
-      imageUrl: 'lib/src/assets/anh6.png',
+      imageUrl: 'lib/src/assets/Category/anh6.png',
     ),
     Product(
       name: 'Serum L\'Oreal',
       price: 150000,
       oldPrice: 160000,
-      imageUrl: 'lib/src/assets/anh7.png',
+      imageUrl: 'lib/src/assets/Category/anh7.png',
     ),
     Product(
       name: 'Mực L\'Oreal',
       price: 150000,
       oldPrice: 160000,
-      imageUrl: 'lib/src/assets/anh8.png',
+      imageUrl: 'lib/src/assets/Category/anh8.png',
     ),
     Product(
       name: 'Phấn L\'Oreal',
       price: 150000,
       oldPrice: 160000,
-      imageUrl: 'lib/src/assets/anh9.png',
+      imageUrl: 'lib/src/assets/Category/anh9.png',
     ),
     Product(
       name: 'Son L\'Oreal',
       price: 150000,
       oldPrice: 160000,
-      imageUrl: 'lib/src/assets/anh6.png',
+      imageUrl: 'lib/src/assets/Category/anh6.png',
     ),
     Product(
       name: 'Serum L\'Oreal',
       price: 150000,
       oldPrice: 160000,
-      imageUrl: 'lib/src/assets/anh7.png',
+      imageUrl: 'lib/src/assets/Category/anh7.png',
     ),
     // Thêm sản phẩm khác nếu cần
   ];
