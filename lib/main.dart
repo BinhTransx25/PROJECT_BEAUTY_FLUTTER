@@ -7,6 +7,7 @@ import 'src/app/app_router.dart';
 
 
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
       locale: context.locale,
       // home:ProductDetailScreen(),  Gọi màn hình mọi người đang code vào đây nha
       routerConfig: _appRouter.router,
+
     );
   }
 }
