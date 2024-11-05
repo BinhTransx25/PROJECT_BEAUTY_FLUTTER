@@ -1,1 +1,4 @@
-{"hello":"Xin chào","welcome":"Chào mừng"}
+{
+  "hello_world": "Xin chào ",
+  "change_language": "Chuyển đổi ngôn ngữ"
+}

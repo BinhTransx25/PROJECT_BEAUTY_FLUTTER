@@ -1,25 +1,26 @@
 name: beauty
 description: "A new Flutter project."
-publish_to: 'none' # Không xuất bản lên pub.dev
+publish_to: 'none' 
 
-version: 1.0.0+1 # Phiên bản ứng dụng
+version: 1.0.0+1
 
 environment:
-  sdk: ^3.5.0 # SDK Flutter tối thiểu yêu cầu
+  sdk: ^3.5.0 
 
 dependencies:
   flutter:
-    sdk: flutter # Thư viện Flutter
-  bloc: ^8.1.4 # Quản lý trạng thái với Bloc
-  dio: ^5.7.0 # Thư viện HTTP Client
-  retrofit: ^4.4.1 # Thư viện cho API Client với Retrofit
-  json_serializable: ^6.8.0 # Chuyển đổi JSON tự động
-  json_annotation: ^4.9.0 # Đánh dấu cho mã JSON
-  go_router: ^14.2.9 # Quản lý routing trong ứng dụng
-  easy_localization: ^3.0.7 # Địa phương hóa dễ dàng
-  sign_in_with_apple: ^6.1.3 # Đăng nhập với Apple
-  skeletonizer: ^1.4.2 # Tạo giao diện loading
-  connectivity_plus: ^6.0.5 # Kiểm tra trạng thái kết nối Internet
+    sdk: flutter 
+  bloc: ^8.1.4 
+  dio: ^5.7.0 
+  retrofit: ^4.4.1
+  json_serializable: ^6.8.0 
+  json_annotation: ^4.9.0 
+  go_router: ^14.2.9 
+  easy_localization: ^3.0.7 
+  sign_in_with_apple: ^6.1.3 
+  skeletonizer: ^1.4.2 
+  connectivity_plus: ^6.0.5 
+
 
   firebase_core: ^3.6.0 # Thư viện cốt lõi của Firebase
   firebase_messaging: ^15.1.3 # Thư viện Firebase cho thông báo đẩy
@@ -30,17 +31,17 @@ dependencies:
   firebase_storage: ^12.3.2 # Lưu trữ Firebase
   cloud_firestore: ^5.4.4 # Cơ sở dữ liệu Firestore
 
-  encrypt: ^5.0.3 # Mã hóa dữ liệu
-  shared_preferences: ^2.3.2 # Lưu trữ dữ liệu cục bộ
-  local_auth: ^2.3.0 # Xác thực sinh trắc học
-
-  flutter_native_splash: ^2.4.1 # Tạo splash screen
-  flutter_animate: ^4.5.0 # Hoạt ảnh cho Flutter
-  flutter_markdown: ^0.7.3+2 # Hiển thị nội dung Markdown
-  flutter_svg: ^2.0.10+1 # Hiển thị hình ảnh SVG
+  encrypt: ^5.0.3 
+  shared_preferences: ^2.3.2 
+  local_auth: ^2.3.0 
+  qr_code_scanner: ^1.0.1
+  flutter_native_splash: ^2.4.1 
+  flutter_animate: ^4.5.0 
+  flutter_markdown: ^0.7.3+2 
+  flutter_svg: ^2.0.10+1 
 
   google_sign_in: ^6.2.1 # Đăng nhập bằng Google
-  qr_code_scanner: ^1.0.1 # Quét mã QR
+  flutter_facebook_auth: ^7.1.1
   cached_network_image: ^3.4.1 # Hình ảnh mạng với bộ nhớ đệm
   package_info_plus: ^8.0.2 # Thông tin về gói ứng dụng
   file_picker: ^8.1.2 # Chọn tệp từ thiết bị
@@ -48,27 +49,28 @@ dependencies:
   mobile_scanner: ^5.2.3 # Quét mã vạch và QR
   url_launcher: ^6.3.0 # Mở URL trong trình duyệt
 
+
 dev_dependencies:
-  flutter_test: # Thư viện để kiểm thử Flutter
+  flutter_test: 
     sdk: flutter
-  flutter_lints: ^4.0.0 # Bộ quy tắc lint cho Flutter
-  retrofit_generator: ^9.1.2 # Tạo mã Retrofit tự động
-  build_runner: ^2.4.9 # Chạy các tác vụ build, ví dụ như tạo mã tự động
-  flutter_launcher_icons: ^0.14.1 # Tạo biểu tượng ứng dụng
+  flutter_lints: ^4.0.0 
+  retrofit_generator: ^9.1.2 
+  build_runner: ^2.4.9 
+  flutter_launcher_icons: ^0.14.1 
 
 flutter:
   uses-material-design: true # Sử dụng thiết kế Material
-
   assets:
-    - assets/translations/
-
+    - assets/translations/en.json
+    - assets/translations/vi.json
+    - lib/src/assets/cay.png  
 flutter_icons:
   android: true # Tạo biểu tượng cho Android
   ios: true # Tạo biểu tượng cho iOS
-  image_path: "assets/icons/app_icon.png" # Đảm bảo bạn có file icon trong thư mục assets
+  image_path: "lib/src/assets/cay.png" # Đảm bảo bạn có file icon trong thư mục assets
+
 flutter_native_splash:
-  # dart run flutter_native_splash:create
-  # dart run flutter_native_splash:remove
+  
   image: "assets/dev/images/splash-light.png"
   color: "#dddddd"
   icon_background_color: "#dddddd"
@@ -82,3 +84,7 @@ flutter_native_splash:
     image_dark: "assets/dev/images/splash-dark.png"
     color_dark: "#333333"
     icon_background_color_dark: "#333333"
+flutter_launcher_icons:
+  android: true # Tạo biểu tượng cho Android
+  ios: true     # Tạo biểu tượng cho iOS
+  image_path: "lib/src/assets/cay.png" # Đường dẫn đến hình ảnh biểu tượng
