@@ -87,6 +87,11 @@ flutter:
     - lib/src/assets/frame2.png
     - lib/src/assets/frame3.png
     - lib/src/assets/Ellipse.png
+    - lib/src/assets/anh6.png
+    - lib/src/assets/anh7.png
+    - lib/src/assets/anh8.png
+    - lib/src/assets/anh9.png
+    - lib/src/assets/anh10.png
 flutter_icons:
   android: true # Tạo biểu tượng cho Android
   ios: true # Tạo biểu tượng cho iOS

@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'src/Screen/helloWorld.dart'; // Import Màn hình mọi người đang test nha
 import 'src/Screen/shop.dart';
 import 'src/Screen/shopEmpty.dart';
+import 'src/Screen/Categories.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       locale: context.locale,
       // home: HelloWorld(), // Gọi màn hình mọi người đang code vào đây nha
       // home: shop(),
-      home: const HomeScreen(), 
+      home: Categories() 
 
     );
   }
