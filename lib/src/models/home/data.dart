@@ -1,3 +1,12 @@
+
+// Dữ liệu hình ảnh cho carousel
+final List<String> carouselImages = [
+  'lib/src/assets/anh1.png',
+  'lib/src/assets/anh2.png',
+  'lib/src/assets/anh3.png',
+  'lib/src/assets/anh4.png',
+  'lib/src/assets/anh5.png',
+];
 class Promotion {
   final String imageUrl;
   final String name;
@@ -43,11 +52,12 @@ class Outstandingproduct {
   final double originalprice;
   final double discountedprice;
 
-  Outstandingproduct(
-      {required this.imageUrl,
+  Outstandingproduct({
+      required this.imageUrl,
       required this.name,
       required this.originalprice,
-      required this.discountedprice});
+      required this.discountedprice
+      });
 }
 
 List<Outstandingproduct> outstandingproduct = [
@@ -116,3 +126,4 @@ List<Outstandingproductsale> outstandingproductsale = [
     sale: '15%',
   ),
 ];
+
