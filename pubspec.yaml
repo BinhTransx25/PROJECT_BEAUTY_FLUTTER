@@ -64,6 +64,28 @@ flutter:
     - assets/translations/en.json
     - assets/translations/vi.json
     - lib/src/assets/cay.png  
+    - lib/src/assets/favorite_product/Heart_gray.png
+    - lib/src/assets/favorite_product/Heart_fill.png
+    - lib/src/assets/favorite_product/Heart_light.png
+    - lib/src/assets/product_img_demo/116.png
+    - lib/src/assets/product_img_demo/117.png
+    - lib/src/assets/product_img_demo/119.png
+
+    - lib/src/assets/favorite_product/heart.svg
+    - lib/src/assets/favorite_product/find_err.svg
+
+    - lib/src/assets/favorite_product/icons/arrow_back_ios.svg 
+    - lib/src/assets/favorite_product/icons/arrow_dropdown_ios.svg
+    - lib/src/assets/favorite_product/icons/arrow_dropup_ios.svg 
+    - lib/src/assets/favorite_product/icons/delete.svg
+    - lib/src/assets/favorite_product/icons/filter_successful.svg 
+    - lib/src/assets/favorite_product/icons/filter.svg
+    - lib/src/assets/favorite_product/icons/find.svg 
+    - lib/src/assets/favorite_product/icons/heart_fill.svg
+    - lib/src/assets/favorite_product/icons/heart_light.svg 
+    - lib/src/assets/favorite_product/icons/multiply.svg
+
+
 flutter_icons:
   android: true # Tạo biểu tượng cho Android
   ios: true # Tạo biểu tượng cho iOS

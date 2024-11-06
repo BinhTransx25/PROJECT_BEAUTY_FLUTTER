@@ -143,7 +143,7 @@ class ProfileScreen extends StatelessWidget {
               child: Center(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Color(0xFFD61355), // Màu D61355
+                    // primary: Color(0xFFD61355), // Màu D61355
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                   ),

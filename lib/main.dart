@@ -1,7 +1,13 @@
 // import 'package:firebase_core/firebase_core.dart';
+import 'package:beauty/src/Screen/favorite_product.dart';
+import 'package:beauty/src/Screen/filter.dart';
+import 'package:beauty/src/Screen/find.dart';
+import 'package:beauty/src/Screen/finding.dart';
+
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'src/Screen/helloWorld.dart'; // Import Màn hình mọi người đang test nha
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +31,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      home: HelloWorld(), // Gọi màn hình mọi người đang code vào đây nha
+      home: Find(), // Gọi màn hình mọi người đang code vào đây nha
     );
   }
 }
