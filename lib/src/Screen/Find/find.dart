@@ -1,7 +1,7 @@
-import 'package:beauty/src/widget/favorite_product_item.dart';
-import 'package:beauty/src/widget/label.dart';
-import 'package:beauty/src/widget/search_suggestion.dart';
-import 'package:beauty/src/widget/search_action_bar.dart';
+import 'widgets/favorite_product_item.dart';
+import 'widgets/label.dart';
+import 'widgets/search_suggestion.dart';
+import 'widgets/search_action_bar.dart';
 
 import 'package:flutter/material.dart';
 

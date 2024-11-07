@@ -1,5 +1,5 @@
 import 'package:beauty/src/constants/svg_icon_paths.dart';
-import 'package:beauty/src/widget/search_box.dart';
+import 'search_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

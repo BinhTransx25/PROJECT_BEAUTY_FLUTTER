@@ -1,6 +1,6 @@
-import 'package:beauty/src/widget/basic_action_bar.dart';
-import 'package:beauty/src/widget/favorite_no_item.dart';
-import 'package:beauty/src/widget/favorite_product_item.dart';
+import 'widgets/basic_action_bar.dart';
+import '../Find/widgets/favorite_no_item.dart';
+import 'widgets/favorite_product_item.dart';
 import 'package:flutter/material.dart';
 
 final List<int> items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];

@@ -1,6 +1,5 @@
-import 'package:beauty/src/widget/Basic_Action_Bar.dart';
-import 'package:beauty/src/widget/basic_custom_button.dart';
-import 'package:beauty/src/widget/show_more_drop_button.dart';
+import 'widgets/basic_custom_button.dart';
+import 'widgets/show_more_drop_button.dart';
 import 'package:flutter/material.dart';
 
 final List<String> titles = [
