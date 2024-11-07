@@ -1,4 +1,7 @@
 // import 'package:firebase_core/firebase_core.dart';
+import 'package:beauty/src/Screen/Password%20Recovery.dart';
+import 'package:beauty/src/Screen/PasswordRecoveryEmail.dart';
+import 'package:beauty/src/Screen/PasswordRecoveryPhone.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'src/Screen/helloWorld.dart'; // Import Màn hình mọi người đang test nha
@@ -25,7 +28,8 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      home: HelloWorld(), // Gọi màn hình mọi người đang code vào đây nha
+      debugShowCheckedModeBanner: false,
+      home: PasswordRecoveryPhone(), // Gọi màn hình mọi người đang code vào đây nha
     );
   }
 }

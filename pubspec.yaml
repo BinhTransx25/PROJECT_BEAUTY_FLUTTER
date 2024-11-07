@@ -63,7 +63,11 @@ flutter:
   assets:
     - assets/translations/en.json
     - assets/translations/vi.json
-    - lib/src/assets/cay.png  
+    - lib/src/assets/cay.png
+    - lib/src/assets/PasswordRecovery/bk.png
+    - lib/src/assets/PasswordRecovery/check.png
+    - lib/src/assets/PasswordRecovery/logo.png
+    - lib/src/assets/PasswordRecovery/phone.png
 flutter_icons:
   android: true # Tạo biểu tượng cho Android
   ios: true # Tạo biểu tượng cho iOS
