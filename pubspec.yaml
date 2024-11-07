@@ -68,6 +68,8 @@ flutter:
     - lib/src/assets/PasswordRecovery/check.png
     - lib/src/assets/PasswordRecovery/logo.png
     - lib/src/assets/PasswordRecovery/phone.png
+    - lib/src/assets/ResetPassword/eye.png
+    - lib/src/assets/ResetPassword/success.png
 flutter_icons:
   android: true # Tạo biểu tượng cho Android
   ios: true # Tạo biểu tượng cho iOS
