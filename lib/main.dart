@@ -1,8 +1,7 @@
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'src/Screen/Home/homedemo.dart';
-import 'src/Screen/Find/'
+import 'src/Screen/Address/Edit_Address.dart';
 import 'src/app/app_router.dart';
 
 void main() async {
@@ -44,7 +43,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      home: HomeScreen(), // Gọi màn hình mọi người đang code vào đây nha
+      home: EditAddressScreen(), // Gọi màn hình mọi người đang code vào đây nha
     );
   }
 }
