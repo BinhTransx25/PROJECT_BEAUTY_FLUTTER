@@ -76,10 +76,11 @@ flutter:
     - lib/src/assets/Vouchers/
     - lib/src/assets/Home/
     - lib/src/assets/Category/
-
-
-
+    - lib/src/assets/favorite_product/
+    - lib/src/assets/product_img_demo/
+    - lib/src/assets/favorite_product/icons/
     # Đường dẫn đến biểu tượng của bạn
+
 
 flutter_icons:
   android: true # Tạo biểu tượng cho Android
