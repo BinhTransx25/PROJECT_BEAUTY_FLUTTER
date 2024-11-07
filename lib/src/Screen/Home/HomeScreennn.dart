@@ -1,26 +1,26 @@
 import 'dart:async';
-import '../../models//home//data.dart';
+import '../../models/home/data.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreennn extends StatefulWidget {
   final int notificationCount;
-  const HomeScreen({this.notificationCount = 1, Key? key}) : super(key: key);
+  const HomeScreennn({this.notificationCount = 1, Key? key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreennn> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
   Timer? _timer;
 
   final List<String> images = [
-    'lib/src/assets/anh1.png',
-    'lib/src/assets/anh2.png',
-    'lib/src/assets/anh3.png',
-    'lib/src/assets/anh4.png',
-    'lib/src/assets/anh5.png',
+    'lib/src/assets/Home/anh1.png',
+    'lib/src/assets/Home/anh2.png',
+    'lib/src/assets/Home/anh3.png',
+    'lib/src/assets/Home/anh4.png',
+    'lib/src/assets/Home/anh5.png',
   ];
 
   @override
@@ -128,13 +128,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     alignment: Alignment.center,
                     children: [
                       Image.asset(
-                        'lib/src/assets/Ellipse.png',
+                        'lib/src/assets/Home/Ellipse.png',
                         width: 60,
                         height: 60,
                       ),
                       ClipOval(
                         child: Image.asset(
-                          'lib/src/assets/avatar.png',
+                          'lib/src/assets/Home/avatar.png',
                           width: 40,
                           height: 40,
                         ),
@@ -262,7 +262,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   alignment: Alignment.center,
                                   children: [
                                     Image.asset(
-                                      'lib/src/assets/Ellipse.png',
+                                      'lib/src/assets/Home/Ellipse.png',
                                       width: 60,
                                       height: 60,
                                     ),
@@ -332,8 +332,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       : Center(child: Text("No categories available")),
                 ],
               ),
-
-
               Divider(height: 15, color: Colors.transparent),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -411,7 +409,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               margin: EdgeInsets.only(top: 7),
                                               child: ClipOval(
                                                 child: Image.asset(
-                                                  'lib/src/assets/Rectangle.png',
+                                                  'lib/src/assets/Home/Rectangle.png',
                                                   width: 40,
                                                   height: 40,
                                                 ),
@@ -476,8 +474,320 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-
-
+              Divider(height: 15, color: Colors.transparent),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Sản phẩm mới",
+                        style: TextStyle(
+                          fontSize: 21.0,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "Tất cả",
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Icon(Icons.arrow_circle_right,
+                              size: 30, color: Color(0xffD61355)),
+                        ],
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 15),
+                  SizedBox(
+                    height: 230,
+                    child: outstandingproduct.isNotEmpty
+                        ? ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: outstandingproduct.length,
+                            itemBuilder: (context, index) {
+                              final product = outstandingproduct[index];
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 4.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Stack(
+                                      alignment: Alignment.topRight,
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.all(4),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Color(0xFF000000)
+                                                    .withOpacity(0.1),
+                                                spreadRadius: 0,
+                                                blurRadius: 10,
+                                                offset: Offset(0, 5),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Image.asset(
+                                            product.imageUrl,
+                                            width: 150,
+                                            height: 171,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        Stack(
+                                          alignment: Alignment.center,
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.only(top: 7),
+                                              child: ClipOval(
+                                                child: Image.asset(
+                                                  'lib/src/assets/Home/Rectangle.png',
+                                                  width: 40,
+                                                  height: 40,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              margin:
+                                                  EdgeInsets.only(bottom: 0),
+                                              child: Icon(Icons.add,
+                                                  size: 16,
+                                                  color: Colors.black),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 10),
+                                    Text(
+                                      product.name,
+                                      style: TextStyle(
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: '${product.originalprice} đ ',
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text:
+                                                ' ${product.discountedprice} đ',
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w700,
+                                              color: Color(0xFFD61355),
+                                              decoration:
+                                                  TextDecoration.lineThrough,
+                                              decorationColor:
+                                                  Color(0xFFD61355),
+                                              decorationThickness: 2,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          )
+                        : Center(
+                            child: Text('No outstanding products available'),
+                          ),
+                  ),
+                ],
+              ),
+              Divider(height: 15, color: Colors.transparent),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Flash Sale",
+                        style: TextStyle(
+                          fontSize: 21.0,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "Tất cả",
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Icon(Icons.arrow_circle_right,
+                              size: 30, color: Color(0xffD61355)),
+                        ],
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 15),
+                  SizedBox(
+                    height: 230,
+                    child: outstandingproductsale.isNotEmpty
+                        ? ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: outstandingproductsale.length,
+                            itemBuilder: (context, index) {
+                              final product = outstandingproductsale[index];
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 4.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Stack(
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.all(4),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Color(0xFF000000)
+                                                    .withOpacity(0.1),
+                                                spreadRadius: 0,
+                                                blurRadius: 10,
+                                                offset: Offset(0, 5),
+                                              ),
+                                            ],
+                                          ),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            child: Image.asset(
+                                              product.imageUrl,
+                                              width: 150,
+                                              height: 171,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        if (product.sale != '')
+                                          Positioned(
+                                            top: -7,
+                                            left: 2,
+                                            child: Stack(
+                                              alignment: Alignment.center,
+                                              children: [
+                                                ClipOval(
+                                                  child: Image.asset(
+                                                    'lib/src/assets/Home/discount.png',
+                                                    width: 40,
+                                                    height: 40,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  product.sale,
+                                                  style: TextStyle(
+                                                    fontSize: 10,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        Positioned(
+                                          top: 7,
+                                          right: 7,
+                                          child: Stack(
+                                            alignment: Alignment.center,
+                                            children: [
+                                              ClipOval(
+                                                child: Image.asset(
+                                                  'lib/src/assets/Home/Rectangle.png',
+                                                  width: 40,
+                                                  height: 40,
+                                                ),
+                                              ),
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(bottom: 7),
+                                                child: Icon(Icons.add,
+                                                    size: 16,
+                                                    color: Colors.black),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 10),
+                                    Text(
+                                      product.name,
+                                      style: TextStyle(
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    SizedBox(height: 5),
+                                    RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: '${product.originalprice} đ ',
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text:
+                                                ' ${product.discountedprice} đ',
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w700,
+                                              color: Color(0xFFD61355),
+                                              decoration:
+                                                  TextDecoration.lineThrough,
+                                              decorationColor:
+                                                  Color(0xFFD61355),
+                                              decorationThickness: 2,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          )
+                        : Center(
+                            child: Text('No outstanding products available'),
+                          ),
+                  ),
+                ],
+              ),
+              Divider(height: 15, color: Colors.transparent),
               Container(
                 width: double.infinity,
                 height: 162,
@@ -512,7 +822,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             bottomLeft: Radius.circular(8),
                           ),
                           child: Image.asset(
-                            'lib/src/assets/frame.png',
+                            'lib/src/assets/Home/frame.png',
                             width: 87,
                             height: 136,
                             fit: BoxFit.cover,
@@ -520,7 +830,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         ClipRRect(
                           child: Image.asset(
-                            'lib/src/assets/frame1.png',
+                            'lib/src/assets/Home/frame1.png',
                             width: 87,
                             height: 136,
                             fit: BoxFit.cover,
@@ -528,7 +838,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         ClipRRect(
                           child: Image.asset(
-                            'lib/src/assets/frame2.png',
+                            'lib/src/assets/Home/frame2.png',
                             width: 87,
                             height: 136,
                             fit: BoxFit.cover,
@@ -539,7 +849,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             bottomRight: Radius.circular(8),
                           ),
                           child: Image.asset(
-                            'lib/src/assets/frame3.png',
+                            'lib/src/assets/Home/frame3.png',
                             width: 87,
                             height: 136,
                             fit: BoxFit.cover,
@@ -551,8 +861,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Divider(height: 15, color: Colors.transparent),
-
-
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -628,7 +936,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               margin: EdgeInsets.only(top: 7),
                                               child: ClipOval(
                                                 child: Image.asset(
-                                                  'lib/src/assets/Rectangle.png',
+                                                  'lib/src/assets/Home/Rectangle.png',
                                                   width: 40,
                                                   height: 40,
                                                 ),
@@ -700,3 +1008,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+

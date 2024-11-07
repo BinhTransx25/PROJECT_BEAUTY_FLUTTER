@@ -1,6 +1,12 @@
 import 'dart:async';
-import '../../models//home//data.dart';
+import '../../models/home/data_demo.dart';
 import 'package:flutter/material.dart';
+import 'widgets/header.dart';
+import 'widgets/PromotionList.dart';
+import 'widgets/CategoryList .dart';
+import 'widgets/ProductList.dart';
+import 'widgets/ProductSaleList.dart';
+import 'widgets/RadiantGlowSection.dart';
 
 class HomeScreen extends StatefulWidget {
   final int notificationCount;
@@ -56,17 +62,24 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 22),
-              Header(notificationCount: widget.notificationCount),
+              Header(notificationCount: 5),
               SizedBox(height: 20),
-              Carousel(images: carouselImages, pageController: _pageController, onPageChanged: _onPageChanged),
+              Carousel(
+                  images: carouselImages,
+                  pageController: _pageController,
+                  onPageChanged: _onPageChanged),
               SizedBox(height: 20),
               PromotionList(promotions: promotions),
               SizedBox(height: 20),
               CategoryList(categories: categories),
               SizedBox(height: 20),
-              ProductList(products: outstandingproduct, title: "Sản phẩm nổi bật"),
+              ProductList(outstandingproduct: outstandingProducts),
               SizedBox(height: 20),
-              ProductSaleList(products: outstandingproductsale, title: "Sản phẩm khuyến mãi"),
+              ProductSaleList(
+                  products: outstandingProductSales,
+                  title: "Sản phẩm khuyến mãi"),
+              SizedBox(height: 20),
+              RadiantGlowSection(),
             ],
           ),
         ),
@@ -76,27 +89,29 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 // Header widget
-class Header extends StatelessWidget {
-  final int notificationCount;
-  const Header({required this.notificationCount});
+// class Header extends StatelessWidget {
+//   final int notificationCount;
+//   const Header({required this.notificationCount});
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Địa chỉ giao hàng", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            Text("Số 123, Phường 12, Quận 1", style: TextStyle(color: Colors.grey[600])),
-          ],
-        ),
-        Icon(Icons.notifications, color: Colors.grey, size: 30),
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//       children: [
+//         Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Text("Địa chỉ giao hàng",
+//                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+//             Text("Số 123, Phường 12, Quận 1",
+//                 style: TextStyle(color: Colors.grey[600])),
+//           ],
+//         ),
+//         Icon(Icons.notifications, color: Colors.grey, size: 30),
+//       ],
+//     );
+//   }
+// }
 
 // Carousel widget
 class Carousel extends StatelessWidget {
@@ -104,7 +119,10 @@ class Carousel extends StatelessWidget {
   final PageController pageController;
   final Function(int) onPageChanged;
 
-  const Carousel({required this.images, required this.pageController, required this.onPageChanged});
+  const Carousel(
+      {required this.images,
+      required this.pageController,
+      required this.onPageChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -123,144 +141,159 @@ class Carousel extends StatelessWidget {
 }
 
 // PromotionList widget
-class PromotionList extends StatelessWidget {
-  final List<Promotion> promotions;
+// class PromotionList extends StatelessWidget {
+//   final List<Promotion> promotions;
 
-  const PromotionList({required this.promotions});
+//   const PromotionList({required this.promotions});
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: promotions.map((promo) => Column(
-        children: [
-          Image.asset(promo.imageUrl, width: 50, height: 50),
-          Text(promo.name, textAlign: TextAlign.center),
-        ],
-      )).toList(),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//       children: promotions
+//           .map((promo) => Column(
+//                 children: [
+//                   Image.asset(promo.imageUrl, width: 50, height: 50),
+//                   Text(promo.name, textAlign: TextAlign.center),
+//                 ],
+//               ))
+//           .toList(),
+//     );
+//   }
+// }
 
 // CategoryList widget
-class CategoryList extends StatelessWidget {
-  final List<Category> categories;
+// class CategoryList extends StatelessWidget {
+//   final List<Category> categories;
 
-  const CategoryList({required this.categories});
+//   const CategoryList({required this.categories});
 
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 10,
-      runSpacing: 10,
-      children: categories.map((category) => Chip(label: Text(category.name))).toList(),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Wrap(
+//       spacing: 10,
+//       runSpacing: 10,
+//       children: categories
+//           .map((category) => Chip(label: Text(category.name)))
+//           .toList(),
+//     );
+//   }
+// }
 
 // ProductList widget for Outstanding Products
-class ProductList extends StatelessWidget {
-  final List<Outstandingproduct> products;
-  final String title;
+// class ProductList extends StatelessWidget {
+//   final List<OutstandingProduct> products;
+//   final String title;
 
-  const ProductList({required this.products, required this.title});
+//   const ProductList({required this.products, required this.title});
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        SizedBox(height: 10),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: products.map((product) => ProductCard(product: product)).toList(),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-// ProductSaleList widget for Outstanding Products with Sale
-class ProductSaleList extends StatelessWidget {
-  final List<Outstandingproductsale> products;
-  final String title;
-
-  const ProductSaleList({required this.products, required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-        SizedBox(height: 10),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: products.map((product) => ProductSaleCard(product: product)).toList(),
-          ),
-        ),
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         Text(title,
+//             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+//         SizedBox(height: 10),
+//         SingleChildScrollView(
+//           scrollDirection: Axis.horizontal,
+//           child: Row(
+//             children: products
+//                 .map((product) => ProductCard(product: product))
+//                 .toList(),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
 // Product Card for Displaying a Product
-class ProductCard extends StatelessWidget {
-  final Outstandingproduct product;
+// class ProductCard extends StatelessWidget {
+//   final OutstandingProduct product;
 
-  const ProductCard({required this.product});
+//   const ProductCard({required this.product});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 10),
-      width: 120,
-      child: Column(
-        children: [
-          Image.asset(product.imageUrl, height: 80),
-          Text(product.name),
-          Text("\$${product.originalprice}", style: TextStyle(decoration: TextDecoration.lineThrough)),
-          Text("\$${product.discountedprice}", style: TextStyle(color: Colors.red)),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       margin: EdgeInsets.only(right: 10),
+//       width: 120,
+//       child: Column(
+//         children: [
+//           Image.asset(product.imageUrl, height: 120),
+//           Text(product.name),
+//           Text("\$${product.originalPrice}",
+//               style: TextStyle(decoration: TextDecoration.lineThrough)),
+//           Text("\$${product.discountedPrice}",
+//               style: TextStyle(color: Colors.red)),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
-// ProductSaleCard widget for Products with Sale
-class ProductSaleCard extends StatelessWidget {
-  final Outstandingproductsale product;
+// ProductSaleList widget for Outstanding Products with Sale
+// class ProductSaleList extends StatelessWidget {
+//   final List<OutstandingProductSale> products;
+//   final String title;
 
-  const ProductSaleCard({required this.product});
+//   const ProductSaleList({required this.products, required this.title});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 10),
-      width: 120,
-      child: Column(
-        children: [
-          Stack(
-            alignment: Alignment.topRight,
-            children: [
-              Image.asset(product.imageUrl, height: 80),
-              if (product.sale.isNotEmpty)
-                Container(
-                  padding: EdgeInsets.all(4),
-                  color: Colors.red,
-                  child: Text(product.sale, style: TextStyle(color: Colors.white, fontSize: 12)),
-                ),
-            ],
-          ),
-          Text(product.name),
-          Text("\$${product.originalprice}", style: TextStyle(decoration: TextDecoration.lineThrough)),
-          Text("\$${product.discountedprice}", style: TextStyle(color: Colors.red)),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         Text(title,
+//             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+//         SizedBox(height: 10),
+//         SingleChildScrollView(
+//           scrollDirection: Axis.horizontal,
+//           child: Row(
+//             children: products
+//                 .map((product) => ProductSaleCard(product: product))
+//                 .toList(),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
+
+// // ProductSaleCard widget for Products with Sale
+// class ProductSaleCard extends StatelessWidget {
+//   final OutstandingProductSale product;
+
+//   const ProductSaleCard({required this.product});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       margin: EdgeInsets.only(right: 10),
+//       width: 120,
+//       child: Column(
+//         children: [
+//           Stack(
+//             alignment: Alignment.topRight,
+//             children: [
+//               Image.asset(product.imageUrl, height: 120),
+//               if (product.sale.isNotEmpty)
+//                 Container(
+//                   padding: EdgeInsets.all(4),
+//                   color: Colors.red,
+//                   child: Text(product.sale,
+//                       style: TextStyle(color: Colors.white, fontSize: 12)),
+//                 ),
+//             ],
+//           ),
+//           Text(product.name),
+//           Text("\$${product.originalPrice}",
+//               style: TextStyle(decoration: TextDecoration.lineThrough)),
+//           Text("\$${product.discountedPrice}",
+//               style: TextStyle(color: Colors.red)),
+//         ],
+//       ),
+//     );
+//   }
+// }
