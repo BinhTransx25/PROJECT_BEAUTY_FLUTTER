@@ -80,9 +80,10 @@ flutter:
     - lib/src/assets/favorite_product/
     - lib/src/assets/product_img_demo/
     - lib/src/assets/favorite_product/icons/
-    - lib/src/assets/MyOrder/
+    - lib/src/assets/MyOrder/ 
+    - lib/src/assets/PasswordRecovery/
+    - lib/src/assets/ResetPassword/
     # Đường dẫn đến biểu tượng của bạn
-
 
 flutter_icons:
   android: true # Tạo biểu tượng cho Android
