@@ -13,7 +13,8 @@ class NotificationList extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16),
       children: [
         for (int i = 0; i < notifications.length; i++) ...[
-          if (i == 0 || notifications[i]['date'] != notifications[i - 1]['date'])
+          if (i == 0 ||
+              notifications[i]['date'] != notifications[i - 1]['date'])
             Padding(
               padding: EdgeInsets.symmetric(vertical: 8),
               child: Text(

@@ -6,9 +6,28 @@ class PaymentMethod extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Phương thức thanh toán',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Phương thức thanh toán',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            InkWell(
+              onTap: () {
+                // Xử lý sự kiện thay đổi ở đây
+                print('Thay đổi phương thức thanh toán');
+              },
+              child: Text(
+                'Thay đổi',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey, // Màu bạc
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
         ),
         SizedBox(height: 10),
         Row(

@@ -9,7 +9,7 @@ class CustomTextField extends StatefulWidget {
     this.keyboardType = TextInputType.text,
     this.isPassword = false,
     this.textError = '',
-    required this.onChanged, 
+    required this.onChanged,
   });
 
   final TextEditingController controller;
@@ -18,7 +18,7 @@ class CustomTextField extends StatefulWidget {
   final TextInputType? keyboardType;
   final bool isPassword;
   final String textError;
-  final Function(String) onChanged; 
+  final Function(String) onChanged;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -39,10 +39,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          height: 52,
+          padding: EdgeInsets.only(left: 8, right: 8, top: 5),
+          height: 55,
           decoration: BoxDecoration(
-            color: const Color(0xFFD2D2D2),
-            borderRadius: BorderRadius.circular(16),
+            color: const Color.fromARGB(255, 239, 239, 239),
+            borderRadius: BorderRadius.circular(24),
           ),
           child: SizedBox(
             child: TextField(
@@ -52,19 +53,23 @@ class _CustomTextFieldState extends State<CustomTextField> {
               onChanged: widget.onChanged, // Gọi hàm onChanged
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(16)),
+                  borderRadius: const BorderRadius.all(Radius.circular(24)),
                   borderSide: BorderSide(
                     color: widget.textError.isNotEmpty
                         ? Colors.red
-                        : (widget.controller.text.isNotEmpty ? Colors.green : Colors.transparent), 
+                        : (widget.controller.text.isNotEmpty
+                            ? Colors.green
+                            : Colors.transparent),
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(16)),
+                  borderRadius: const BorderRadius.all(Radius.circular(24)),
                   borderSide: BorderSide(
                     color: widget.textError.isNotEmpty
                         ? Colors.red
-                        : (widget.controller.text.isNotEmpty ? Colors.green : Colors.transparent),
+                        : (widget.controller.text.isNotEmpty
+                            ? Colors.green
+                            : Colors.transparent),
                   ),
                 ),
                 hintText: widget.hintText,

@@ -8,7 +8,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       centerTitle: true,
       backgroundColor: Colors.white,
-      toolbarHeight: 68,
+      toolbarHeight: 78,
       title: const Text(
         'Thêm thẻ mới',
         textAlign: TextAlign.center,

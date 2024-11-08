@@ -20,7 +20,7 @@ class AddressItemWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(
-          color: Colors.grey,
+          color: const Color.fromARGB(255, 219, 219, 219),
           width: 1.0,
         ),
         borderRadius: BorderRadius.circular(10),
@@ -34,8 +34,8 @@ class AddressItemWidget extends StatelessWidget {
             children: [
               Image.asset(
                 'lib/src/assets/Address/location.png',
-                height: 40,
-                width: 40,
+                height: 60,
+                width: 60,
               ),
               SizedBox(width: 10),
               Expanded(
@@ -55,9 +55,11 @@ class AddressItemWidget extends StatelessWidget {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 8, vertical: 4),
                             decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
+                              border: Border.all(
+                                  color:
+                                      const Color.fromARGB(255, 255, 255, 255)),
                               borderRadius: BorderRadius.circular(5),
-                              color: const Color.fromARGB(255, 218, 213, 213),
+                              color: const Color.fromARGB(255, 244, 234, 234),
                             ),
                             child: Text(
                               'Mặc định',
@@ -69,33 +71,48 @@ class AddressItemWidget extends StatelessWidget {
                           ),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            '26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city',
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey),
-                            softWrap: true,
-                            overflow: TextOverflow.visible,
+                    Padding(
+                      padding: EdgeInsets.only(right: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              '26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.grey),
+                              softWrap: true,
+                              overflow: TextOverflow.visible,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
               SizedBox(
-                width: 20,
-                height: 20,
+                width: 36,
+                height: 36,
                 child: Checkbox(
+                  shape: CircleBorder(),
+                  side: BorderSide(
+                    color: isChecked ? Colors.black : Colors.grey,
+                    width: 1.5,
+                  ),
+                  fillColor: WidgetStateProperty.resolveWith<Color>((states) {
+                    if (states.contains(WidgetState.selected)) {
+                      return Colors.black;
+                    }
+                    return Colors.transparent;
+                  }),
+                  checkColor: Colors.white,
                   value: isChecked,
                   onChanged: onChanged,
                 ),
-              ),
+              )
             ],
           ),
         ],

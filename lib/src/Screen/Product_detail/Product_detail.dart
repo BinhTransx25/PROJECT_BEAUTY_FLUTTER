@@ -20,6 +20,7 @@ class ProductDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(height: 15),
                   ProductInfo(),
                   Divider(color: Color(0xFFE4E7EC)),
                   SizedBox(height: 5),
@@ -34,6 +35,7 @@ class ProductDetailScreen extends StatelessWidget {
                   ),
                   Divider(color: Color(0xFFE4E7EC)),
                   ProductReview(),
+                  SizedBox(height: 4),
                 ],
               ),
             ),

@@ -6,6 +6,7 @@ class OnboardingStartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -55,10 +56,10 @@ class OnboardingStartScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 80),
-             CustomButton(
+              CustomButton(
                 title: 'LOGIN',
                 onPress: () {
-                  context.go('/onnboarding'); 
+                  context.go('/onnboarding');
                 },
               ),
             ],

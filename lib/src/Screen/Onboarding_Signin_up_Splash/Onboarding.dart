@@ -11,7 +11,8 @@ class OnboardingScreen extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('lib/src/assets/Onboarding_Signin_up_Splash/background.png'),
+            image: AssetImage(
+                'lib/src/assets/Onboarding_Signin_up_Splash/background.png'),
             fit: BoxFit.fill,
           ),
         ),
@@ -81,7 +82,7 @@ class OnboardingScreen extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      SizedBox(height: 60),
+                      SizedBox(height: 160),
                       DotProgressIndicator(),
                       SizedBox(height: 40),
                       CustomButton(
@@ -100,7 +101,7 @@ class OnboardingScreen extends StatelessWidget {
                         textStyle:
                             TextStyle(color: Color(0xffD61355), fontSize: 16),
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 10),
                       CustomButton(
                         title: 'Đăng nhập',
                         onPress: () => {},

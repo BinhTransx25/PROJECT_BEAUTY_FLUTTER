@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(Categories());
-}
-
 class Categories extends StatelessWidget {
   final List<Product> products = [
     Product(
@@ -61,12 +57,12 @@ class Categories extends StatelessWidget {
             TabBarSection(),
             Expanded(
               child: GridView.builder(
-                padding: EdgeInsets.all(8.0),
+                padding: EdgeInsets.only(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 8.0,
-                  mainAxisSpacing: 8.0,
-                  childAspectRatio: 0.75,
+                  crossAxisSpacing: 1.0,
+                  mainAxisSpacing: 1,
+                  childAspectRatio: 0.8,
                 ),
                 itemCount: products.length,
                 itemBuilder: (context, index) {
@@ -113,15 +109,7 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            blurRadius: 5,
-            offset: Offset(0, 2),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(16.0),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,36 +121,28 @@ class ProductCard extends StatelessWidget {
                 child: Image.asset(
                   product.imageUrl,
                   width: double.infinity,
-                  height: 120,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Positioned(
-                top: 8,
-                right: 8,
-                child: Icon(
-                  Icons.add_circle,
-                  color: Colors.black,
-                  size: 24,
+                  height: 200,
                 ),
               ),
             ],
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(left: 25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   product.name,
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 4),
                 Row(
                   children: [
                     Text(
                       '${product.price}₫',
-                      style: TextStyle(fontSize: 14, color: Color(0xFFD61355)),
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Color(0xFFD61355),
+                          fontWeight: FontWeight.bold),
                     ),
                     SizedBox(width: 8),
                     Text(

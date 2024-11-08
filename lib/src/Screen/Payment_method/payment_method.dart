@@ -27,7 +27,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
         body: Container(
           color: Colors.white,
           child: Padding(
-            padding: const EdgeInsets.all(13.0),
+            padding: const EdgeInsets.all(22.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

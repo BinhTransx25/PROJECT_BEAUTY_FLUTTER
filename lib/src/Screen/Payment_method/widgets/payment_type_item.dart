@@ -50,7 +50,7 @@ class PaymentTypeItem extends StatelessWidget {
               ),
               if (index == 0)
                 Container(
-                  width: 54.59,
+                  width: 65,
                   height: 21,
                   color: const Color(0xFFF4F4F4),
                   child: const FittedBox(
@@ -76,7 +76,7 @@ class PaymentTypeItem extends StatelessWidget {
           onChanged: onSelected,
           controlAffinity: ListTileControlAffinity.trailing,
           activeColor: Colors.black,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 13.0),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 15.0),
         ),
       ),
     );

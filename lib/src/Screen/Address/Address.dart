@@ -10,6 +10,7 @@ class AddressScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBarWidget(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,8 +23,6 @@ class AddressScreen extends StatelessWidget {
                   Divider(
                     color: Colors.grey,
                     thickness: 1,
-                    indent: 8,
-                    endIndent: 8,
                   ),
                   AddressItemWidget(
                     isDefault: true,

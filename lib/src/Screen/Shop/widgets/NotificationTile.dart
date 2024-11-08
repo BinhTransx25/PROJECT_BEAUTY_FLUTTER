@@ -15,7 +15,8 @@ class NotificationTile extends StatelessWidget {
         title,
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
-      subtitle: Text(description),
+      subtitle: Text(description,
+          style: TextStyle(fontWeight: FontWeight.normal, color: Colors.grey)),
     );
   }
 }

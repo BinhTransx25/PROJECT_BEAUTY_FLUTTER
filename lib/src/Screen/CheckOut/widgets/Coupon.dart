@@ -6,10 +6,30 @@ class Coupon extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Phiếu giảm giá',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Phiếu giảm giá',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            InkWell(
+              onTap: () {
+                // Xử lý sự kiện thay đổi ở đây
+                print('Thay đổi phiếu giảm giá');
+              },
+              child: Text(
+                'Thay đổi',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey, // Màu bạc
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
         ),
+        SizedBox(height: 10),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -19,9 +39,30 @@ class Coupon extends StatelessWidget {
               width: 40,
             ),
             SizedBox(width: 10),
-            Text(
-              'Phiếu giảm giá của shop',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Phiếu giảm giá của shop',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      // Xử lý sự kiện chọn phiếu giảm giá
+                      print('Chọn phiếu giảm giá');
+                    },
+                    child: Text(
+                      'Chọn phiếu giảm giá',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey, // Màu bạc
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

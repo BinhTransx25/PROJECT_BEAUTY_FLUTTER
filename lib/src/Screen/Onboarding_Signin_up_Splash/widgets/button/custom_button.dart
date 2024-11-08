@@ -27,10 +27,13 @@ class CustomButton extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
-              textStyle: textStyle ?? const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
+              textStyle: textStyle ??
+                  const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+              elevation: 8, // Độ cao của bóng
+              shadowColor: Colors.black.withOpacity(1), // Màu của đổ bóng
             ),
         child: Text(
           title,

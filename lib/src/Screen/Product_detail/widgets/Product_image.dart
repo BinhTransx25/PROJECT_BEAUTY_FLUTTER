@@ -10,13 +10,14 @@ class ProductImage extends StatelessWidget {
         Container(
           width: double.infinity,
           height: 397,
-          margin: const EdgeInsets.symmetric(vertical: 24),
-          child: Image.asset('lib/src/assets/Account/pro_de.png', width: 120, height: 120),
+          child: Image.asset('lib/src/assets/Account/pro_de.png',
+              width: 120, height: 120),
         ),
         Positioned(
           top: 50,
           left: 30,
-          child: Image.asset('lib/src/assets/Account/ArrowLeft.png', width: 24, height: 24),
+          child: Image.asset('lib/src/assets/Account/ArrowLeft.png',
+              width: 24, height: 24),
         ),
         Positioned(
           top: 50,
@@ -28,11 +29,15 @@ class ProductImage extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.circular(9),
               boxShadow: [
-                BoxShadow(color: Colors.black.withOpacity(0.102), blurRadius: 5, offset: Offset(0, 2)),
+                BoxShadow(
+                    color: Colors.black.withOpacity(0.102),
+                    blurRadius: 5,
+                    offset: Offset(0, 2)),
               ],
             ),
             child: Center(
-              child: Image.asset('lib/src/assets/Account/Heart.png', width: 24, height: 24),
+              child: Image.asset('lib/src/assets/Account/Heart.png',
+                  width: 24, height: 24),
             ),
           ),
         ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../models/home/data_demo.dart';
+import '../../../models/home/data_home_new.dart';
 
 class PromotionList extends StatelessWidget {
   final List<Promotion> promotions;

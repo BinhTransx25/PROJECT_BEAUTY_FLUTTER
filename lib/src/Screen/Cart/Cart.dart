@@ -5,13 +5,15 @@ import 'widgets/cart_app_bar.dart';
 import 'widgets/bottom_bar.dart';
 
 class CartScreen extends StatelessWidget {
-  final List<Product> products = []; // Có thể để rỗng để kiểm tra giao diện giỏ hàng trống.
+  final List<Product> products =
+      []; // Có thể để rỗng để kiểm tra giao diện giỏ hàng trống.
 
   CartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: CartAppBar(),
       body: products.isEmpty ? EmptyCart() : ProductList(products: products),
       bottomNavigationBar: products.isNotEmpty ? BottomBar() : null,

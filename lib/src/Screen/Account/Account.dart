@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart'; // Import go_router
 import 'widgets/Account_widget.dart';
+
 class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -92,19 +93,19 @@ class AccountScreen extends StatelessWidget {
   void _showLogoutDialog(BuildContext context) {
     showDialog(
       context: context,
-      barrierDismissible: false, // Không tắt được bằng cách nhấn ngoài
+      barrierDismissible: false,
       builder: (context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15), // Border radius
+            borderRadius: BorderRadius.circular(15),
           ),
-          backgroundColor: Colors.white, // Màu nền trắng
-          elevation: 5, // Đổ bóng
-          contentPadding: EdgeInsets.all(20),
+          backgroundColor: Colors.white,
+          elevation: 5,
+          contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset('lib/src/assets/Account/logout.png', height: 40), // Hình ảnh
+              Image.asset('lib/src/assets/Account/logout.png', height: 40),
               SizedBox(height: 10),
               Text(
                 'Đăng xuất',
@@ -120,38 +121,52 @@ class AccountScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 14),
               ),
               SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // Nút Hủy
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context); // Đóng hộp thoại
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey, // Màu nút hủy
-                    ),
-                    child: Text('Hủy'),
-                  ),
-                  // Nút Xác nhận
-                  ElevatedButton(
-                    onPressed: () {
-                      // Hiển thị Toast và chuyển về màn hình login
-                      Fluttertoast.showToast(
-                        msg: "Bạn đã đăng xuất",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                      );
+              // Nút Xác nhận
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Fluttertoast.showToast(
+                      msg: "Bạn đã đăng xuất",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                    );
 
-                      // Chuyển về màn hình Login
-                      context.go('/login');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFFF81140), // Màu đỏ
-                    ),
-                    child: Text('Xác nhận'),
+                    // Chuyển về màn hình Login
+                    context.go('/login');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFFF81140),
+                    elevation: 3, // Đổ bóng
                   ),
-                ],
+                  child: Text(
+                    'Xác nhận',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              // Nút Hủy
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton(
+                  onPressed: () {
+                    Navigator.pop(context); // Đóng hộp thoại
+                  },
+                  style: OutlinedButton.styleFrom(
+                    side: BorderSide(
+                        color: const Color.fromARGB(
+                            255, 216, 216, 216)), // Màu viền
+                    backgroundColor: Colors.white, // Nền trắng
+                  ),
+                  child: Text(
+                    'Hủy',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold), // Màu chữ đen
+                  ),
+                ),
               ),
             ],
           ),

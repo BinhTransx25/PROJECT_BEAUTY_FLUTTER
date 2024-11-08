@@ -1,5 +1,5 @@
 import 'dart:async';
-import '../../models/home/data_demo.dart';
+import '../../models/home/data_home_new.dart';
 import 'package:flutter/material.dart';
 import 'widgets/header.dart';
 import 'widgets/PromotionList.dart';

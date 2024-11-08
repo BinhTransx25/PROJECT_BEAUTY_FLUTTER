@@ -8,7 +8,11 @@ class ProductReview extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Đánh giá', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20)),
+        const Text('Đánh giá',
+            style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 20)),
         ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -34,13 +38,24 @@ class ReviewItem extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Text('Mohamad', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black)),
+              const Text('Mohamad',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.black)),
               const Spacer(),
-              Row(children: List.generate(5, (index) => const Icon(Icons.star, size: 25, color: Colors.yellow))),
+              Row(
+                  children: List.generate(
+                      5,
+                      (index) => const Icon(Icons.star,
+                          size: 25, color: Colors.yellow))),
             ],
           ),
-          const Text('26-05-2024', style: TextStyle(color: Color(0xFF979797), fontSize: 12)),
-          const Text('Tui rất thích', style: TextStyle(color: Colors.black, fontSize: 15)),
+          const Text('26-05-2024',
+              style: TextStyle(color: Color(0xFF979797), fontSize: 12)),
+          const Text('Tui rất thích',
+              style: TextStyle(color: Colors.black, fontSize: 15)),
+          SizedBox(height: 15),
         ],
       ),
     );
