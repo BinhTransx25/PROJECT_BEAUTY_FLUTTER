@@ -1,3 +1,30 @@
+import 'package:equatable/equatable.dart';
+
+// Abstract class LoginState
+abstract class LoginState extends Equatable {
+  @override
+  List<Object> get props => [];
+}
+
+// Initial state
+class LoginInitial extends LoginState {}
+
+// Loading state (đang tải)
+class LoginInProgress extends LoginState {}
+
+// Success state (thành công)
+class LoginSuccess extends LoginState {}
+
+// Failure state (thất bại)
+class LoginFailure extends LoginState {
+  final String error;
+  LoginFailure({required this.error});
+
+  @override
+  List<Object> get props => [error];
+}
+
+
 // // lib/blocs/login/login_state.dart
 // import 'package:equatable/equatable.dart';
 

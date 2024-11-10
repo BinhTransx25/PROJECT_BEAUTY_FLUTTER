@@ -39,7 +39,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          padding: EdgeInsets.only(left: 8, right: 8, top: 5),
+          padding: EdgeInsets.only(),
           height: 55,
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 239, 239, 239),

@@ -1,6 +1,7 @@
 import 'widgets/basic_custom_button.dart';
 import 'widgets/show_more_drop_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 final List<String> titles = [
   'Tẩy trang',
@@ -110,7 +111,9 @@ class Filter extends StatelessWidget {
                   title: 'Áp dụng',
                   type: BasicCustomButtonType.primary,
                   size: BasicCustomButtonSize.medium,
-                  onPressed: () {},
+                  onPressed: () {
+                    context.go('/find');
+                  },
                 ),
               ],
             ),
@@ -213,10 +216,10 @@ class _RatingButtonListState extends State<RatingButtonList> {
     return Column(
       children: [
         SizedBox(
-          height: (itemsToShow / 2).ceil() *
-              50.0,
+          height: (itemsToShow / 2).ceil() * 50.0,
           child: GridView.builder(
-            key: ValueKey(itemsToShow), // Khóa duy nhất cho các bản cập nhật động // không thì lỗi ' _elements.contains(element) ' is not true
+            key: ValueKey(
+                itemsToShow), // Khóa duy nhất cho các bản cập nhật động // không thì lỗi ' _elements.contains(element) ' is not true
             physics: NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,

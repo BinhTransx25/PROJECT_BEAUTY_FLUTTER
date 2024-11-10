@@ -1,5 +1,6 @@
 // lib/src/screens/faq/widgets.dart
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HeaderTitle extends StatelessWidget {
   final String title;
@@ -14,10 +15,18 @@ class HeaderTitle extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            'lib/src/assets/Account/ArrowLeft.png',
-            width: 30,
-            height: 30,
+          GestureDetector(
+            onTap: () {
+              // Thực hiện hành động khi nhấn vào hình ảnh
+              print("Image tapped");
+              // Ví dụ: quay lại trang trước
+              context.go('/account');
+            },
+            child: Image.asset(
+              'lib/src/assets/Account/ArrowLeft.png',
+              width: 30,
+              height: 30,
+            ),
           ),
           Expanded(
             child: Text(

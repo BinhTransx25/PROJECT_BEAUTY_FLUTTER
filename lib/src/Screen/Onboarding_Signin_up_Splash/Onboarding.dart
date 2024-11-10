@@ -2,7 +2,21 @@ import 'package:beauty/src/Screen/Onboarding_Signin_up_Splash/widgets/button/cus
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class OnboardingScreen extends StatelessWidget {
+class OnboardingScreen extends StatefulWidget {
+  @override
+  _OnboardingScreenState createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
+
+  void _onPageChanged(int index) {
+    setState(() {
+      _currentPage = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,48 +45,41 @@ class OnboardingScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 46),
-              RichText(
-                text: TextSpan(
+              Expanded(
+                child: PageView(
+                  controller: _pageController,
+                  onPageChanged: _onPageChanged,
                   children: [
-                    TextSpan(
-                      text: 'Tỏa sáng\n',
-                      style: TextStyle(
-                        fontSize: 50,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFFD61355),
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Tỏa sáng', style: _textStyle(Color(0xFFD61355))),
+                        Text('Tự tin,', style: _textStyle(Colors.black)),
+                        Text('Vẻ đẹp theo', style: _textStyle(Colors.black)),
+                        Text('cách của', style: _textStyle(Colors.black)),
+                        Text('bạn.', style: _textStyle(Colors.black)),
+                      ],
                     ),
-                    TextSpan(
-                      text: 'Tự tin,\n',
-                      style: TextStyle(
-                        fontSize: 50,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Khám phá', style: _textStyle(Color(0xFFD61355))),
+                        Text('Phong cách riêng',
+                            style: _textStyle(Colors.black)),
+                        Text('Mang lại', style: _textStyle(Colors.black)),
+                        Text('sự tự tin', style: _textStyle(Colors.black)),
+                        Text('và nổi bật.', style: _textStyle(Colors.black)),
+                      ],
                     ),
-                    TextSpan(
-                      text: 'Vẻ đẹp theo\n',
-                      style: TextStyle(
-                        fontSize: 50,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
-                      ),
-                    ),
-                    TextSpan(
-                      text: 'cách của\n',
-                      style: TextStyle(
-                        fontSize: 50,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
-                      ),
-                    ),
-                    TextSpan(
-                      text: 'bạn.',
-                      style: TextStyle(
-                        fontSize: 50,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Thời trang',
+                            style: _textStyle(Color(0xFFD61355))),
+                        Text('Là ngôn ngữ', style: _textStyle(Colors.black)),
+                        Text('của vẻ đẹp', style: _textStyle(Colors.black)),
+                        Text('và phong cách', style: _textStyle(Colors.black)),
+                      ],
                     ),
                   ],
                 ),
@@ -83,19 +90,18 @@ class OnboardingScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       SizedBox(height: 160),
-                      DotProgressIndicator(),
+                      DotProgressIndicator(
+                          currentPage: _currentPage, totalPages: 3),
                       SizedBox(height: 40),
                       CustomButton(
                         title: 'Đăng ký',
-                        onPress: () => {context.go('/signup')},
+                        onPress: () => context.go('/sign_up'),
                         buttonStyle: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
-                            side: BorderSide(
-                              color: Color(0xffD61355),
-                              width: 1,
-                            ),
+                            side:
+                                BorderSide(color: Color(0xffD61355), width: 1),
                           ),
                         ),
                         textStyle:
@@ -104,7 +110,7 @@ class OnboardingScreen extends StatelessWidget {
                       SizedBox(height: 10),
                       CustomButton(
                         title: 'Đăng nhập',
-                        onPress: () => {},
+                        onPress: () => context.go('/signin'),
                         textStyle: TextStyle(color: Colors.white, fontSize: 16),
                       )
                     ],
@@ -117,54 +123,38 @@ class OnboardingScreen extends StatelessWidget {
       ),
     );
   }
+
+  TextStyle _textStyle(Color color) {
+    return TextStyle(
+      fontSize: 40,
+      fontWeight: FontWeight.w500,
+      color: color,
+    );
+  }
 }
 
-class DotProgressIndicator extends StatefulWidget {
-  @override
-  // ignore: library_private_types_in_public_api
-  _DotProgressIndicatorState createState() => _DotProgressIndicatorState();
-}
+class DotProgressIndicator extends StatelessWidget {
+  final int currentPage;
+  final int totalPages;
 
-class _DotProgressIndicatorState extends State<DotProgressIndicator>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 1200),
-      vsync: this,
-    )..repeat();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  DotProgressIndicator({required this.currentPage, required this.totalPages});
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        return Row(
-          mainAxisSize: MainAxisSize.min,
-          children: List.generate(3, (index) {
-            return AnimatedContainer(
-              duration: Duration(milliseconds: 300),
-              margin: EdgeInsets.symmetric(horizontal: 4.0),
-              height: index == 0 ? 10.0 : 8.0,
-              width: index == 0 ? 20.0 : 10.0,
-              decoration: BoxDecoration(
-                color: index == 0 ? Colors.red : Colors.pinkAccent,
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-            );
-          }),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: List.generate(totalPages, (index) {
+        return AnimatedContainer(
+          duration: Duration(milliseconds: 300),
+          margin: EdgeInsets.symmetric(horizontal: 4.0),
+          height: currentPage == index ? 10.0 : 8.0,
+          width: currentPage == index ? 20.0 : 10.0,
+          decoration: BoxDecoration(
+            color: currentPage == index ? Color(0xFFD61355) : Colors.grey,
+            borderRadius: BorderRadius.circular(8.0),
+          ),
         );
-      },
+      }),
     );
   }
 }

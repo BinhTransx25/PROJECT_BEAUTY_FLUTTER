@@ -1,6 +1,7 @@
 import 'package:beauty/src/constants/svg_icon_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 class BasicActionBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -28,7 +29,7 @@ class BasicActionBar extends StatelessWidget implements PreferredSizeWidget {
             height: 15,
           ),
           onPressed: () {
-            // Thêm hành động khi nút được nhấn
+            context.go('/home');
           },
         ),
       ),

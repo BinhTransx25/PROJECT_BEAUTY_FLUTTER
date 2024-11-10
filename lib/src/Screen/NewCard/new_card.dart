@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 class NewCard extends StatefulWidget {
   const NewCard({super.key});
@@ -32,7 +33,9 @@ class _NewCardState extends State<NewCard> {
                 ),
               ),
               leading: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.go('/paymentmethod');
+                },
                 icon: Image.asset(
                   "lib/src/assets/payment/back.png",
                   width: 20,

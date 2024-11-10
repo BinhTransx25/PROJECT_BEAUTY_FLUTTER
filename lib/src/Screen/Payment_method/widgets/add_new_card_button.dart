@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class AddNewCardButton extends StatelessWidget {
   const AddNewCardButton({super.key});
@@ -9,7 +10,10 @@ class AddNewCardButton extends StatelessWidget {
       margin: const EdgeInsets.only(top: 21),
       height: 44,
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+              context.go('/newcard');
+
+        },
         style: TextButton.styleFrom(
           backgroundColor: Colors.white,
           side: const BorderSide(width: 1, color: Color(0x3F000000)),

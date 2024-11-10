@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:go_router/go_router.dart';
 class PaymentMethod extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -15,6 +15,7 @@ class PaymentMethod extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
+                context.go('/paymentmethod', extra: 'checkout');
                 // Xử lý sự kiện thay đổi ở đây
                 print('Thay đổi phương thức thanh toán');
               },

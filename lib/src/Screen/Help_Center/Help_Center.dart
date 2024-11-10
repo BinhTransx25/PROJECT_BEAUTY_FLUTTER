@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HelpCenterScreen extends StatelessWidget {
   @override
@@ -14,7 +15,15 @@ class HelpCenterScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 30.0),
               child: Row(
                 children: [
-                  Icon(Icons.arrow_back, color: Colors.black),
+                  GestureDetector(
+                    onTap: () {
+                      // Thực hiện hành động khi nhấn vào icon
+                      print("Back icon tapped");
+                      // Ví dụ: quay lại trang trước
+                      context.go('/account');
+                    },
+                    child: Icon(Icons.arrow_back, color: Colors.black),
+                  ),
                   Spacer(),
                   Text(
                     'Trung tâm trợ giúp',
@@ -77,7 +86,9 @@ class HelpCenterScreen extends StatelessWidget {
 
   // Widget for each menu option
   Widget _buildMenuOption(BuildContext context,
-      {required IconData icon, required String text, required String routeName}) {
+      {required IconData icon,
+      required String text,
+      required String routeName}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: GestureDetector(

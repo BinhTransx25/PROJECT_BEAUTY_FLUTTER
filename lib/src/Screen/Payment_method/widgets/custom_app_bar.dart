@@ -1,12 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   @override
   final Size preferredSize;
 
   CustomAppBar({Key? key})
       : preferredSize = const Size.fromHeight(68.0),
         super(key: key);
+
+  @override
+  _CustomAppBarState createState() => _CustomAppBarState();
+}
+
+class _CustomAppBarState extends State<CustomAppBar> {
+  late String previousPage; // Biến lưu tên trang trước
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Nhận tham số từ trang trước đó với null check
+    final routeState = GoRouter.of(context).state;
+    previousPage = routeState?.extra as String? ?? 'unknown'; // Sử dụng giá trị mặc định nếu extra là null
+  }
+
+  void _goBack() {
+    if (previousPage == 'account') {
+      context.go('/account'); // Trở về trang SMS
+    } else if (previousPage == 'checkout') {
+      context.go('/checkout'); // Trở về trang Email
+    } else {
+      context.pop(); // Hoặc quay lại trang trước nếu không có thông tin cụ thể
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +52,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       leading: IconButton(
-        onPressed: () {},
+        onPressed: _goBack,
         icon: Image.asset(
           "lib/src/assets/payment/back.png",
           width: 20,

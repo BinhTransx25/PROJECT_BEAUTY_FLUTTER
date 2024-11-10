@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'widgets/Notification_widget.dart';
-import '../tabs/bottom_nav_bar.dart';
-class NotificationScreen extends StatefulWidget {
+
+class Notification extends StatefulWidget {
   @override
   _NotificationScreenState createState() => _NotificationScreenState();
 }
 
-class _NotificationScreenState extends State<NotificationScreen> {
+class _NotificationScreenState extends State<Notification> {
   bool personalInfo = false;
   bool sound = false;
   bool vibration = false;
@@ -58,7 +58,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: const BottomNavBar(currentIndex: 0), // Đánh dấu màn hình này là mục đầu tiên
     );
   }
 }

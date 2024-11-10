@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart'; // Import go_router
 import 'widgets/Account_widget.dart';
+import '../../app/tabs/bottom_nav_bar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../bloc/login_bloc/login_bloc.dart';
+import '../../bloc/login_bloc/login_event.dart';
 
 class AccountScreen extends StatelessWidget {
   @override
@@ -21,7 +25,7 @@ class AccountScreen extends StatelessWidget {
               label: 'Thông tin cá nhân',
               onTap: () {
                 // Điều hướng tới trang thông tin cá nhân
-                context.go('/personal_info');
+                context.push('/profile');
               },
             ),
             DividerWithPadding(),
@@ -31,7 +35,7 @@ class AccountScreen extends StatelessWidget {
               label: 'Phương thức thanh toán',
               onTap: () {
                 // Điều hướng tới trang phương thức thanh toán
-                context.go('/payment_methods');
+                context.go('/payment_methods', extra: 'account');
               },
             ),
             DividerWithPadding(),
@@ -41,7 +45,7 @@ class AccountScreen extends StatelessWidget {
               label: 'Thông báo',
               onTap: () {
                 // Điều hướng tới trang thông báo
-                context.go('/notifications');
+                context.go('/notification_account');
               },
             ),
             DividerWithPadding(),
@@ -86,6 +90,9 @@ class AccountScreen extends StatelessWidget {
           ],
         ),
       ),
+
+      bottomNavigationBar: const BottomNavBar(
+          currentIndex: 4), // Đánh dấu màn hình này là mục đầu tiên
     );
   }
 
@@ -126,14 +133,15 @@ class AccountScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
+                    // Cập nhật trạng thái đăng xuất và chuyển hướng màn hình
+                    context
+                        .read<LoginBloc>()
+                        .add(LogoutRequested()); // Thêm sự kiện đăng xuất
                     Fluttertoast.showToast(
                       msg: "Bạn đã đăng xuất",
                       toastLength: Toast.LENGTH_SHORT,
                       gravity: ToastGravity.BOTTOM,
                     );
-
-                    // Chuyển về màn hình Login
-                    context.go('/login');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFF81140),

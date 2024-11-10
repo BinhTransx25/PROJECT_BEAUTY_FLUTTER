@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'widgets/FAQs_widget.dart';
 
+
 class FAQScreen extends StatefulWidget {
   @override
   _FAQScreenState createState() => _FAQScreenState();

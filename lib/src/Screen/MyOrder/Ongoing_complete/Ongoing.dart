@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../app/tabs/bottom_nav_bar.dart';
 
 class Ongoing extends StatefulWidget {
   @override
@@ -102,6 +103,9 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
           buildOrderList(completedOrders, false),
         ],
       ),
+
+ bottomNavigationBar: const BottomNavBar(
+              currentIndex: 2), // Đánh dấu màn hình này là mục đầu tiên
     );
   }
 

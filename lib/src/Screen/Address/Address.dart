@@ -3,6 +3,7 @@ import 'widgets/AppBarWidget.dart';
 import 'widgets/AddressItemWidget.dart';
 import 'widgets/AddAddressButton.dart';
 import 'widgets/ChooseAddressButton.dart';
+import 'package:go_router/go_router.dart';
 
 class AddressScreen extends StatelessWidget {
   const AddressScreen({super.key});
@@ -35,7 +36,9 @@ class AddressScreen extends StatelessWidget {
                     onChanged: (value) {},
                   ),
                   AddAddressButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.go('/editaddress');
+                    },
                   ),
                 ],
               ),

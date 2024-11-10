@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import '../../models/home/data_home_new.dart';
 import 'package:flutter/material.dart';
 import 'widgets/header.dart';
@@ -7,6 +8,7 @@ import 'widgets/CategoryList .dart';
 import 'widgets/ProductList.dart';
 import 'widgets/ProductSaleList.dart';
 import 'widgets/RadiantGlowSection.dart';
+import '../../app/tabs/bottom_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   final int notificationCount;
@@ -84,6 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: const BottomNavBar(
+          currentIndex: 0), // Đánh dấu màn hình này là mục đầu tiên
     );
   }
 }

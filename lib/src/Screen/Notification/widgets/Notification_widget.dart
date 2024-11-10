@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:go_router/go_router.dart';
 class NotificationHeader extends StatelessWidget {
   final String title;
 
@@ -8,17 +8,27 @@ class NotificationHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [
-        Icon(Icons.arrow_back_ios, size: 24),
-        Expanded(
-          child: Text(
-            title,
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ],
-    );
+  children: [
+    GestureDetector(
+      onTap: () {
+        context.go('/account');
+        // Thực hiện hành động khi nhấn vào icon
+        print("Back icon tapped");
+        // Ví dụ: quay lại trang trước
+        
+      },
+      child: Icon(Icons.arrow_back_ios, size: 24),
+    ),
+    Expanded(
+      child: Text(
+        title,
+        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        textAlign: TextAlign.center,
+      ),
+    ),
+  ],
+);
+
   }
 }
 

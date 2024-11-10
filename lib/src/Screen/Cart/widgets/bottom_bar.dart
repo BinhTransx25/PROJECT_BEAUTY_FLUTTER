@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class BottomBar extends StatelessWidget {
   @override
@@ -11,7 +12,9 @@ class BottomBar extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red,
             ),
-            onPressed: () {},
+            onPressed: () {
+              context.go('/checkout');
+            },
             child: Text(
               "Thanh Toán",
               style: TextStyle(

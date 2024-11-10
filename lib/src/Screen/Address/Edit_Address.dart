@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class EditAddressScreen extends StatefulWidget {
   @override
@@ -82,7 +83,17 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
               padding: const EdgeInsets.only(top: 40.0, right: 25),
               child: Row(
                 children: [
-                  Icon(Icons.arrow_back, color: Colors.black),
+                  GestureDetector(
+                    onTap: () {
+                      // Thực hiện hành động khi nhấn vào icon
+                      print("Nút quay lại được nhấn");
+                      context.go('/address'); // Quay lại màn hình trước
+                    },
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Colors.black,
+                    ),
+                  ),
                   Spacer(),
                   Text(
                     'Sửa Địa Chỉ',

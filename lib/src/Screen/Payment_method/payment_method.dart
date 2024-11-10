@@ -3,6 +3,7 @@ import 'widgets/custom_app_bar.dart';
 import 'widgets/payment_type_item.dart';
 import 'widgets/add_new_card_button.dart';
 import 'widgets/choose_button.dart';
+import 'package:go_router/go_router.dart';
 
 class PaymentMethod extends StatefulWidget {
   const PaymentMethod({super.key});
@@ -18,6 +19,26 @@ class _PaymentMethodState extends State<PaymentMethod> {
     PaymentType("lib/src/assets/payment/paypal.png"),
     PaymentType("lib/src/assets/payment/mastercard.png"),
   ];
+  late String previousPage; // Biến lưu tên trang trước
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Nhận tham số từ trang trước đó với null check
+    final routeState = GoRouter.of(context).state;
+    previousPage = routeState?.extra as String? ??
+        'unknown'; // Sử dụng giá trị mặc định nếu extra là null
+  }
+
+  void _goBack() {
+    if (previousPage == 'account') {
+      context.go('/account'); // Trở về trang SMS
+    } else if (previousPage == 'checkout') {
+      context.go('/checkout'); // Trở về trang Email
+    } else {
+      context.pop(); // Hoặc quay lại trang trước nếu không có thông tin cụ thể
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

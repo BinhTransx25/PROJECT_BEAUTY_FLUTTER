@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class OrderButton extends StatelessWidget {
   @override
@@ -9,7 +10,9 @@ class OrderButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: Color(0xFFD61355),
         ),
-        onPressed: () {},
+        onPressed: () {
+          context.go('/ongoing');
+        },
         child: Text(
           "Đặt hàng",
           style: TextStyle(

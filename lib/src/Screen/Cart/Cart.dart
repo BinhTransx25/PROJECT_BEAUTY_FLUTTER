@@ -3,6 +3,7 @@ import 'widgets/empty_cart.dart';
 import 'widgets/product_list.dart';
 import 'widgets/cart_app_bar.dart';
 import 'widgets/bottom_bar.dart';
+import '../../app/tabs/bottom_nav_bar.dart';
 
 class CartScreen extends StatelessWidget {
   final List<Product> products =
@@ -16,7 +17,9 @@ class CartScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: CartAppBar(),
       body: products.isEmpty ? EmptyCart() : ProductList(products: products),
-      bottomNavigationBar: products.isNotEmpty ? BottomBar() : null,
+      bottomSheet: products.isNotEmpty ? BottomBar() : null,
+      bottomNavigationBar: const BottomNavBar(
+              currentIndex: 3), // Đánh dấu màn hình này là mục đầu tiên
     );
   }
 }

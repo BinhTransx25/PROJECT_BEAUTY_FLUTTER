@@ -2,6 +2,7 @@ import 'package:beauty/src/constants/svg_icon_paths.dart';
 import 'search_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 class SearchActionBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? filterSuccessful;
@@ -27,6 +28,7 @@ class SearchActionBar extends StatelessWidget implements PreferredSizeWidget {
           height: 15,
         ),
         onPressed: () {
+          context.go('/home');
           // Thêm hành động khi nút được nhấn
         },
       ),
@@ -38,6 +40,7 @@ class SearchActionBar extends StatelessWidget implements PreferredSizeWidget {
             height: 30,
           ), // Icon filter ở bên phải
           onPressed: () {
+            context.go('/filter');
             // Thêm hành động khi nút được nhấn
           },
         ),

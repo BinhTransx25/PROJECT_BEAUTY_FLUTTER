@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:go_router/go_router.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
@@ -16,13 +16,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.white,
       elevation: 0.0,
       centerTitle: true,
-      leading: Container(
-        margin: EdgeInsets.all(10),
-        alignment: Alignment.center,
-        child: SvgPicture.asset(
-          'lib/src/assets/Checkout/arrowleft.svg',
-          height: 20,
-          width: 20,
+      leading: GestureDetector(
+        onTap: () {
+          // Thực hiện hành động khi nhấn vào biểu tượng, ví dụ: quay lại màn hình trước
+       context.go('/cart');
+        },
+        child: Container(
+          margin: EdgeInsets.all(10),
+          alignment: Alignment.center,
+          child: SvgPicture.asset(
+            'lib/src/assets/Checkout/arrowleft.svg',
+            height: 20,
+            width: 20,
+          ),
         ),
       ),
       actions: [

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Verificationcode extends StatefulWidget {
   const Verificationcode({super.key});
@@ -10,7 +11,8 @@ class Verificationcode extends StatefulWidget {
 }
 
 class _VerificationcodeState extends State<Verificationcode> {
-  final List<TextEditingController> _controllers = List.generate(6, (_) => TextEditingController());
+  final List<TextEditingController> _controllers =
+      List.generate(6, (_) => TextEditingController());
   final List<FocusNode> _focusNodes = List.generate(6, (_) => FocusNode());
 
   Timer? _timer;
@@ -64,9 +66,32 @@ class _VerificationcodeState extends State<Verificationcode> {
       FocusScope.of(context).requestFocus(_focusNodes[index - 1]);
     }
   }
+
+  late String previousPage; // Biến lưu tên trang trước
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Nhận tham số từ trang trước đó với null check
+    final routeState = GoRouter.of(context).state;
+    previousPage = routeState?.extra as String? ??
+        'unknown'; // Sử dụng giá trị mặc định nếu extra là null
+  }
+
+  void _goBack() {
+    if (previousPage == 'sms') {
+      context.go('/passwordRecoveryPhone'); // Trở về trang SMS
+    } else if (previousPage == 'email') {
+      context.go('/passwordRecoveryEmail'); // Trở về trang Email
+    } else {
+      context.pop(); // Hoặc quay lại trang trước nếu không có thông tin cụ thể
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -91,10 +116,11 @@ class _VerificationcodeState extends State<Verificationcode> {
             ),
             const SizedBox(height: 50),
             const Padding(
-              padding:  EdgeInsets.only(left: 20.0), // Thay đổi giá trị 20.0 theo ý muốn
+              padding: EdgeInsets.only(
+                  left: 20.0), // Thay đổi giá trị 20.0 theo ý muốn
               child: Align(
                 alignment: Alignment.centerLeft,
-                child:  Text(
+                child: Text(
                   'Xác thực OTP',
                   style: TextStyle(
                     fontSize: 40,
@@ -106,53 +132,54 @@ class _VerificationcodeState extends State<Verificationcode> {
             ),
             const SizedBox(height: 15),
             const Padding(
-              padding: EdgeInsets.only(left: 20.0,right: 100), // Thay đổi giá trị 20.0 theo ý muốn
+              padding: EdgeInsets.only(
+                  left: 20.0, right: 100), // Thay đổi giá trị 20.0 theo ý muốn
               child: Align(
                 alignment: Alignment.centerLeft,
-                child:  Text(
+                child: Text(
                   'Mã xác minh đã dược gửi đến aaa@gmail.com',
                   style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      color: Color(0XFF979797)
-                  ),
+                      color: Color(0XFF979797)),
                   textAlign: TextAlign.start,
                 ),
               ),
             ),
             const SizedBox(height: 20),
-             Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: List.generate(6, (index) {
-                  return Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: List.generate(6, (index) {
+                return Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: TextField(
+                    controller: _controllers[index],
+                    focusNode: _focusNodes[index],
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                    maxLength: 1,
+                    decoration: InputDecoration(
+                      counterText: '',
+                      border: InputBorder.none,
                     ),
-                    child: TextField(
-                      controller: _controllers[index],
-                      focusNode: _focusNodes[index],
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.center,
-                      maxLength: 1,
-                      decoration: InputDecoration(
-                        counterText: '',
-                        border: InputBorder.none,
-                      ),
-                      onChanged: (value) => _onChanged(value, index),
-                    ),
-                  );
-                }),
-              ),
+                    onChanged: (value) => _onChanged(value, index),
+                  ),
+                );
+              }),
+            ),
             const SizedBox(height: 40),
             GestureDetector(
               onTap: () {
-                // Xử lý khi người dùng nhấn vào nút
+                context.go('/resetpassword');
               },
               child: Container(
-                width: MediaQuery.of(context).size.width - 40, // Đảm bảo nút chiếm toàn bộ chiề
+                width: MediaQuery.of(context).size.width -
+                    40, // Đảm bảo nút chiếm toàn bộ chiề
                 height: 50, // Đặt chiều cao cụ thể cho nút
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10), // Bo góc
@@ -160,7 +187,7 @@ class _VerificationcodeState extends State<Verificationcode> {
                 ),
                 alignment: Alignment.center, // Căn giữa chữ bên trong nút
                 child: const Text(
-                  'Gửi mã xác minh',
+                  'Xác minh',
                   style: TextStyle(
                     color: Colors.white, // Đặt màu chữ trắng
                     fontSize: 16, // Đặt kích thước chữ
@@ -170,12 +197,15 @@ class _VerificationcodeState extends State<Verificationcode> {
             ),
             const SizedBox(height: 10),
             GestureDetector(
-              onTap: () {
-                // Xử lý khi người dùng nhấn vào nút
-                String code = _controllers.map((controller) => controller.text).join();
-                print('Verification code: $code');
-              },
-              child: const Text('Trở về', style: TextStyle(color: Color(0xff202020), fontSize: 16)),
+              onTap: _goBack,
+              // () {
+              //   // Xử lý khi người dùng nhấn vào nút
+              //   String code =
+              //       _controllers.map((controller) => controller.text).join();
+              //   print('Verification code: $code');
+              // },
+              child: const Text('Trở về',
+                  style: TextStyle(color: Color(0xff202020), fontSize: 14)),
             ),
             const SizedBox(height: 20),
             GestureDetector(
@@ -186,9 +216,11 @@ class _VerificationcodeState extends State<Verificationcode> {
                   style: const TextStyle(color: Colors.black),
                   children: [
                     TextSpan(
-                      text: _isResendEnabled ? 'Gửi lại' : 'Gửi lại ($_start giây)',
+                      text: _isResendEnabled
+                          ? 'Gửi lại'
+                          : 'Gửi lại ($_start giây)',
                       style: const TextStyle(
-                        color:  Color(0xffD61355) ,
+                        color: Color(0xffD61355),
                         decoration: TextDecoration.underline,
                       ),
                     ),
@@ -197,7 +229,6 @@ class _VerificationcodeState extends State<Verificationcode> {
               ),
             ),
           ],
-        )
-    );
+        ));
   }
 }

@@ -2,6 +2,7 @@ import 'widgets/basic_action_bar.dart';
 import '../Find/widgets/favorite_no_item.dart';
 import 'widgets/favorite_product_item.dart';
 import 'package:flutter/material.dart';
+import '../../app/tabs/bottom_nav_bar.dart';
 
 final List<int> items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
@@ -34,12 +35,13 @@ class FavoriteProduct extends StatelessWidget {
                     FavoriteNoItem()
                   ],
                 ),
+          bottomNavigationBar: const BottomNavBar(
+              currentIndex: 1), // Đánh dấu màn hình này là mục đầu tiên
         ),
       ),
     );
   }
 }
-
 
 class ListProduct extends StatelessWidget {
   final List<int> items;
@@ -54,7 +56,7 @@ class ListProduct extends StatelessWidget {
         crossAxisCount: 2, // Chia đôi màn hình
         mainAxisSpacing: 20.0,
         crossAxisSpacing: 20.0,
-        childAspectRatio: 5/7, // Điều chỉnh tỷ lệ nếu cần
+        childAspectRatio: 5 / 7, // Điều chỉnh tỷ lệ nếu cần
       ),
       itemCount: items.length,
       itemBuilder: (context, index) {

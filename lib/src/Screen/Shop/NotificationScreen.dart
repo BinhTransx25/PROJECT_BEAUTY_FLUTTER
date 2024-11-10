@@ -4,6 +4,7 @@ import 'widgets/AppBarWidget.dart';
 import 'widgets/EmptyNotificationWidget.dart';
 import 'widgets/NotificationList.dart';
 
+
 class NotificationScreen extends StatelessWidget {
   final List<Map<String, String>> notifications = [
     {
