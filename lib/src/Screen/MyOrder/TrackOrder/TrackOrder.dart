@@ -15,7 +15,7 @@ class TrackOrder extends StatelessWidget {
         centerTitle: true,
         leading: IconButton(
           icon: Image.asset(
-            'lib/src/Screen/MyOrder/assets/goback.png',
+            'lib/src/assets/MyOrder/goback.png',
             width: 24,
             height: 24,
           ),
@@ -30,7 +30,7 @@ class TrackOrder extends StatelessWidget {
           children: [
             SizedBox(height: 10),
             Image.asset(
-              'lib/src/Screen/MyOrder/assets/map.png',
+              'lib/src/assets/MyOrder/map.png',
               width: double.infinity,
               height: 360,
               fit: BoxFit.cover,
@@ -46,7 +46,7 @@ class TrackOrder extends StatelessWidget {
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   IconButton(
-                    icon: Image.asset('lib/src/Screen/MyOrder/assets/Arrow_down.png'),
+                    icon: Image.asset('lib/src/assets/MyOrder/Arrow_down.png'),
                     onPressed: () {},
                     padding: EdgeInsets.zero,
                     constraints: BoxConstraints(),
@@ -88,8 +88,8 @@ class TrackOrder extends StatelessWidget {
             // Thay thế chấm tròn bằng ảnh
             Image.asset(
               isCompleted
-                  ? 'lib/src/Screen/MyOrder/assets/radiogroup.png' // Ảnh cho trạng thái hoàn thành
-                  : 'lib/src/Screen/MyOrder/assets/unradiogroup.png', // Ảnh cho trạng thái chưa hoàn thành
+                  ? 'lib/src/assets/MyOrder/radiogroup.png' // Ảnh cho trạng thái hoàn thành
+                  : 'lib/src/assets/MyOrder/unradiogroup.png', // Ảnh cho trạng thái chưa hoàn thành
               width: 20,
               height: 20,
             ),

@@ -1,21 +1,5 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Ongoing(),
-    );
-  }
-}
+import '../../../app/tabs/bottom_nav_bar.dart';
 
 class Ongoing extends StatefulWidget {
   @override
@@ -85,12 +69,12 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
           labelColor: Colors.pink,
           unselectedLabelColor: Colors.black,
           labelStyle: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.normal,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
           ),
           unselectedLabelStyle: TextStyle(
             fontSize: 14,
-            fontWeight: FontWeight.normal,
+            fontWeight: FontWeight.bold,
           ),
           indicator: BoxDecoration(
             border: Border(
@@ -119,12 +103,15 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
           buildOrderList(completedOrders, false),
         ],
       ),
+
+ bottomNavigationBar: const BottomNavBar(
+              currentIndex: 2), // Đánh dấu màn hình này là mục đầu tiên
     );
   }
 
   Widget buildOrderList(List<Map<String, dynamic>> orders, bool isOngoing) {
     return Padding(
-      padding: EdgeInsets.all(4.0),
+      padding: EdgeInsets.only(top: 12, left: 22, right: 22),
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -140,22 +127,22 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  margin: EdgeInsets.symmetric(vertical: 20),
+                  margin: EdgeInsets.symmetric(vertical: 12),
                   child: Container(
-                    height: 80,
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    height: 100,
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     child: Row(
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: Image.asset(
-                            'lib/src/Screen/MyOrder/assets/son.png',
-                            width: 60,
+                            'lib/src/assets/MyOrder/son.png',
+                            width: 80,
                             height: 80,
                             fit: BoxFit.cover,
                           ),
                         ),
-                        SizedBox(width: 8),
+                        SizedBox(width: 16),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,11 +150,11 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                               Text(
                                 order['name'],
                                 style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              SizedBox(height: 2),
+                              SizedBox(height: 4),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -175,7 +162,7 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                                     '${order['price']}đ',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 12,
+                                      fontSize: 16,
                                       color: Colors.black,
                                     ),
                                   ),
@@ -184,8 +171,7 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                                     '${discountedPrice}đ',
                                     style: TextStyle(
                                       color: Colors.pink,
-                                       decoration: TextDecoration
-                                          .lineThrough, 
+                                      decoration: TextDecoration.lineThrough,
                                       decorationColor: Colors.pink,
                                       fontSize: 12,
                                     ),
@@ -195,27 +181,27 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                             ],
                           ),
                         ),
-                        SizedBox(width: 8),
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Container(
                               decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6),
                                 color: Colors.grey[200],
                               ),
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 6, vertical: 2),
+                                  horizontal: 12, vertical: 4),
                               child: Text(
                                 order['status'],
                                 style: TextStyle(
-                                  color: order['status'] == 'Hoàn thành'
-                                      ? Colors.green
-                                      : Colors.black,
-                                  fontSize: 10,
-                                ),
+                                    color: order['status'] == 'Hoàn thành'
+                                        ? const Color.fromARGB(255, 27, 211, 33)
+                                        : Colors.black,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
-                            SizedBox(height: 2),
+                            SizedBox(height: 10),
                             if (isOngoing)
                               ElevatedButton(
                                 onPressed: () {
@@ -240,8 +226,7 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.pink, // Màu nền nút
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 16, vertical: 4),
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   ),
@@ -250,7 +235,9 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                                   'Xem đơn hàng',
                                   style: TextStyle(
                                       fontSize: 12,
-                                      color: Colors.white), // Màu chữ nút
+                                      color: Colors.white,
+                                      fontWeight:
+                                          FontWeight.bold), // Màu chữ nút
                                 ),
                               ),
                             if (!isOngoing && order['status'] == 'Hoàn thành')
@@ -274,8 +261,7 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.pink, // Màu nền nút
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 16, vertical: 4),
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   ),
@@ -283,8 +269,10 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                                 child: Text(
                                   'Đánh giá',
                                   style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.white), // Màu chữ nút
+                                      fontSize: 14,
+                                      color: Colors.white,
+                                      fontWeight:
+                                          FontWeight.bold), // Màu chữ nút
                                 ),
                               ),
                           ],
@@ -338,7 +326,7 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               Image.asset(
-                'lib/src/Screen/MyOrder/assets/Arrow_down.png',
+                'lib/src/assets/MyOrder/Arrow_down.png',
                 width: 36,
                 height: 36,
               ),

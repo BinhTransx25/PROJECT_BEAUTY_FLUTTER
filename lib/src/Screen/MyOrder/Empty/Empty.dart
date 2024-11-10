@@ -51,7 +51,7 @@ class _EmptyState extends State<Empty> with SingleTickerProviderStateMixin {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('lib/src/Screen/MyOrder/assets/unorder.png',
+                Image.asset('lib/src/assets/MyOrder/unorder.png',
                     width: 160, height: 160),
                 // SizedBox(height: 10),
                 Text(
@@ -63,6 +63,7 @@ class _EmptyState extends State<Empty> with SingleTickerProviderStateMixin {
                   'Bạn không có đơn hàng lúc này',
                   style: TextStyle(fontSize: 16),
                 ),
+                SizedBox(height: 200),
               ],
             ),
           ),
