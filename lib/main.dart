@@ -1,14 +1,18 @@
+import 'package:beauty/api_call/notification_helper.dart';
 import 'package:flutter/material.dart';
+
 // import 'src/Screen/Password_Recovery_Reset/VerificationCode.dart';
 // import 'src/app/app_router.dart';
 import 'src/app/Main_Router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'src/bloc/login_bloc/login_bloc.dart';
 
-
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  NotificationHelper.init();
   runApp(MyApp());
 }
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -27,20 +31,19 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
-/** 
-class MyApp extends StatelessWidget {
+/**
+    class MyApp extends StatelessWidget {
     final _appRouter = AppRouter();
-  @override
-  Widget build(BuildContext context) {
+    @override
+    Widget build(BuildContext context) {
     return MaterialApp.router(
-      // home: HomeScreennnn(),  Gọi màn hình mọi người đang code vào đây nha
-      routerConfig: _appRouter.router,
+    // home: HomeScreennnn(),  Gọi màn hình mọi người đang code vào đây nha
+    routerConfig: _appRouter.router,
 
     );
-  }
-}
-*/
+    }
+    }
+ */
 
 // class MyApp extends StatelessWidget {
 //   @override

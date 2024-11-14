@@ -49,6 +49,7 @@ dependencies:
   mobile_scanner: ^6.0.1 # Quét mã vạch và QR
   url_launcher: ^6.3.0 # Mở URL trong trình duyệt
   fluttertoast: ^8.2.8
+  flutter_local_notifications: ^18.0.1
 
 dev_dependencies:
   flutter_test:

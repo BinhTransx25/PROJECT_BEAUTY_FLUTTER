@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:beauty/api_call/api_call.dart';
+
 import '../../models/home/data_home_new.dart';
 import 'package:flutter/material.dart';
 import 'widgets/header.dart';
@@ -26,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    fetchNotifications();//giả lập thong báo
     _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
       if (_currentPage < carouselImages.length - 1) {
         _currentPage++;

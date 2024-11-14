@@ -1,3 +1,5 @@
+import 'package:beauty/api_call/api_call.dart';
+import 'package:beauty/api_call/notification_helper.dart';
 import 'package:flutter/material.dart';
 import 'widgets/Notification_widget.dart';
 
@@ -12,7 +14,10 @@ class _NotificationScreenState extends State<Notification> {
   bool vibration = false;
   bool specialOffers = false;
   bool discounts = false;
-
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
