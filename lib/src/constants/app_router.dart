@@ -1,3 +1,4 @@
+import 'package:beauty/src/widget/HomeScreen.dart';
 import 'package:beauty/src/widget/Onboarding%20-%20Start.dart';
 import 'package:beauty/src/widget/Onboarding.dart';
 import 'package:beauty/src/widget/Signin.dart';
@@ -7,7 +8,7 @@ import 'package:go_router/go_router.dart';
 
 class MyAppRouter {
   GoRouter router = GoRouter(
-    initialLocation: "/splash",
+    initialLocation: "/home",
     routes: [
       GoRoute(
         name: "Splash",
@@ -30,6 +31,10 @@ class MyAppRouter {
           path: '/signin',
           name: 'SigninScreen',
           builder: (context, state) => SigninScreen()),
+      GoRoute(
+          path: '/home',
+          name: 'HomeScreen',
+          builder: (context, state) => HomeScreen()),
     ],
   );
 }

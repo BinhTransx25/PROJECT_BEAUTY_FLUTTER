@@ -45,6 +45,7 @@ dependencies:
   mobile_scanner: ^6.0.1 # Quét mã vạch và QR
   url_launcher: ^6.3.0 # Mở URL trong trình duyệt
   fluttertoast: ^8.2.8
+  flash: ^3.1.1
 
 dev_dependencies:
   flutter_test:
@@ -64,7 +65,28 @@ flutter:
     - lib/src/assets/background.png
     - lib/src/assets/facebook.png
     - lib/src/assets/google.png
-    - lib/src/assets/cay.png  # Đường dẫn đến biểu tượng của bạn
+    - lib/src/assets/avatar.png
+    - lib/src/assets/anh1.png
+    - lib/src/assets/anh2.png
+    - lib/src/assets/anh3.png
+    - lib/src/assets/anh4.png
+    - lib/src/assets/anh5.png
+    - lib/src/assets/coupon.png
+    - lib/src/assets/donation.png
+    - lib/src/assets/refund.png
+    - lib/src/assets/freeshipping.png
+    - lib/src/assets/cay.png 
+    - lib/src/assets/son.png
+    - lib/src/assets/Rectangle.png
+    - lib/src/assets/sp1.png
+    - lib/src/assets/sp2.png
+    - lib/src/assets/sp3.png
+    - lib/src/assets/sp4.png
+    - lib/src/assets/discount.png
+    - lib/src/assets/frame.png
+    - lib/src/assets/frame1.png
+    - lib/src/assets/frame2.png
+    - lib/src/assets/frame3.png
 
 flutter_icons:
   android: true
