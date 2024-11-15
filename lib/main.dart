@@ -1,56 +1,52 @@
-import 'package:beauty/core/app_localizations.dart';
-import 'package:beauty/src/constants/app_router.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'src/Screen/Password_Recovery_Reset/VerificationCode.dart';
+// import 'src/app/app_router.dart';
+import 'src/app/Main_Router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'src/bloc/login_bloc/login_bloc.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
-  await Firebase.initializeApp();
 
-  runApp(
-    EasyLocalization(
-      supportedLocales: [Locale('en', 'US'), Locale('vi')],
-      path: AppLocalizations.translationFilePath,
-      fallbackLocale: AppLocalizations.engLocale,
-      saveLocale: true,
-      child: MyApp(),
-    ),
-  );
+void main() {
+  runApp(MyApp());
 }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp.router(
-//       routerDelegate: MyAppRouter().router.routerDelegate,
-//       routeInformationParser: MyAppRouter().router.routeInformationParser,
-//       locale: context.locale,
-//       supportedLocales: context.supportedLocales,
-//       localizationsDelegates: context.localizationDelegates,
-//       title: 'Flutter Demo',
-//       theme: ThemeData(fontFamily: 'OpenSans'),
-//       debugShowCheckedModeBanner: false,
-//     );
-//   }
-// }
-class MyApp extends StatefulWidget {
-  MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-class _MyAppState extends State<MyApp> {
-
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Go Router',
-      routerConfig: MyAppRouter().router,
+    return BlocProvider(
+      create: (context) => LoginBloc(),
+      child: Builder(
+        builder: (context) {
+          final loginBloc = context.read<LoginBloc>();
+          final router = MainRouter(loginBloc: loginBloc).router;
+          return MaterialApp.router(
+            routerConfig: router,
+          );
+        },
+      ),
     );
   }
 }
+
+
+/** 
+class MyApp extends StatelessWidget {
+    final _appRouter = AppRouter();
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      // home: HomeScreennnn(),  Gọi màn hình mọi người đang code vào đây nha
+      routerConfig: _appRouter.router,
+
+    );
+  }
+}
+*/
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Verificationcode(), // Gọi màn hình mọi người đang code vào đây nha
+//     );
+//   }
+// }

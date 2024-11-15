@@ -1,28 +1,29 @@
 plugins {
     id "com.android.application"
     id "kotlin-android"
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
-    id 'com.google.gms.google-services' // Đảm bảo chỉ có một dòng này
+    id("com.google.gms.google-services")
+
+
 }
 
 android {
     namespace = "com.cds.beauty"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 34
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+           jvmTarget = "17"
     }
 
     defaultConfig {
         applicationId = "com.cds.beauty"
-        minSdkVersion 23 // Chọn minSdkVersion phù hợp với yêu cầu của bạn
+        minSdkVersion 23
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
@@ -30,15 +31,33 @@ android {
 
     buildTypes {
         release {
+
+             // Không thu nhỏ mã
+            minifyEnabled false
+
+             // Không thu nhỏ tài nguyên
+            shrinkResources false
+
             signingConfig = signingConfigs.debug
         }
+
+        debug {
+        // Đảm bảo không bật tính năng thu nhỏ mã và tài nguyên trong chế độ debug
+        minifyEnabled false
+        shrinkResources false
     }
+    }
+
 }
 
 dependencies {
-    implementation platform('com.google.firebase:firebase-bom:31.0.0') // Thêm dòng này
-    implementation 'com.google.firebase:firebase-analytics' // Thêm dòng này
-    implementation 'com.google.firebase:firebase-auth' // Sử dụng Firebase Auth
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.2'
+    implementation platform('com.google.firebase:firebase-bom:32.2.0')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'com.google.firebase:firebase-messaging:23.0.0'
+    implementation 'com.google.firebase:firebase-analytics' 
+    implementation 'com.google.firebase:firebase-auth' 
+
 }
 
 flutter {
