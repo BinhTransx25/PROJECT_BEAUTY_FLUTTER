@@ -1,8 +1,9 @@
-import 'package:beauty/api_call/notification_helper.dart';
+import 'package:beauty/logic/get_notify/get_notify_block.dart';
 import 'package:flutter/material.dart';
 
 // import 'src/Screen/Password_Recovery_Reset/VerificationCode.dart';
 // import 'src/app/app_router.dart';
+import 'notification_helper/notification_helper.dart';
 import 'src/app/Main_Router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'src/bloc/login_bloc/login_bloc.dart';
@@ -16,8 +17,16 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LoginBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => LoginBloc(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              GetNotifyBloc(), // Make sure GetNotifyBloc is defined
+        ),
+      ],
       child: Builder(
         builder: (context) {
           final loginBloc = context.read<LoginBloc>();

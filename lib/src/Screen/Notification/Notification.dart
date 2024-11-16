@@ -1,5 +1,3 @@
-import 'package:beauty/api_call/api_call.dart';
-import 'package:beauty/api_call/notification_helper.dart';
 import 'package:flutter/material.dart';
 import 'widgets/Notification_widget.dart';
 

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:beauty/api_call/api_call.dart';
+
 
 import '../../models/home/data.dart';
 import 'package:flutter/material.dart';

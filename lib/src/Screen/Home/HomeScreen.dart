@@ -1,6 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 
-import 'package:beauty/api_call/api_call.dart';
+
+
+import 'package:beauty/logic/get_notify/get_notify_block.dart';
+import 'package:beauty/logic/get_notify/get_notify_event.dart';
+import 'package:beauty/logic/get_notify/get_notify_state.dart';
+import 'package:beauty/notification_helper/notification_helper.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/home/data_home_new.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +21,7 @@ import '../../app/tabs/bottom_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   final int notificationCount;
+
   const HomeScreen({this.notificationCount = 1, Key? key}) : super(key: key);
 
   @override
@@ -28,7 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    fetchNotifications();//giả lập thong báo
+    //fetchNotifications(); //giả lập thong báo
+    context.read<GetNotifyBloc>().add(GetWithEvent(page: 1, perPage: 10));
     _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
       if (_currentPage < carouselImages.length - 1) {
         _currentPage++;
@@ -55,42 +64,64 @@ class _HomeScreenState extends State<HomeScreen> {
       _currentPage = index;
     });
   }
-
+  void checkDataType(dynamic value) {
+    if (value is int) {
+      print('int');
+    } else if (value is String) {
+      print('string');
+    } else {
+      print('undernow');
+    }
+  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 22),
-              Header(notificationCount: 5),
-              SizedBox(height: 20),
-              Carousel(
-                  images: carouselImages,
-                  pageController: _pageController,
-                  onPageChanged: _onPageChanged),
-              SizedBox(height: 20),
-              PromotionList(promotions: promotions),
-              SizedBox(height: 20),
-              CategoryList(categories: categories),
-              SizedBox(height: 20),
-              ProductList(outstandingproduct: outstandingProducts),
-              SizedBox(height: 20),
-              ProductSaleList(
-                  products: outstandingProductSales,
-                  title: "Sản phẩm khuyến mãi"),
-              SizedBox(height: 20),
-              RadiantGlowSection(),
-            ],
+    return BlocListener<GetNotifyBloc, GetNotifyState>(
+      listener: (context, state){
+        if (state.status == 'success') {
+          NotificationHelper.showNotification(
+              state.subject, state.content);//nếu chưa sử dụng thư viện thi xoá đi
+        } else if (state.status == 'failure') {
+          // Print the error message if there's a failure
+          print('Failed to fetch data: ${state.errorMessage}');
+        }
+      },
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Container(
+            width: MediaQuery
+                .of(context)
+                .size
+                .width,
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 22),
+                Header(notificationCount: 5),
+                SizedBox(height: 20),
+                Carousel(
+                    images: carouselImages,
+                    pageController: _pageController,
+                    onPageChanged: _onPageChanged),
+                SizedBox(height: 20),
+                PromotionList(promotions: promotions),
+                SizedBox(height: 20),
+                CategoryList(categories: categories),
+                SizedBox(height: 20),
+                ProductList(outstandingproduct: outstandingProducts),
+                SizedBox(height: 20),
+                ProductSaleList(
+                    products: outstandingProductSales,
+                    title: "Sản phẩm khuyến mãi"),
+                SizedBox(height: 20),
+                RadiantGlowSection(),
+              ],
+            ),
           ),
         ),
+        bottomNavigationBar: const BottomNavBar(
+            currentIndex: 0), // Đánh dấu màn hình này là mục đầu tiên
       ),
-      bottomNavigationBar: const BottomNavBar(
-          currentIndex: 0), // Đánh dấu màn hình này là mục đầu tiên
     );
   }
 }
@@ -126,10 +157,9 @@ class Carousel extends StatelessWidget {
   final PageController pageController;
   final Function(int) onPageChanged;
 
-  const Carousel(
-      {required this.images,
-      required this.pageController,
-      required this.onPageChanged});
+  const Carousel({required this.images,
+    required this.pageController,
+    required this.onPageChanged});
 
   @override
   Widget build(BuildContext context) {
