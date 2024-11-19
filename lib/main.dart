@@ -1,37 +1,52 @@
-// import 'package:firebase_core/firebase_core.dart';
-import 'package:beauty/src/Screen/HomeScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'src/Screen/helloWorld.dart'; // Import Màn hình mọi người đang test nha
-import 'src/Screen/shop.dart';
-import 'src/Screen/shopEmpty.dart';
-import 'src/Screen/Categories.dart';
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
-  await EasyLocalization.ensureInitialized();
+// import 'src/Screen/Password_Recovery_Reset/VerificationCode.dart';
+// import 'src/app/app_router.dart';
+import 'src/app/Main_Router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'src/bloc/login_bloc/login_bloc.dart';
 
-  runApp(
-    EasyLocalization(
-      supportedLocales: [Locale('en'), Locale('vi')],
-      path: 'assets/translations', // Đường dẫn tới file ngôn ngữ
-      fallbackLocale: Locale('en'),
-      child: MyApp(),
-    ),
-  );
+
+void main() {
+  runApp(MyApp());
 }
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      // home: HelloWorld(), // Gọi màn hình mọi người đang code vào đây nha
-      // home: shop(),
-      home: Categories() 
+    return BlocProvider(
+      create: (context) => LoginBloc(),
+      child: Builder(
+        builder: (context) {
+          final loginBloc = context.read<LoginBloc>();
+          final router = MainRouter(loginBloc: loginBloc).router;
+          return MaterialApp.router(
+            routerConfig: router,
+          );
+        },
+      ),
+    );
+  }
+}
+
+
+/** 
+class MyApp extends StatelessWidget {
+    final _appRouter = AppRouter();
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      // home: HomeScreennnn(),  Gọi màn hình mọi người đang code vào đây nha
+      routerConfig: _appRouter.router,
 
     );
   }
 }
+*/
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Verificationcode(), // Gọi màn hình mọi người đang code vào đây nha
+//     );
+//   }
+// }

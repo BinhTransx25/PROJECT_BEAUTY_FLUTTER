@@ -1,44 +1,44 @@
 name: beauty
 description: "A new Flutter project."
-publish_to: 'none' 
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.5.0 
+  sdk: ^3.5.0
 
 dependencies:
   flutter:
-    sdk: flutter 
-  bloc: ^8.1.4 
-  dio: ^5.7.0 
+    sdk: flutter
+  flutter_bloc: ^8.1.6
+  dio: ^5.7.0
   retrofit: ^4.4.1
-  json_serializable: ^6.8.0 
-  json_annotation: ^4.9.0 
-  go_router: ^14.2.9 
-  easy_localization: ^3.0.7 
-  sign_in_with_apple: ^6.1.3 
-  skeletonizer: ^1.4.2 
-  connectivity_plus: ^6.0.5 
-
+  json_serializable: ^6.8.0
+  json_annotation: ^4.9.0
+  go_router: ^14.4.1
+  easy_localization: ^3.0.7
+  sign_in_with_apple: ^6.1.3
+  skeletonizer: ^1.4.2
+  connectivity_plus: ^6.0.5
+  equatable: ^2.0.3
 
   firebase_core: ^3.6.0 # Thư viện cốt lõi của Firebase
   firebase_messaging: ^15.1.3 # Thư viện Firebase cho thông báo đẩy
   firebase_analytics: ^11.3.3 # Phân tích Firebase
   firebase_auth: ^5.3.1 # Xác thực Firebase
+
   firebase_database: ^11.1.4 # Cơ sở dữ liệu Firebase
   firebase_remote_config: ^5.1.3 # Cấu hình từ xa Firebase
   firebase_storage: ^12.3.2 # Lưu trữ Firebase
   cloud_firestore: ^5.4.4 # Cơ sở dữ liệu Firestore
-
-  encrypt: ^5.0.3 
-  shared_preferences: ^2.3.2 
-  local_auth: ^2.3.0 
+  encrypt: ^5.0.3
+  shared_preferences: ^2.3.2
+  local_auth: ^2.3.0
   qr_code_scanner: ^1.0.1
-  flutter_native_splash: ^2.4.1 
-  flutter_animate: ^4.5.0 
-  flutter_markdown: ^0.7.3+2 
-  flutter_svg: ^2.0.10+1 
+  flutter_native_splash: ^2.4.1
+  flutter_animate: ^4.5.0
+  flutter_markdown: ^0.7.3+2
+  flutter_svg: ^2.0.10+1
 
   google_sign_in: ^6.2.1 # Đăng nhập bằng Google
   flutter_facebook_auth: ^7.1.1
@@ -46,73 +46,52 @@ dependencies:
   package_info_plus: ^8.0.2 # Thông tin về gói ứng dụng
   file_picker: ^8.1.2 # Chọn tệp từ thiết bị
   cupertino_icons: ^1.0.8 # Biểu tượng iOS
-  mobile_scanner: ^5.2.3 # Quét mã vạch và QR
+  mobile_scanner: ^6.0.1 # Quét mã vạch và QR
   url_launcher: ^6.3.0 # Mở URL trong trình duyệt
-
+  fluttertoast: ^8.2.8
 
 dev_dependencies:
-  flutter_test: 
+  flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0 
-  retrofit_generator: ^9.1.2 
-  build_runner: ^2.4.9 
-  flutter_launcher_icons: ^0.14.1 
+  flutter_lints: ^4.0.0
+  retrofit_generator: ^9.1.2
+  build_runner: ^2.4.9
+  flutter_launcher_icons: ^0.14.1
 
 flutter:
   uses-material-design: true # Sử dụng thiết kế Material
   assets:
     - assets/translations/en.json
     - assets/translations/vi.json
-    - lib/src/assets/cay.png  
-    - lib/src/assets/avatar.png
-    - lib/src/assets/anh1.png
-    - lib/src/assets/anh2.png
-    - lib/src/assets/anh3.png
-    - lib/src/assets/anh4.png
-    - lib/src/assets/anh5.png
-    - lib/src/assets/coupon.png
-    - lib/src/assets/donation.png
-    - lib/src/assets/refund.png
-    - lib/src/assets/freeshipping.png
-    - lib/src/assets/cay.png 
-    - lib/src/assets/son.png
-    - lib/src/assets/Rectangle.png
-    - lib/src/assets/sp1.png
-    - lib/src/assets/sp2.png
-    - lib/src/assets/sp3.png
-    - lib/src/assets/sp4.png
-    - lib/src/assets/discount.png
-    - lib/src/assets/frame.png
-    - lib/src/assets/frame1.png
-    - lib/src/assets/frame2.png
-    - lib/src/assets/frame3.png
-    - lib/src/assets/Ellipse.png
-    - lib/src/assets/anh6.png
-    - lib/src/assets/anh7.png
-    - lib/src/assets/anh8.png
-    - lib/src/assets/anh9.png
-    - lib/src/assets/anh10.png
+    - lib/src/assets/demo_cate/cay.png
+    - lib/src/assets/Account/
+    - lib/src/assets/payment/
+    - lib/src/assets/Onboarding_Signin_up_Splash/
+    - lib/src/assets/Address/
+    - lib/src/assets/Cart/
+    - lib/src/assets/Checkout/
+    - lib/src/assets/Vouchers/
+    - lib/src/assets/Home/
+    - lib/src/assets/Category/
+    - lib/src/assets/favorite_product/
+    - lib/src/assets/product_img_demo/
+    - lib/src/assets/favorite_product/icons/
+    - lib/src/assets/MyOrder/
+    - lib/src/assets/PasswordRecovery/
+    - lib/src/assets/ResetPassword/
+    - lib/src/assets/Onboarding_Signin_up_Splash/logo_beauty.png
+
+    # Đường dẫn đến biểu tượng của bạn
+
 flutter_icons:
   android: true # Tạo biểu tượng cho Android
   ios: true # Tạo biểu tượng cho iOS
-  image_path: "lib/src/assets/cay.png" # Đảm bảo bạn có file icon trong thư mục assets
+  image_path: "lib/src/assets/Onboarding_Signin_up_Splash/logo_test.png" # Đảm bảo bạn có file icon trong thư mục assets
 
 flutter_native_splash:
-  
-  image: "assets/dev/images/splash-light.png"
-  color: "#dddddd"
-  icon_background_color: "#dddddd"
-  image_dark: "assets/dev/images/splash-dark.png"
-  color_dark: "#333333"
-  icon_background_color_dark: "#333333"
+  image: "lib/src/assets/Onboarding_Signin_up_Splash/logo_test.png"
   android_12:
-    image: "assets/dev/images/splash-light.png"
-    color: "#dddddd"
-    icon_background_color: "#dddddd"
-    image_dark: "assets/dev/images/splash-dark.png"
-    color_dark: "#333333"
-    icon_background_color_dark: "#333333"
-flutter_launcher_icons:
-  android: true # Tạo biểu tượng cho Android
-  ios: true     # Tạo biểu tượng cho iOS
-  image_path: "lib/src/assets/cay.png" # Đường dẫn đến hình ảnh biểu tượng
+    image: "lib/src/assets/Onboarding_Signin_up_Splash/logo_test.png"
+    fullscreen: true
+    android: true
+    ios: true
