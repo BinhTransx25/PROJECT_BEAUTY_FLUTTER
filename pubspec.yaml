@@ -11,6 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
+  get: ^4.6.5
+  http: ^1.1.0
   dio: ^5.7.0
   retrofit: ^4.4.1
   json_serializable: ^6.8.0
@@ -46,7 +48,7 @@ dependencies:
   package_info_plus: ^8.0.2 # Thông tin về gói ứng dụng
   file_picker: ^8.1.2 # Chọn tệp từ thiết bị
   cupertino_icons: ^1.0.8 # Biểu tượng iOS
-  mobile_scanner: ^6.0.1 # Quét mã vạch và QR
+  mobile_scanner: ^6.0.2 # Quét mã vạch và QR
   url_launcher: ^6.3.0 # Mở URL trong trình duyệt
   fluttertoast: ^8.2.8
 
