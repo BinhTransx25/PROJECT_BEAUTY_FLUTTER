@@ -1,4 +1,4 @@
-int _currentCustomerId = 1; // Biến toàn cục, lưu ID hiện tại
+int _currentCustomerId = 1; 
 
 class UserRequest {
   final String name;
@@ -18,7 +18,7 @@ class UserRequest {
     this.nickName = "N/A",
     this.address = "N/A",
     required this.passwordConfirmation,
-  }) : customerId = _currentCustomerId++, // Tự động tăng ID
+  }) : customerId = _currentCustomerId++, 
        assert(email != null),
        assert(phone != null),
        assert(password != null),
@@ -36,7 +36,6 @@ class UserRequest {
       'customer_id': customerId,
     };
 
-    // Loại bỏ các trường có giá trị rỗng
     data.removeWhere((key, value) => value == null || value == "");
     return data;
   }
