@@ -14,7 +14,7 @@ class GetNotifyBloc extends Bloc<GetNotifyEvent, GetNotifyState> {
     final service = RestService(dio);
     try {
       final response = await service.getNotify(event.page, event.perPage,event.token);
-      //print('${List.of(response['data'])[0]}');
+      //print('${List.of(response['data'])[0]}') lấy ds thông báo ở mảng đầu tiên ;
       final subject = '${List.of(response['data'])[0]['subject']}';
       final content = '${List.of(response['data'])[0]['content']}';
       emit(GetNotifyState.success(subject,content));
