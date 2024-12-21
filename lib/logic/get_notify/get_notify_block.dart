@@ -13,7 +13,7 @@ class GetNotifyBloc extends Bloc<GetNotifyEvent, GetNotifyState> {
     final dio = Dio();
     final service = RestService(dio);
     try {
-      final response = await service.getNotify(event.page, event.perPage);
+      final response = await service.getNotify(event.page, event.perPage,event.token);
       //print('${List.of(response['data'])[0]}');
       final subject = '${List.of(response['data'])[0]['subject']}';
       final content = '${List.of(response['data'])[0]['content']}';

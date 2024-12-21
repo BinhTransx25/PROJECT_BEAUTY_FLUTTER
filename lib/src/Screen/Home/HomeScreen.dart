@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-
-
 import 'package:beauty/logic/get_notify/get_notify_block.dart';
 import 'package:beauty/logic/get_notify/get_notify_event.dart';
 import 'package:beauty/logic/get_notify/get_notify_state.dart';
@@ -37,7 +35,12 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     //fetchNotifications(); //giả lập thong báo
-    context.read<GetNotifyBloc>().add(GetWithEvent(page: 1, perPage: 10));
+    context.read<GetNotifyBloc>().add(GetWithEvent(
+        page: 1,
+        perPage: 10,
+        //token này cần lấy sau khi login vào, đây chỉ cho tạm thôi, chắc chắn sau này dùng token này k đc
+        token:
+            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYXV0aC1zZXJ2aWNlL2xvZ2luIiwiaWF0IjoxNzM0NzQ1OTUwLCJleHAiOjE3MzQ3NDk1NTAsIm5iZiI6MTczNDc0NTk1MCwianRpIjoiQ2F6UENUVUZneXgxVjNIWSIsInN1YiI6IjU1IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.eyydgk5PdjHyKP3BarrCpfWI0k0z-az6faDycNIGKrU'));
     _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
       if (_currentPage < carouselImages.length - 1) {
         _currentPage++;
@@ -64,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _currentPage = index;
     });
   }
+
   void checkDataType(dynamic value) {
     if (value is int) {
       print('int');
@@ -73,13 +77,14 @@ class _HomeScreenState extends State<HomeScreen> {
       print('undernow');
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<GetNotifyBloc, GetNotifyState>(
-      listener: (context, state){
+      listener: (context, state) {
         if (state.status == 'success') {
-          NotificationHelper.showNotification(
-              state.subject, state.content);//nếu chưa sử dụng thư viện thi xoá đi
+          NotificationHelper.showNotification(state.subject,
+              state.content); //nếu chưa sử dụng thư viện thi xoá đi
         } else if (state.status == 'failure') {
           // Print the error message if there's a failure
           print('Failed to fetch data: ${state.errorMessage}');
@@ -88,10 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Container(
-            width: MediaQuery
-                .of(context)
-                .size
-                .width,
+            width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,9 +159,10 @@ class Carousel extends StatelessWidget {
   final PageController pageController;
   final Function(int) onPageChanged;
 
-  const Carousel({required this.images,
-    required this.pageController,
-    required this.onPageChanged});
+  const Carousel(
+      {required this.images,
+      required this.pageController,
+      required this.onPageChanged});
 
   @override
   Widget build(BuildContext context) {
