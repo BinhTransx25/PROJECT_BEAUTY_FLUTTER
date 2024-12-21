@@ -3,7 +3,6 @@ import 'widgets/favorite_product_item.dart';
 import 'widgets/search_action_bar.dart';
 import 'package:flutter/material.dart';
 
-final List<int> items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 class Finding extends StatelessWidget {
   @override
@@ -35,7 +34,7 @@ class Finding extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
                 child: TabBarView(
                   children: [
-                    Center(child: ListProducts(items: items)),
+                    Center(child: ListProducts(items: sampleProducts)),
                     // Center(child: Text("Nội dung Mới nhất")),
                     Column(
                       children: [
@@ -58,29 +57,79 @@ class Finding extends StatelessWidget {
 }
 
 class ListProducts extends StatelessWidget {
-  final List<int> items;
+  final List<Product> items;
 
   const ListProducts({super.key, required this.items});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2, // Chia đôi màn hình
-        mainAxisSpacing: 20.0,
-        crossAxisSpacing: 20.0,
-        childAspectRatio: 5 / 7, // Điều chỉnh tỷ lệ nếu cần
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, // Chia đôi màn hình
+          mainAxisSpacing: 20.0,
+          crossAxisSpacing: 20.0,
+          childAspectRatio: 5 / 7, // Điều chỉnh tỷ lệ nếu cần
+        ),
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          final product = items[index];
+          return FavoriteProductItem(
+            productName: product.productName,
+            price: product.price,
+            oldPrice: product.oldPrice,
+            imageUrl: product.imageUrl,
+            showPrice: product.showPrice,
+          );
+        },
       ),
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        return FavoriteProductItem(
-          productName: "productName",
-          price: "64000",
-          oldPrice: "40000",
-          imageUrl: "imageUrl",
-        );
-      },
-    ));
+    );
   }
 }
+
+class Product {
+  final String productName;
+  final String price;
+  final String oldPrice;
+  final String imageUrl;
+  final bool showPrice;
+
+  Product({
+    required this.productName,
+    required this.price,
+    required this.oldPrice,
+    required this.imageUrl,
+    this.showPrice = true,
+  });
+}
+
+final List<Product> sampleProducts = [
+  Product(
+    productName: "Product 1",
+    price: "64,000",
+    oldPrice: "80,000",
+    imageUrl: "https://example.com/image1.png",
+    showPrice: true,
+  ),
+  Product(
+    productName: "Product 2",
+    price: "54,000",
+    oldPrice: "70,000",
+    imageUrl: "https://example.com/image2.png",
+    showPrice: false,
+  ),
+  Product(
+    productName: "Product 3",
+    price: "74,000",
+    oldPrice: "90,000",
+    imageUrl: "https://example.com/image3.png",
+    showPrice: true,
+  ),
+  Product(
+    productName: "Product 4",
+    price: "84,000",
+    oldPrice: "100,000",
+    imageUrl: "https://example.com/image4.png",
+    showPrice: true,
+  ),
+];

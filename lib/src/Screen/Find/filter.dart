@@ -1,3 +1,8 @@
+import 'dart:developer';
+
+import 'package:beauty/src/api/category_sevice.dart';
+import 'package:beauty/src/models/home/catergory.dart';
+
 import 'widgets/basic_custom_button.dart';
 import 'widgets/show_more_drop_button.dart';
 import 'package:flutter/material.dart';
@@ -43,9 +48,7 @@ class Filter extends StatelessWidget {
                     style: TextStyle(fontSize: 20),
                   ),
                   SizedBox(height: 10),
-                  ButtonList(
-                    titles: titles,
-                  ),
+                  CategoryList(),
                   Divider(color: Color(0xFFD9D9D9), height: 1),
                   SizedBox(height: 20),
                   Text(
@@ -138,21 +141,23 @@ class ButtonList extends StatefulWidget {
 
 class _ButtonListState extends State<ButtonList> {
   bool isExpanded = false; // Biến trạng thái để điều khiển hiển thị
+  int? selectedIndex; // Lưu trạng thái nút được chọn
 
   @override
   Widget build(BuildContext context) {
     final hideButton = widget.isUnlimitedDisplayItem ?? false;
-    // Xác định số lượng item cần hiển thị
+
+    // Đảm bảo không vượt quá số lượng phần tử trong titles
     final itemsToShow = !hideButton
-        ? (isExpanded ? widget.titles.length : 4)
+        ? (isExpanded ? widget.titles.length : widget.titles.length.clamp(0, 4))
         : widget.titles.length;
 
     return Column(
       children: [
         GridView.builder(
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 5.0,
             crossAxisSpacing: 10.0,
@@ -160,13 +165,33 @@ class _ButtonListState extends State<ButtonList> {
           ),
           itemCount: itemsToShow,
           itemBuilder: (context, index) {
-            return BasicCustomButton(
-              title: widget.titles[index],
-              type: index % 2 != 0
-                  ? BasicCustomButtonType.primary
-                  : BasicCustomButtonType.secondary,
-              size: BasicCustomButtonSize.medium,
-            );
+            // Kiểm tra và chỉ tạo nút khi index hợp lệ
+            if (index < widget.titles.length) {
+              final isSelected = selectedIndex == index;
+
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedIndex = index; // Cập nhật nút được chọn
+                  });
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: isSelected ? Colors.pink : Colors.grey[300],
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    widget.titles[index],
+                    style: TextStyle(
+                      color: isSelected ? Colors.white : Colors.black,
+                    ),
+                  ),
+                ),
+              );
+            } else {
+              return const SizedBox(); // Trả về widget rỗng nếu index không hợp lệ
+            }
           },
         ),
         if (!hideButton)
@@ -383,3 +408,51 @@ class _PriceRangeSelectorState extends State<PriceRangeSelector> {
     );
   }
 }
+
+class CategoryList extends StatefulWidget {
+  const CategoryList({Key? key}) : super(key: key);
+
+  @override
+  State<CategoryList> createState() => _CategoryListState();
+}
+
+class _CategoryListState extends State<CategoryList> {
+  final CategoryService _categoryService = CategoryService();
+  List<Category> categories = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCategories();
+  }
+
+  Future<void> _loadCategories() async {
+    try {
+      final fetchedCategories = await _categoryService.getCategories();
+      setState(() {
+        categories = fetchedCategories;
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      print('Error loading categories: $e');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Chuyển danh sách categories thành danh sách chuỗi titles
+    final titles = categories.map((category) => category.name).toList();
+    print("dddd____________________dđd" + categories.toString());
+    print("dddd____________________dđd" + titles.toString());
+    log( titles.toString(), name: "dddd____________________dđd" );
+
+    return isLoading
+        ? const Center(child: CircularProgressIndicator()) // Hiển thị loading
+        : ButtonList(titles: titles); // Truyền titles vào ButtonList
+  }
+}
+
