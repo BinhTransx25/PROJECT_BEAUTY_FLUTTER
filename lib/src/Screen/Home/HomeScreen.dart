@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'dart:convert';
-
+// import 'dart:convert';
+// cua hunghung
 import 'package:beauty/logic/get_notify/get_notify_block.dart';
 import 'package:beauty/logic/get_notify/get_notify_event.dart';
 import 'package:beauty/logic/get_notify/get_notify_state.dart';
@@ -8,7 +8,13 @@ import 'package:beauty/notification_helper/notification_helper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/home/data_home_new.dart';
+// api cua nganngan
+import '../../service/Home/ProductService.dart';
+import '../../service/Home/BannerServer.dart';
+
 import 'package:flutter/material.dart';
+import '../../models/home/Banner.dart';
+import '../../service/Home/CategoryService.dart';
 import 'widgets/header.dart';
 import 'widgets/PromotionList.dart';
 import 'widgets/CategoryList .dart';
@@ -16,10 +22,12 @@ import 'widgets/ProductList.dart';
 import 'widgets/ProductSaleList.dart';
 import 'widgets/RadiantGlowSection.dart';
 import '../../app/tabs/bottom_nav_bar.dart';
+import '../../models/home/data_home_new.dart';
+import '../../models/home/CategoryModel.dart';
+import '../../models/home/ProductModel.dart';
 
 class HomeScreen extends StatefulWidget {
   final int notificationCount;
-
   const HomeScreen({this.notificationCount = 1, Key? key}) : super(key: key);
 
   @override
@@ -28,6 +36,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final PageController _pageController = PageController();
+  final ApiService _apiService = ApiService();
+
+  List<BannerModel> banners = [];
+  List<CategoryModel> categories = [];
+  List<ProductModel> products = [];
+  bool isLoading = true;
   int _currentPage = 0;
   Timer? _timer;
 
@@ -53,6 +67,16 @@ class _HomeScreenState extends State<HomeScreen> {
         curve: Curves.easeIn,
       );
     });
+
+    fetchBanners();
+    fetchCategories();
+    _startAutoScroll();
+  }
+
+  void _onPageChanged(int index) {
+    setState(() {
+      _currentPage = index;
+    });
   }
 
   @override
@@ -60,12 +84,6 @@ class _HomeScreenState extends State<HomeScreen> {
     _timer?.cancel();
     _pageController.dispose();
     super.dispose();
-  }
-
-  void _onPageChanged(int index) {
-    setState(() {
-      _currentPage = index;
-    });
   }
 
   void checkDataType(dynamic value) {
@@ -77,263 +95,201 @@ class _HomeScreenState extends State<HomeScreen> {
       print('undernow');
     }
   }
+// của ngân, bannerbanner
+  Future<void> fetchBanners() async {
+    try {
+      setState(() => isLoading = true);
+      final fetchedBanners = await _apiService.fetchBanners();
+      setState(() {
+        banners = fetchedBanners;
+        isLoading = false;
+      });
+    } catch (e) {
+      print('Error fetching banners: $e');
+      setState(() => isLoading = false);
+    }
+  }
+
+  final CategoryService _categoryService = CategoryService();
+  final ProductService _productService = ProductService();
+
+  Future<void> fetchCategories() async {
+    try {
+      final fetchedCategories = await _categoryService.getCategories();
+      setState(() {
+        categories = fetchedCategories;
+      });
+    } catch (e) {
+      print('Error fetching categories: $e');
+    }
+  }
+
+  void fetchProducts() async {
+    try {
+      final response = await _productService.getProducts();
+      setState(() {
+        products = response.data;
+      });
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  void _startAutoScroll() {
+    _timer = Timer.periodic(const Duration(seconds: 5), (Timer timer) {
+      if (_currentPage < banners.length - 1) {
+        _currentPage++;
+      } else {
+        _currentPage = 0;
+      }
+
+      if (_pageController.hasClients) {
+        _pageController.animateToPage(
+          _currentPage,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeIn,
+        );
+      }
+    });
+  }
+
+  Widget _buildCarouselSection() {
+    if (isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+    return Carousel(
+      banners: banners,
+      pageController: _pageController,
+      onPageChanged: _onPageChanged,
+    );
+  }
+
+  Widget _buildBody() {
+    return SingleChildScrollView(
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 22),
+            Header(notificationCount: widget.notificationCount),
+            const SizedBox(height: 20),
+            _buildCarouselSection(),
+            const SizedBox(height: 20),
+            PromotionList(promotions: promotions),
+            const SizedBox(height: 20),
+            CategoryList(),
+            const SizedBox(height: 20),
+            ProductList(),
+            const SizedBox(height: 20),
+            ProductSaleList(
+              products: outstandingProductSales,
+              title: "Sản phẩm khuyến mãi",
+            ),
+            const SizedBox(height: 20),
+            RadiantGlowSection(),
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<GetNotifyBloc, GetNotifyState>(
-      listener: (context, state) {
-        if (state.status == 'success') {
-          NotificationHelper.showNotification(state.subject,
-              state.content); //nếu chưa sử dụng thư viện thi xoá đi
-        } else if (state.status == 'failure') {
-          // Print the error message if there's a failure
-          print('Failed to fetch data: ${state.errorMessage}');
-        }
-      },
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 22),
-                Header(notificationCount: 5),
-                SizedBox(height: 20),
-                Carousel(
-                    images: carouselImages,
-                    pageController: _pageController,
-                    onPageChanged: _onPageChanged),
-                SizedBox(height: 20),
-                PromotionList(promotions: promotions),
-                SizedBox(height: 20),
-                CategoryList(categories: categories),
-                SizedBox(height: 20),
-                ProductList(outstandingproduct: outstandingProducts),
-                SizedBox(height: 20),
-                ProductSaleList(
-                    products: outstandingProductSales,
-                    title: "Sản phẩm khuyến mãi"),
-                SizedBox(height: 20),
-                RadiantGlowSection(),
-              ],
-            ),
-          ),
-        ),
-        bottomNavigationBar: const BottomNavBar(
-            currentIndex: 0), // Đánh dấu màn hình này là mục đầu tiên
-      ),
+    return Scaffold(
+      body: _buildBody(),
+      bottomNavigationBar: const BottomNavBar(currentIndex: 0),
     );
   }
 }
 
-// Header widget
-// class Header extends StatelessWidget {
-//   final int notificationCount;
-//   const Header({required this.notificationCount});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//       children: [
-//         Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             Text("Địa chỉ giao hàng",
-//                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-//             Text("Số 123, Phường 12, Quận 1",
-//                 style: TextStyle(color: Colors.grey[600])),
-//           ],
-//         ),
-//         Icon(Icons.notifications, color: Colors.grey, size: 30),
-//       ],
-//     );
-//   }
-// }
-
-// Carousel widget
 class Carousel extends StatelessWidget {
-  final List<String> images;
+  final List<BannerModel> banners;
   final PageController pageController;
   final Function(int) onPageChanged;
 
-  const Carousel(
-      {required this.images,
-      required this.pageController,
-      required this.onPageChanged});
+  const Carousel({
+    Key? key,
+    required this.banners,
+    required this.pageController,
+    required this.onPageChanged,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200,
-      child: PageView.builder(
-        controller: pageController,
-        onPageChanged: onPageChanged,
-        itemCount: images.length,
-        itemBuilder: (context, index) {
-          return Image.asset(images[index], fit: BoxFit.cover);
-        },
+    return Column(
+      children: [
+        SizedBox(
+          height: 200,
+          child: PageView.builder(
+            controller: pageController,
+            onPageChanged: onPageChanged,
+            itemCount: banners.length,
+            itemBuilder: (context, index) {
+              final banner = banners[index];
+              return Container(
+                decoration: BoxDecoration(
+                  color: Color(int.parse(
+                      banner.backgroundColor.replaceAll('#', '0xFF'))),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                margin: const EdgeInsets.symmetric(horizontal: 4),
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      banner.title,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 255, 217, 217),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      banner.description,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 93, 83, 231),
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+        const SizedBox(height: 8),
+        _buildIndicators(),
+      ],
+    );
+  }
+
+  Widget _buildIndicators() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(
+        banners.length,
+        (index) => Container(
+          width: 8,
+          height: 8,
+          margin: const EdgeInsets.symmetric(horizontal: 4),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: pageController.hasClients &&
+                    (pageController.page?.round() ?? 0) == index
+                ? Colors.blue
+                : Colors.grey,
+          ),
+        ),
       ),
     );
   }
+
+  
 }
-
-// PromotionList widget
-// class PromotionList extends StatelessWidget {
-//   final List<Promotion> promotions;
-
-//   const PromotionList({required this.promotions});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//       children: promotions
-//           .map((promo) => Column(
-//                 children: [
-//                   Image.asset(promo.imageUrl, width: 50, height: 50),
-//                   Text(promo.name, textAlign: TextAlign.center),
-//                 ],
-//               ))
-//           .toList(),
-//     );
-//   }
-// }
-
-// CategoryList widget
-// class CategoryList extends StatelessWidget {
-//   final List<Category> categories;
-
-//   const CategoryList({required this.categories});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Wrap(
-//       spacing: 10,
-//       runSpacing: 10,
-//       children: categories
-//           .map((category) => Chip(label: Text(category.name)))
-//           .toList(),
-//     );
-//   }
-// }
-
-// ProductList widget for Outstanding Products
-// class ProductList extends StatelessWidget {
-//   final List<OutstandingProduct> products;
-//   final String title;
-
-//   const ProductList({required this.products, required this.title});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         Text(title,
-//             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-//         SizedBox(height: 10),
-//         SingleChildScrollView(
-//           scrollDirection: Axis.horizontal,
-//           child: Row(
-//             children: products
-//                 .map((product) => ProductCard(product: product))
-//                 .toList(),
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
-
-// Product Card for Displaying a Product
-// class ProductCard extends StatelessWidget {
-//   final OutstandingProduct product;
-
-//   const ProductCard({required this.product});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       margin: EdgeInsets.only(right: 10),
-//       width: 120,
-//       child: Column(
-//         children: [
-//           Image.asset(product.imageUrl, height: 120),
-//           Text(product.name),
-//           Text("\$${product.originalPrice}",
-//               style: TextStyle(decoration: TextDecoration.lineThrough)),
-//           Text("\$${product.discountedPrice}",
-//               style: TextStyle(color: Colors.red)),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// ProductSaleList widget for Outstanding Products with Sale
-// class ProductSaleList extends StatelessWidget {
-//   final List<OutstandingProductSale> products;
-//   final String title;
-
-//   const ProductSaleList({required this.products, required this.title});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         Text(title,
-//             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-//         SizedBox(height: 10),
-//         SingleChildScrollView(
-//           scrollDirection: Axis.horizontal,
-//           child: Row(
-//             children: products
-//                 .map((product) => ProductSaleCard(product: product))
-//                 .toList(),
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
-
-// // ProductSaleCard widget for Products with Sale
-// class ProductSaleCard extends StatelessWidget {
-//   final OutstandingProductSale product;
-
-//   const ProductSaleCard({required this.product});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       margin: EdgeInsets.only(right: 10),
-//       width: 120,
-//       child: Column(
-//         children: [
-//           Stack(
-//             alignment: Alignment.topRight,
-//             children: [
-//               Image.asset(product.imageUrl, height: 120),
-//               if (product.sale.isNotEmpty)
-//                 Container(
-//                   padding: EdgeInsets.all(4),
-//                   color: Colors.red,
-//                   child: Text(product.sale,
-//                       style: TextStyle(color: Colors.white, fontSize: 12)),
-//                 ),
-//             ],
-//           ),
-//           Text(product.name),
-//           Text("\$${product.originalPrice}",
-//               style: TextStyle(decoration: TextDecoration.lineThrough)),
-//           Text("\$${product.discountedPrice}",
-//               style: TextStyle(color: Colors.red)),
-//         ],
-//       ),
-//     );
-//   }
-// }
