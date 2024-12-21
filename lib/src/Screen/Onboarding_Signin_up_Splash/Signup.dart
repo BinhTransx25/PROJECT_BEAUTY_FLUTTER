@@ -3,6 +3,8 @@ import 'package:beauty/src/Screen/Onboarding_Signin_up_Splash/widgets/button/cus
 import 'package:beauty/src/Screen/Onboarding_Signin_up_Splash/widgets/text_fields/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../api/auth_service.dart';
+import '../../models/user/user_models.dart';
 
 class SignupScreen extends StatefulWidget {
   @override
@@ -68,11 +70,31 @@ class _SignupScreenState extends State<SignupScreen> {
         emailError == null &&
         passwordError == null &&
         confirmPasswordError == null) {
+      final userRequest = UserRequest(
+        email: emailController.text.trim(),
+        phone: phoneController.text.trim(),
+        password: passwordController.text,
+        passwordConfirmation: confirmPasswordController.text,
+      );
+
       try {
-        context.go('/signin');
+        final authService = AuthService();
+        final success = await authService.register(userRequest);
+
+        if (success) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Đăng ký thành công!')),
+          );
+          context.go('/signin'); // Chuyển tới màn hình đăng nhập
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Đăng ký thất bại, vui lòng thử lại!')),
+          );
+        }
       } catch (e) {
-       // ignore: avoid_print
-       print('Lỗi đăng nhập Facebook: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Lỗi: $e')),
+        );
       }
     }
   }

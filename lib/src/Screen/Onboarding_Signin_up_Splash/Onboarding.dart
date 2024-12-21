@@ -89,7 +89,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      SizedBox(height: 160),
+                      SizedBox(height: 130),
                       DotProgressIndicator(
                           currentPage: _currentPage, totalPages: 3),
                       SizedBox(height: 40),
@@ -126,7 +126,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   TextStyle _textStyle(Color color) {
     return TextStyle(
-      fontSize: 40,
+      fontSize: 35,
       fontWeight: FontWeight.w500,
       color: color,
     );
