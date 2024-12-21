@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../app/tabs/bottom_nav_bar.dart';
+import '../../service/order/orderserver.dart';
+import '../../models/home/ordermodel.dart'; 
+import '../../app/tabs/bottom_nav_bar.dart';
 
 class Ongoing extends StatefulWidget {
   @override
@@ -8,47 +10,42 @@ class Ongoing extends StatefulWidget {
 
 class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-
-  final List<Map<String, dynamic>> ongoingOrders = [
-    {
-      'id': '001',
-      'name': 'Son L\'Oreal',
-      'price': 150000,
-      'discount': 10000,
-      'status': 'Đang vận chuyển',
-    },
-    {
-      'id': '002',
-      'name': 'Son L\'Oreal',
-      'price': 150000,
-      'discount': 10000,
-      'status': 'Đang vận chuyển',
-    },
-  ];
-
-  final List<Map<String, dynamic>> completedOrders = [
-    {
-      'id': '003',
-      'name': 'Son L\'Oreal',
-      'price': 150000,
-      'discount': 10000,
-      'status': 'Hoàn thành',
-      'rating': 0, // Default rating
-    },
-    {
-      'id': '004',
-      'name': 'Son L\'Oreal',
-      'price': 150000,
-      'discount': 10000,
-      'status': 'Hoàn thành',
-      'rating': 0,
-    },
-  ];
+  List<Order> orders = [];
+  final OrderService _orderService = OrderService();
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 5, vsync: this);
+    fetchOrders();
+  }
+
+  Future<void> fetchOrders() async {
+    try {
+      List<Order> fetchedOrders = await _orderService.fetchOrders();
+      setState(() {
+        orders = fetchedOrders;
+      });
+    } catch (e) {
+      print('Error fetching orders: $e');
+    }
+  }
+
+  String getStatus(String status) {
+    switch (status) {
+      case 'pending':
+        return 'Chưa giải quyết';
+      case 'confirmed':
+        return 'Đã xác nhận';
+      case 'shipping':
+        return 'Đang vận chuyển';
+      case 'cancelled':
+        return 'Đã hủy';
+      case 'completed':
+        return 'Hoàn tất';
+      default:
+        return 'Không xác định';
+    }
   }
 
   @override
@@ -87,7 +84,19 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
           tabs: [
             Container(
               width: MediaQuery.of(context).size.width / 2,
+              child: Tab(text: 'Chưa giải quyết'),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width / 2,
+              child: Tab(text: 'Đã xác nhận'),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width / 2,
               child: Tab(text: 'Đang vận chuyển'),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width / 2,
+              child: Tab(text: 'Đã hủy'),
             ),
             Container(
               width: MediaQuery.of(context).size.width / 2,
@@ -99,17 +108,28 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
       body: TabBarView(
         controller: _tabController,
         children: [
-          buildOrderList(ongoingOrders, true),
-          buildOrderList(completedOrders, false),
+          buildOrderList(
+              orders.where((order) => order.status == 'pending').toList(),
+              true),
+          buildOrderList(
+              orders.where((order) => order.status == 'confirmed').toList(),
+              false),
+          buildOrderList(
+              orders.where((order) => order.status == 'shipping').toList(),
+              false),
+          buildOrderList(
+              orders.where((order) => order.status == 'cancelled').toList(),
+              false),
+          buildOrderList(
+              orders.where((order) => order.status == 'completed').toList(),
+              false),
         ],
       ),
-
- bottomNavigationBar: const BottomNavBar(
-              currentIndex: 2), // Đánh dấu màn hình này là mục đầu tiên
+      bottomNavigationBar: const BottomNavBar(currentIndex: 2),
     );
   }
 
-  Widget buildOrderList(List<Map<String, dynamic>> orders, bool isOngoing) {
+  Widget buildOrderList(List<Order> orders, bool isOngoing) {
     return Padding(
       padding: EdgeInsets.only(top: 12, left: 22, right: 22),
       child: SingleChildScrollView(
@@ -121,7 +141,6 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
               itemCount: orders.length,
               itemBuilder: (context, index) {
                 final order = orders[index];
-                final discountedPrice = order['price'] - order['discount'];
                 return Card(
                   elevation: 4,
                   shape: RoundedRectangleBorder(
@@ -135,8 +154,8 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8),
-                          child: Image.asset(
-                            'lib/src/assets/MyOrder/son.png',
+                          child: Image.network(
+                            'https://hoangphucphoto.com/wp-content/uploads/2024/08/anh-son-2.jpg',
                             width: 80,
                             height: 80,
                             fit: BoxFit.cover,
@@ -148,7 +167,7 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                order['name'],
+                                'Son môi',
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w600,
@@ -159,21 +178,11 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
-                                    '${order['price']}đ',
+                                    '${order.totalOrder}đ',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                       color: Colors.black,
-                                    ),
-                                  ),
-                                  SizedBox(width: 4),
-                                  Text(
-                                    '${discountedPrice}đ',
-                                    style: TextStyle(
-                                      color: Colors.pink,
-                                      decoration: TextDecoration.lineThrough,
-                                      decorationColor: Colors.pink,
-                                      fontSize: 12,
                                     ),
                                   ),
                                 ],
@@ -192,17 +201,16 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 4),
                               child: Text(
-                                order['status'],
+                                getStatus(order.status),
                                 style: TextStyle(
-                                    color: order['status'] == 'Hoàn thành'
-                                        ? const Color.fromARGB(255, 27, 211, 33)
-                                        : Colors.black,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold),
+                                  color: getStatusColor(order.status),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             SizedBox(height: 10),
-                            if (isOngoing)
+                            if (order.status != 'completed')
                               ElevatedButton(
                                 onPressed: () {
                                   showDialog(
@@ -211,7 +219,7 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                                       return AlertDialog(
                                         title: Text('Thông tin đơn hàng'),
                                         content: Text(
-                                            'Chi tiết đơn hàng: ${order['id']}'),
+                                            'Chi tiết đơn hàng: ${order.code}'),
                                         actions: [
                                           TextButton(
                                             onPressed: () {
@@ -225,7 +233,7 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.pink, // Màu nền nút
+                                  backgroundColor: Colors.pink,
                                   padding: EdgeInsets.symmetric(horizontal: 16),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
@@ -234,13 +242,13 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                                 child: Text(
                                   'Xem đơn hàng',
                                   style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.white,
-                                      fontWeight:
-                                          FontWeight.bold), // Màu chữ nút
+                                    fontSize: 12,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
-                            if (!isOngoing && order['status'] == 'Hoàn thành')
+                            if (order.status == 'completed')
                               ElevatedButton(
                                 onPressed: () {
                                   showModalBottomSheet(
@@ -251,8 +259,8 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                                         onRatingSubmitted:
                                             (int rating, String feedback) {
                                           setState(() {
-                                            order['rating'] = rating;
-                                            order['feedback'] = feedback;
+                                            order.rating = rating;
+                                            order.feedback = feedback;
                                           });
                                         },
                                       );
@@ -260,7 +268,7 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.pink, // Màu nền nút
+                                  backgroundColor: Colors.pink,
                                   padding: EdgeInsets.symmetric(horizontal: 16),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
@@ -269,10 +277,10 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
                                 child: Text(
                                   'Đánh giá',
                                   style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                      fontWeight:
-                                          FontWeight.bold), // Màu chữ nút
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                           ],
@@ -288,10 +296,28 @@ class _OngoingState extends State<Ongoing> with SingleTickerProviderStateMixin {
       ),
     );
   }
+
+  Color getStatusColor(String status) {
+    switch (status) {
+      case 'pending':
+        return const Color.fromARGB(255, 27, 211, 33);
+      case 'confirmed':
+        return Colors.blue;
+      case 'processing':
+      case 'shipping':
+        return Colors.red;
+      case 'cancelled':
+        return Colors.orange;
+      case 'completed':
+        return Colors.green;
+      default:
+        return Colors.black;
+    }
+  }
 }
 
 class RatingBottomSheet extends StatefulWidget {
-  final Map<String, dynamic> order;
+  final Order order;
   final Function(int, String) onRatingSubmitted;
 
   RatingBottomSheet({required this.order, required this.onRatingSubmitted});
@@ -307,7 +333,7 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
   @override
   void initState() {
     super.initState();
-    rating = widget.order['rating'];
+    rating = widget.order.rating; 
   }
 
   @override
@@ -325,23 +351,18 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
                 'Đánh giá',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              Image.asset(
-                'lib/src/assets/MyOrder/Arrow_down.png',
-                width: 36,
-                height: 36,
+              IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () => Navigator.of(context).pop(),
               ),
             ],
           ),
           SizedBox(height: 10),
-          Divider(
-            thickness: 2,
-            color: const Color.fromARGB(255, 194, 194, 194),
-          ),
+          Divider(thickness: 2, color: Colors.grey),
           SizedBox(height: 10),
           Text(
             'Đơn hàng bạn thế nào?',
-            style: TextStyle(
-                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 4),
           Text(
@@ -356,7 +377,7 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
                 icon: Icon(
                   index < rating ? Icons.star : Icons.star_border,
                   color: Colors.amber,
-                  size: 36, // Điều chỉnh kích thước sao
+                  size: 36,
                 ),
                 onPressed: () {
                   setState(() {
@@ -372,29 +393,26 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Điền phản hồi của bạn',
-              contentPadding: EdgeInsets.symmetric(
-                  vertical: 16, horizontal: 10), // Điều chỉnh padding
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 16, horizontal: 10),
             ),
-            maxLines: 5, // Số dòng tối đa
-            style: TextStyle(fontSize: 16), // Tăng kích thước chữ
+            maxLines: 5,
+            style: TextStyle(fontSize: 16),
           ),
           SizedBox(height: 16),
           Center(
-            // Căn giữa nút
             child: ElevatedButton(
               onPressed: () {
                 widget.onRatingSubmitted(rating, feedbackController.text);
                 Navigator.of(context).pop();
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.pink, // Màu nền nút
-                minimumSize: Size(
-                    double.infinity, 50), // Đặt chiều rộng đầy đủ và chiều cao
+                backgroundColor: Colors.pink,
+                minimumSize: Size(double.infinity, 50),
               ),
               child: Text(
                 'Gửi đánh giá',
-                style:
-                    TextStyle(color: Colors.white, fontSize: 20), // Màu chữ nút
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ),
             ),
           ),
