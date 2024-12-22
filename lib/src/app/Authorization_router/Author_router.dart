@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../Screen/Home/HomeScreen.dart';
 import '../../Screen/Cart/Cart.dart';
 import '../../Screen/Account/Account.dart';
+import '../../Screen/Account/SettingDetailScreen.dart';
 import '../../Screen/Shop/NotificationScreen.dart';
 import '../../Screen/Find/find.dart';
 import '../../Screen/Find/filter.dart';
@@ -19,8 +20,13 @@ import '../../Screen/Notification/Notification.dart';
 import '../../Screen/FAQs/FAQs.dart';
 import '../../Screen/Help_Center/Help_Center.dart';
 
+
 class AuthorRouter {
   static final List<GoRoute> routes = [
+     GoRoute(
+      path: '/setting_detail',
+      builder: (context, state) => SettingDetailScreen(),
+    ),
      GoRoute(
       path: '/help_center',
       builder: (context, state) => HelpCenterScreen(),
