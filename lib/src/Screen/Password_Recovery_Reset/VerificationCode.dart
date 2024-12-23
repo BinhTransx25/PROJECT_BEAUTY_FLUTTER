@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:beauty/src/api/auth_service.dart';
+import 'package:beauty/src/models/user/user_models.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,8 +18,10 @@ class _VerificationcodeState extends State<Verificationcode> {
   final List<FocusNode> _focusNodes = List.generate(6, (_) => FocusNode());
 
   Timer? _timer;
-  int _start = 30;
+  int _start = 60;
   bool _isResendEnabled = false;
+
+  late String email;
 
   @override
   void initState() {
@@ -42,7 +46,6 @@ class _VerificationcodeState extends State<Verificationcode> {
 
   void _resendCode() {
     if (_isResendEnabled) {
-      // Thực hiện hành động gửi lại mã
       startTimer();
     }
   }
@@ -67,24 +70,56 @@ class _VerificationcodeState extends State<Verificationcode> {
     }
   }
 
-  late String previousPage; // Biến lưu tên trang trước
+  late String previousPage;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Nhận tham số từ trang trước đó với null check
     final routeState = GoRouter.of(context).state;
-    previousPage = routeState?.extra as String? ??
-        'unknown'; // Sử dụng giá trị mặc định nếu extra là null
+    email = routeState?.extra as String? ?? 'unknown';
   }
+
+  final authService = AuthService();
 
   void _goBack() {
     if (previousPage == 'sms') {
-      context.go('/passwordRecoveryPhone'); // Trở về trang SMS
+      context.go('/passwordRecoveryPhone');
     } else if (previousPage == 'email') {
-      context.go('/passwordRecoveryEmail'); // Trở về trang Email
+      context.go('/passwordRecoveryEmail');
     } else {
-      context.pop(); // Hoặc quay lại trang trước nếu không có thông tin cụ thể
+      context.pop();
+    }
+  }
+
+  Future<void> verifyOtp() async {
+    final otp = _controllers.map((controller) => controller.text.trim()).join();
+
+    if (otp.length == 6 && email.isNotEmpty) {
+      final otpRequest = OtpRequest(email: email, otp: otp);
+
+      try {
+        final success = await authService.veriotp(otpRequest);
+        if (success) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('OTP xác thực thành công!')),
+          );
+          context.go('/resetpassword',extra: email);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('OTP không hợp lệ, vui lòng thử lại!')),
+          );
+        }
+      } catch (e) {
+        print("Lỗi xác thực OTP: $e");
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Lỗi kết nối, vui lòng thử lại sau!')),
+        );
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Vui lòng nhập OTP hợp lệ!')),
+      );
     }
   }
 
@@ -116,8 +151,7 @@ class _VerificationcodeState extends State<Verificationcode> {
             ),
             const SizedBox(height: 50),
             const Padding(
-              padding: EdgeInsets.only(
-                  left: 20.0), // Thay đổi giá trị 20.0 theo ý muốn
+              padding: EdgeInsets.only(left: 20.0),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -131,14 +165,13 @@ class _VerificationcodeState extends State<Verificationcode> {
               ),
             ),
             const SizedBox(height: 15),
-            const Padding(
-              padding: EdgeInsets.only(
-                  left: 20.0, right: 100), // Thay đổi giá trị 20.0 theo ý muốn
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 100),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Mã xác minh đã dược gửi đến aaa@gmail.com',
-                  style: TextStyle(
+                  'Mã xác minh đã dược gửi đến $email',
+                  style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                       color: Color(0XFF979797)),
@@ -163,7 +196,7 @@ class _VerificationcodeState extends State<Verificationcode> {
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.center,
                     maxLength: 1,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       counterText: '',
                       border: InputBorder.none,
                     ),
@@ -174,23 +207,20 @@ class _VerificationcodeState extends State<Verificationcode> {
             ),
             const SizedBox(height: 40),
             GestureDetector(
-              onTap: () {
-                context.go('/resetpassword');
-              },
+              onTap: verifyOtp,
               child: Container(
-                width: MediaQuery.of(context).size.width -
-                    40, // Đảm bảo nút chiếm toàn bộ chiề
-                height: 50, // Đặt chiều cao cụ thể cho nút
+                width: MediaQuery.of(context).size.width - 40,
+                height: 50,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10), // Bo góc
-                  color: Color(0xffD61355), // Màu nền
+                  borderRadius: BorderRadius.circular(10),
+                  color: const Color(0xffD61355),
                 ),
-                alignment: Alignment.center, // Căn giữa chữ bên trong nút
+                alignment: Alignment.center,
                 child: const Text(
                   'Xác minh',
                   style: TextStyle(
-                    color: Colors.white, // Đặt màu chữ trắng
-                    fontSize: 16, // Đặt kích thước chữ
+                    color: Colors.white,
+                    fontSize: 16,
                   ),
                 ),
               ),
@@ -198,12 +228,6 @@ class _VerificationcodeState extends State<Verificationcode> {
             const SizedBox(height: 10),
             GestureDetector(
               onTap: _goBack,
-              // () {
-              //   // Xử lý khi người dùng nhấn vào nút
-              //   String code =
-              //       _controllers.map((controller) => controller.text).join();
-              //   print('Verification code: $code');
-              // },
               child: const Text('Trở về',
                   style: TextStyle(color: Color(0xff202020), fontSize: 14)),
             ),

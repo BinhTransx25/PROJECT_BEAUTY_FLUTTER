@@ -18,8 +18,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  final TextEditingController confirmPasswordController =TextEditingController();
 
   String? phoneError;
   String? emailError;
@@ -73,10 +72,14 @@ class _SignupScreenState extends State<SignupScreen> {
         passwordError == null &&
         confirmPasswordError == null) {
       final userRequest = UserRequest(
+        name: 'Nguyễn Văn A',
+        nickName: 'Văn A',
         email: emailController.text.trim(),
+        address: '123 Street',
         phone: phoneController.text.trim(),
         password: passwordController.text,
         passwordConfirmation: confirmPasswordController.text,
+        customerId: 1,
       );
 
       try {
@@ -85,9 +88,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
         if (success) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Đăng ký thành công!')),
-          );
-          context.go('/signin'); // Chuyển tới màn hình đăng nhập
+            SnackBar(content: Text('Đăng ký thành công!')),);
+          context.go('/signin');
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Đăng ký thất bại, vui lòng thử lại!')),

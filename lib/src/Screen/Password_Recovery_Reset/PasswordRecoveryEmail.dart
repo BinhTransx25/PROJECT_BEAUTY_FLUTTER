@@ -1,3 +1,5 @@
+import 'package:beauty/src/api/auth_service.dart';
+import 'package:beauty/src/models/user/user_models.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,6 +11,54 @@ class PasswordRecoveryEmail extends StatefulWidget {
 }
 
 class _PasswordRecoveryEmailState extends State<PasswordRecoveryEmail> {
+  final TextEditingController _emailController = TextEditingController();
+
+  Future<void> _onSendCodePressed(BuildContext context) async {
+    String email = _emailController.text.trim();
+
+    if (email.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Vui lòng nhập email')),
+      );
+      return; // Nếu email trống, không thực hiện tiếp
+    }
+
+    final authService = AuthService();
+    final userRequest = UserRequest(
+      name: 'name',
+      nickName: 'nickName',
+      email: email,
+      address: "123 Street",
+      phone: 'phone',
+      password: 'password',
+      passwordConfirmation: 'password',
+      customerId: 1,
+    );
+
+    try {
+      // Kiểm tra và gửi OTP
+      final otpSuccess = await authService.otp(userRequest);
+
+      if (otpSuccess) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Mã xác nhận đã gửi đến email')),
+        );
+        context.go('/verificationcode',
+            extra: email); // Chuyển hướng sau khi thành công
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text('Không thể gửi mã xác nhận. Vui lòng thử lại.')),
+        );
+      }
+    } catch (e) {
+      print('Lỗi khi gửi OTP: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Lỗi xác nhận mã. Vui lòng thử lại sau.')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +87,7 @@ class _PasswordRecoveryEmailState extends State<PasswordRecoveryEmail> {
             ),
             const SizedBox(height: 50),
             const Padding(
-              padding: EdgeInsets.only(
-                  left: 20.0), // Thay đổi giá trị 20.0 theo ý muốn
+              padding: EdgeInsets.only(left: 20.0),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -53,8 +102,7 @@ class _PasswordRecoveryEmailState extends State<PasswordRecoveryEmail> {
             ),
             const SizedBox(height: 15),
             const Padding(
-              padding: EdgeInsets.only(
-                  left: 20.0, right: 100), // Thay đổi giá trị 20.0 theo ý muốn
+              padding: EdgeInsets.only(left: 20.0, right: 100),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -69,40 +117,35 @@ class _PasswordRecoveryEmailState extends State<PasswordRecoveryEmail> {
             ),
             const SizedBox(height: 20),
             Container(
-              width: MediaQuery.of(context)
-                  .size
-                  .width, // Đảm bảo Container chiếm toàn bộ chiều
-              height: 50, // Đặt chiều cao cụ thể cho Container
-              margin: const EdgeInsets.only(left: 20, right: 20), // Màu nền đen
+              width: MediaQuery.of(context).size.width,
+              height: 50,
+              margin: const EdgeInsets.only(left: 20, right: 20),
               padding: const EdgeInsets.only(left: 20, right: 20),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(60), // Bo góc
+                borderRadius: BorderRadius.circular(60),
                 color: Color(0xffF8F8F8),
-              ), // Thêm khoảng cách giữa chữ và mép
-
+              ),
               child: Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: TextField(
-                      decoration: InputDecoration.collapsed(
+                      controller: _emailController, // Sử dụng controller
+                      decoration: const InputDecoration.collapsed(
                         hintText: 'Email',
                         hintStyle: TextStyle(
                           color: Color(0XFF979797),
                           fontSize: 14,
                         ),
                       ),
-                      style: TextStyle(
-                          color: Colors
-                              .black), // Đặt màu chữ để dễ nhìn trên nền đen
+                      style: const TextStyle(color: Colors.black),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        right: 10.0), // Thêm khoảng cách bên phải
-                    child: Image.network(
-                      'https://s3-alpha-sig.figma.com/img/8af0/30e2/03f1071fa1bd51c5cfb950ef892cccaf?Expires=1731888000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=boQT44A9ufTQuQNfAjW3jY-IVI4rzUhLXHBtSHx4Ikb-bPzsGTLZlHYK0UbYhohz1IlvN5~ACZsXGqlqyFADNNpBVGcYUVTkeurVjVkG7byZ6UGBQ-tVi3nbudCqeYLVKV5-2jjoOfFd~Nrv3ytQ5BuuDTvIU-9HzIOCisZzR3e7md2ojwYxeP3pwedupRljO1HXBh8FFRK45KIvJ9bjIAPiKKa51p8jmdynBqXFlqcP7wYvXsMJ3HQtRTYDv-eEAXFhIoN~2qPYj-ovkLAT8gy7pbg6ZtTtU44ae~L-Im1vFRTuD9clxOU~t5P1ZuKOVVOIk4sqsUSfrf3wiLJ7bQ__', // Đường dẫn đến hình ảnh
-                      width: 20, // Đặt chiều rộng cho hình ảnh
-                      height: 20, // Đặt chiều cao cho hình ảnh
+                  const Padding(
+                    padding: EdgeInsets.only(right: 10.0),
+                    child: Icon(
+                      Icons.email_outlined,
+                      color: Color(0xFF979797),
+                      size: 20,
                     ),
                   ),
                 ],
@@ -110,23 +153,20 @@ class _PasswordRecoveryEmailState extends State<PasswordRecoveryEmail> {
             ),
             const SizedBox(height: 40),
             GestureDetector(
-              onTap: () {
-             context.go('/verificationcode', extra: 'email');
-              },
+              onTap: () => _onSendCodePressed(context),
               child: Container(
-                width: MediaQuery.of(context).size.width -
-                    40, // Đảm bảo nút chiếm toàn bộ chiề
-                height: 50, // Đặt chiều cao cụ thể cho nút
+                width: MediaQuery.of(context).size.width - 40,
+                height: 50,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10), // Bo góc
-                  color: Color(0xffD61355), // Màu nền
+                  borderRadius: BorderRadius.circular(10),
+                  color: Color(0xffD61355),
                 ),
-                alignment: Alignment.center, // Căn giữa chữ bên trong nút
+                alignment: Alignment.center,
                 child: const Text(
                   'Gửi mã xác minh',
                   style: TextStyle(
-                    color: Colors.white, // Đặt màu chữ trắng
-                    fontSize: 16, // Đặt kích thước chữ
+                    color: Colors.white,
+                    fontSize: 16,
                   ),
                 ),
               ),
