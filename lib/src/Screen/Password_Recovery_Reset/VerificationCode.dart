@@ -1,16 +1,27 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class Verificationcode extends StatefulWidget {
-  const Verificationcode({super.key});
+  final String email;
+  final String previousPage;
+  const Verificationcode({super.key, required this.email, required this.previousPage});
+
 
   @override
   State<Verificationcode> createState() => _VerificationcodeState();
 }
 
 class _VerificationcodeState extends State<Verificationcode> {
+  String otp = '';
+  String errorOTP = '';
+  bool isLoading=false;
+  final Dio _dio = Dio();
+
+
   final List<TextEditingController> _controllers =
       List.generate(6, (_) => TextEditingController());
   final List<FocusNode> _focusNodes = List.generate(6, (_) => FocusNode());
@@ -40,9 +51,13 @@ class _VerificationcodeState extends State<Verificationcode> {
     });
   }
 
-  void _resendCode() {
+  void _resendCode()async {
     if (_isResendEnabled) {
       // Thực hiện hành động gửi lại mã
+      final response = await _dio.post(
+        'https://api-core.dsp.one/api/password/send-otp',
+        data: {'email': widget.email},
+      );
       startTimer();
     }
   }
@@ -55,6 +70,7 @@ class _VerificationcodeState extends State<Verificationcode> {
     for (var focusNode in _focusNodes) {
       focusNode.dispose();
     }
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -66,22 +82,73 @@ class _VerificationcodeState extends State<Verificationcode> {
       FocusScope.of(context).requestFocus(_focusNodes[index - 1]);
     }
   }
+  Future<void> handleVerifyOTP() async {
+    setState(() {
+      otp = _controllers.map((controller) => controller.text).join();
+      if (otp.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('OTP không được để trống.')),
+        );
+      } else {
+        errorOTP = '';
+      }
+    });
 
-  late String previousPage; // Biến lưu tên trang trước
+    if (errorOTP.isEmpty) {
+      setState(() {
+        isLoading = true;
+      });
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Nhận tham số từ trang trước đó với null check
-    final routeState = GoRouter.of(context).state;
-    previousPage = routeState?.extra as String? ??
-        'unknown'; // Sử dụng giá trị mặc định nếu extra là null
+      try {
+        final response = await _dio.post(
+          'https://api-core.dsp.one/api/password/verify-otp',
+          data: {'email': widget.email, 'otp': otp}
+        );
+
+        print('response: ${response.data}');
+
+        setState(() {
+          isLoading = false;
+        });
+
+        final Map<String, dynamic> responseData = jsonDecode(response.toString());
+
+        if (responseData['message'] == 'OTP hợp lệ. Bạn có thể đổi mật khẩu.') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('OTP đã được xác minh thành công.')),
+          );
+          context.go('/resetpassword' ,extra: {'email': widget.email,});
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Xác minh OTP thất bại. Vui lòng thử lại.')),
+          );
+        }
+      } catch (e) {
+        setState(() {
+          isLoading = false;
+        });
+        print('error123: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Có lỗi xảy ra. Vui lòng thử lại.')),
+        );
+      }
+    }
   }
+  // late String previousPage; // Biến lưu tên trang trước
+  //
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   // Nhận tham số từ trang trước đó với null check
+  //   final routeState = GoRouter.of(context).state;
+  //   previousPage = routeState?.extra as String? ??
+  //       'unknown'; // Sử dụng giá trị mặc định nếu extra là null
+  // }
 
   void _goBack() {
-    if (previousPage == 'sms') {
+    if (widget.previousPage == 'sms') {
       context.go('/passwordRecoveryPhone'); // Trở về trang SMS
-    } else if (previousPage == 'email') {
+    } else if (widget.previousPage == 'email') {
       context.go('/passwordRecoveryEmail'); // Trở về trang Email
     } else {
       context.pop(); // Hoặc quay lại trang trước nếu không có thông tin cụ thể
@@ -131,14 +198,14 @@ class _VerificationcodeState extends State<Verificationcode> {
               ),
             ),
             const SizedBox(height: 15),
-            const Padding(
-              padding: EdgeInsets.only(
+             Padding(
+              padding: const EdgeInsets.only(
                   left: 20.0, right: 100), // Thay đổi giá trị 20.0 theo ý muốn
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Mã xác minh đã dược gửi đến aaa@gmail.com',
-                  style: TextStyle(
+                  'Mã xác minh đã dược gửi đến ${widget.email}',
+                  style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                       color: Color(0XFF979797)),
@@ -175,7 +242,8 @@ class _VerificationcodeState extends State<Verificationcode> {
             const SizedBox(height: 40),
             GestureDetector(
               onTap: () {
-                context.go('/resetpassword');
+                handleVerifyOTP();
+                // context.go('/resetpassword' ,extra: {'email': widget.email,});
               },
               child: Container(
                 width: MediaQuery.of(context).size.width -
@@ -186,12 +254,11 @@ class _VerificationcodeState extends State<Verificationcode> {
                   color: Color(0xffD61355), // Màu nền
                 ),
                 alignment: Alignment.center, // Căn giữa chữ bên trong nút
-                child: const Text(
+                child:isLoading
+                    ? const CircularProgressIndicator(color: Colors.white)
+                    : const Text(
                   'Xác minh',
-                  style: TextStyle(
-                    color: Colors.white, // Đặt màu chữ trắng
-                    fontSize: 16, // Đặt kích thước chữ
-                  ),
+                  style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ),
             ),

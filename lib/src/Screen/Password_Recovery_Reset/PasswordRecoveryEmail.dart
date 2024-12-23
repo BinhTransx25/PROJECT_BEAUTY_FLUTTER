@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -5,10 +8,64 @@ class PasswordRecoveryEmail extends StatefulWidget {
   const PasswordRecoveryEmail({super.key});
 
   @override
-  State<PasswordRecoveryEmail> createState() => _PasswordRecoveryEmailState();
+  _PasswordRecoveryEmailState createState() => _PasswordRecoveryEmailState();
 }
 
 class _PasswordRecoveryEmailState extends State<PasswordRecoveryEmail> {
+  String email = 'nguyenminhkhuong318@gmail.com';
+  String erorrEmail = '';
+  bool isLoading=false;
+  final Dio _dio = Dio();
+
+  Future<void> handleSendOTP() async {
+    setState(() {
+      if (email.isEmpty) {
+        erorrEmail = 'Email không được để trống';
+      } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(email)) {
+        erorrEmail = 'Email không hợp lệ';
+      } else {
+        erorrEmail = '';
+      }
+    });
+
+    if (erorrEmail.isEmpty) {
+      setState(() {
+        isLoading = true;
+      });
+
+      try {
+        final response = await _dio.post(
+        'https://api-core.dsp.one/api/password/send-otp',
+          data: {'email': email},
+        );
+
+        print('response: ${response}');
+
+        setState(() {
+          isLoading = false;
+        });
+        final Map<String, dynamic> responseData = jsonDecode(response.toString());
+        if (responseData['message'] == 'OTP đã được gửi đến email của bạn.') {
+          // Nếu API trả về mã trạng thái 200, điều đó có nghĩa là yêu cầu thành công
+          context.go('/verificationcode', extra: {'email': email, 'previousPage': 'email'});
+        } else {
+          // Nếu API trả về mã trạng thái khác 200, điều đó có nghĩa là yêu cầu thất bại
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Gửi mã OTP thất bại. Vui lòng thử lại.')),
+          );
+        }
+      } catch (e) {
+        setState(() {
+          isLoading = false;
+        });
+        print('error123: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Có lỗi xảy ra. Vui lòng thử lại.')),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,16 +139,21 @@ class _PasswordRecoveryEmailState extends State<PasswordRecoveryEmail> {
 
               child: Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: TextField(
-                      decoration: InputDecoration.collapsed(
+                      onChanged: (text) {
+                        setState(() {
+                          email = text;
+                        });
+                      },
+                      decoration: const InputDecoration.collapsed(
                         hintText: 'Email',
                         hintStyle: TextStyle(
                           color: Color(0XFF979797),
                           fontSize: 14,
                         ),
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors
                               .black), // Đặt màu chữ để dễ nhìn trên nền đen
                     ),
@@ -99,8 +161,8 @@ class _PasswordRecoveryEmailState extends State<PasswordRecoveryEmail> {
                   Padding(
                     padding: const EdgeInsets.only(
                         right: 10.0), // Thêm khoảng cách bên phải
-                    child: Image.network(
-                      'https://s3-alpha-sig.figma.com/img/8af0/30e2/03f1071fa1bd51c5cfb950ef892cccaf?Expires=1731888000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=boQT44A9ufTQuQNfAjW3jY-IVI4rzUhLXHBtSHx4Ikb-bPzsGTLZlHYK0UbYhohz1IlvN5~ACZsXGqlqyFADNNpBVGcYUVTkeurVjVkG7byZ6UGBQ-tVi3nbudCqeYLVKV5-2jjoOfFd~Nrv3ytQ5BuuDTvIU-9HzIOCisZzR3e7md2ojwYxeP3pwedupRljO1HXBh8FFRK45KIvJ9bjIAPiKKa51p8jmdynBqXFlqcP7wYvXsMJ3HQtRTYDv-eEAXFhIoN~2qPYj-ovkLAT8gy7pbg6ZtTtU44ae~L-Im1vFRTuD9clxOU~t5P1ZuKOVVOIk4sqsUSfrf3wiLJ7bQ__', // Đường dẫn đến hình ảnh
+                    child: Image.asset(
+                      'lib/src/assets/PasswordRecovery/email.png', // Đường dẫn đến hình ảnh
                       width: 20, // Đặt chiều rộng cho hình ảnh
                       height: 20, // Đặt chiều cao cho hình ảnh
                     ),
@@ -108,10 +170,21 @@ class _PasswordRecoveryEmailState extends State<PasswordRecoveryEmail> {
                 ],
               ),
             ),
+            if (erorrEmail.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    erorrEmail,
+                    style: TextStyle(color: Color(0xffEF2E2E), fontSize: 12),
+                  ),
+                ),
+              ),
             const SizedBox(height: 40),
             GestureDetector(
               onTap: () {
-             context.go('/verificationcode', extra: 'email');
+             handleSendOTP();
               },
               child: Container(
                 width: MediaQuery.of(context).size.width -
@@ -122,11 +195,15 @@ class _PasswordRecoveryEmailState extends State<PasswordRecoveryEmail> {
                   color: Color(0xffD61355), // Màu nền
                 ),
                 alignment: Alignment.center, // Căn giữa chữ bên trong nút
-                child: const Text(
+                child: isLoading
+                    ? CircularProgressIndicator(
+                  color: Colors.white,
+                )
+                    : const Text(
                   'Gửi mã xác minh',
                   style: TextStyle(
-                    color: Colors.white, // Đặt màu chữ trắng
-                    fontSize: 16, // Đặt kích thước chữ
+                    color: Colors.white,
+                    fontSize: 16,
                   ),
                 ),
               ),
