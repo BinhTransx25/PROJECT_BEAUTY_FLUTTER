@@ -1,6 +1,7 @@
 // main_router.dart
 
-import 'package:beauty/src/Screen/Home/HomeScreen.dart';
+import 'package:beauty/src/Screen/Onboarding_Signin_up_Splash/Signin.dart';
+import 'package:beauty/src/Screen/Onboarding_Signin_up_Splash/Signup.dart';
 
 import '../Screen/Onboarding_Signin_up_Splash/splash_widget.dart';
 // main_router.dart
@@ -20,12 +21,12 @@ class MainRouter {
   MainRouter({required this.loginBloc});
 
   late final GoRouter router = GoRouter(
-    initialLocation: '/home', // Định nghĩa location ban đầu
+    initialLocation: '/signin', // Định nghĩa location ban đầu
     refreshListenable: BlocRefreshNotifier(loginBloc),
     routes: [
       GoRoute(
-        path: '/home',
-        builder: (context, state) => HomeScreen(),
+        path: '/signin',
+        builder: (context, state) => SigninScreen(),
       ),
       // Kết hợp các routes từ AuthenRouter
       ...AuthenRouter.routes,

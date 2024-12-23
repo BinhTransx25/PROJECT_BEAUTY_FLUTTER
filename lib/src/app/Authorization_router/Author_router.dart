@@ -1,6 +1,6 @@
+import 'package:beauty/src_demo/retrofit/HomeScreen.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../Screen/Home/HomeScreen.dart';
 import '../../Screen/Cart/Cart.dart';
 import '../../Screen/Account/Account.dart';
 import '../../Screen/Shop/NotificationScreen.dart';
@@ -11,7 +11,6 @@ import '../../Screen/CheckOut/Checkout.dart';
 import '../../Screen/Address/Address.dart';
 import '../../Screen/Address/Edit_Address.dart';
 import '../../Screen/Vouchers/Vouchers.dart';
-import '../../Screen/MyOrder/Ongoing_complete/Ongoing.dart';
 import '../../Screen/Profile/Profile.dart';
 import '../../Screen/Payment_method/payment_method.dart';
 import '../../Screen/NewCard/new_card.dart';
@@ -64,10 +63,6 @@ class AuthorRouter {
     GoRoute(
       path: '/favourite',
       builder: (context, state) => FavoriteProduct(),
-    ),
-    GoRoute(
-      path: '/ongoing',
-      builder: (context, state) => Ongoing(),
     ),
     GoRoute(
       path: '/cart',
