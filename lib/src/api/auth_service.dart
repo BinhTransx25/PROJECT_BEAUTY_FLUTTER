@@ -32,7 +32,7 @@ class AuthService {
       } else {
         return false;
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print('DioError: ${e.response?.data}');
       return false;
     } catch (e) {
@@ -67,7 +67,7 @@ class AuthService {
         Fluttertoast.showToast(msg: 'Đăng nhập thất bại');
         return false;
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       Fluttertoast.showToast(msg: 'Lỗi: ${e.message}');
       return false;
     } catch (e) {
@@ -97,7 +97,7 @@ class AuthService {
         print('Response data: ${response.data}');
         return false;
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       if (e.response != null) {
         print('DioError: ${e.response?.statusCode}');
         print('DioError response data: ${e.response?.data}');
@@ -127,7 +127,7 @@ class AuthService {
       } else {
         return false;
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print('DioError: ${e.response?.data}');
       return false;
     } catch (e) {
@@ -153,7 +153,7 @@ class AuthService {
       } else {
         return false;
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       print('DioError: ${e.response?.data}');
       return false;
     } catch (e) {

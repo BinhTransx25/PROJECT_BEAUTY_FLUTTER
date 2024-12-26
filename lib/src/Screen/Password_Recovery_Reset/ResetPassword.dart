@@ -1,85 +1,14 @@
-
-// import 'dart:convert';
-// import 'dart:async';
-
-// import 'package:dio/dio.dart';
-
 import 'package:beauty/src/api/auth_service.dart';
 import 'package:beauty/src/models/user/user_models.dart';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class Resetpassword extends StatefulWidget {
-  final String email;
-  const Resetpassword({super.key, required this.email});
+  const Resetpassword({super.key});
 
   @override
   State<Resetpassword> createState() => _ResetpasswordState();
 }
-
-
-// void _showSuccessModal(BuildContext context) {
-//   showDialog(
-//     context: context,
-//     barrierDismissible: true,
-//     builder: (BuildContext context) {
-//       return Dialog(
-//         shape: RoundedRectangleBorder(
-//           borderRadius: BorderRadius.circular(10),
-//         ),
-//         child: Padding(
-//           padding: const EdgeInsets.all(20.0),
-//           child: Column(
-//             mainAxisSize: MainAxisSize.min,
-//             children: [
-//               const Text(
-//                 'Thành công',
-//                 style: TextStyle(
-//                   fontSize: 24,
-//                   fontWeight: FontWeight.bold,
-//                 ),
-//               ),
-//               const SizedBox(height: 30),
-//               Image.asset('lib/src/assets/ResetPassword/success.png'),
-//               const SizedBox(height: 30),
-//               const Text(
-//                 'Đổi mật khẩu thành công!',
-//                 textAlign: TextAlign.center,
-//                 style: TextStyle(
-//                   fontSize: 20,
-//                   fontWeight: FontWeight.bold,
-//                 ),
-//               ),
-//               const SizedBox(height: 20),
-//               ElevatedButton(
-//                 onPressed: () {
-//                   Navigator.pop(context); // Đóng modal
-//                   context.go('/signin'); // Điều hướng về trang login
-//                 },
-//                 style: ElevatedButton.styleFrom(
-//                   backgroundColor: const Color(0xffD61355), // Màu nền nút
-//                   shape: RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(10), // Bo góc nút
-//                   ),
-//                 ),
-//                 child: const Text(
-//                   'Đồng ý',
-//                   style: TextStyle(
-//                     color: Colors.white, // Màu chữ nút
-//                     fontSize: 16,
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       );
-//     },
-//   );
-// }
-
-
 
 class _ResetpasswordState extends State<Resetpassword> {
   late String email;
@@ -88,11 +17,6 @@ class _ResetpasswordState extends State<Resetpassword> {
   String confirmPassword = '';
   String errorPassword = '';
   String errorConfirmPassword = '';
-
-  // final Dio _dio = Dio();
-
-  // Future<void> resetPassword() async {
-
 
   @override
   void initState() {
@@ -103,7 +27,6 @@ class _ResetpasswordState extends State<Resetpassword> {
   }
 
   void resetpassword() async {
-
     setState(() {
       errorPassword = '';
       errorConfirmPassword = '';
@@ -111,54 +34,12 @@ class _ResetpasswordState extends State<Resetpassword> {
 
     if (password.isEmpty) {
       setState(() {
-
-      //   errorPassword = '* Mật khẩu mới không được để trống';
-      // });
-      // return;
-
         errorPassword = '* Mật khẩu mới không được trùng với mật khẩu cũ';
       });
-
     }
 
     if (confirmPassword.isEmpty) {
       setState(() {
-
-  //       errorConfirmPassword = '* Xác nhận mật khẩu không được để trống';
-  //     });
-  //     return;
-  //   }
-
-  //   if (password != confirmPassword) {
-  //     setState(() {
-  //       errorConfirmPassword = '* Mật khẩu xác nhận không trùng khớp';
-  //     });
-  //     return;
-  //   }
-
-  //   try {
-  //     final response = await Dio().post(
-  //       'https://api-core.dsp.one/api/password/reset-password',
-  //       data: {'email':widget.email,'new_password': password, 'new_password_confirmation': confirmPassword},
-  //     );
-
-  //     final responseData = jsonDecode(response.toString());
-  //     if (responseData['message'] == 'Mật khẩu đã được cập nhật thành công.') {
-  //       _showSuccessModal(context);
-  //     } else {
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         SnackBar(content: Text('Đổi mật khẩu thất bại. Vui lòng thử lại.')),
-  //       );
-  //     }
-  //   } catch (e) {
-  //     print('Error: $e');
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(content: Text('Có lỗi xảy ra. Vui lòng thử lại.')),
-  //     );
-  //   }
-  // }
-
-
         errorConfirmPassword =
             '* Mật khẩu đã nhập không trùng với mật khẩu mới tạo';
       });
@@ -246,7 +127,6 @@ class _ResetpasswordState extends State<Resetpassword> {
       },
     );
   }
-
 
   @override
   Widget build(BuildContext context) {

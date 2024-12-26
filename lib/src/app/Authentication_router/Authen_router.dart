@@ -41,20 +41,11 @@ class AuthenRouter {
     ),
     GoRoute(
       path: '/resetpassword',
-      builder: (context, state) {
-        final Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
-        return Resetpassword(email: extra['email'] as String,);
-      },
+      builder: (context, state) => Resetpassword(),
     ),
     GoRoute(
       path: '/verificationcode',
-      builder: (context, state){
-        final Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
-        return Verificationcode(
-          email: extra['email'] as String,
-          previousPage: extra['previousPage'] as String,
-        );
-      },
+      builder: (context, state) => Verificationcode(),
     ),
   ];
 }

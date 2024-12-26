@@ -1,8 +1,9 @@
+// main_router.dart
 
 import 'package:beauty/src/Screen/Onboarding_Signin_up_Splash/Signin.dart';
 import 'package:beauty/src/Screen/Onboarding_Signin_up_Splash/Signup.dart';
 
-// import '../Screen/Onboarding_Signin_up_Splash/splash_widget.dart';
+import '../Screen/Onboarding_Signin_up_Splash/splash_widget.dart';
 // main_router.dart
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -11,8 +12,7 @@ import 'Authorization_router/Author_router.dart';
 import '../bloc/login_bloc/login_bloc.dart';
 import '../bloc/login_bloc/login_state.dart';
 import '../bloc/BlocRefreshNotifier.dart';
-// import 'package:flutter/material.dart';
-
+import 'package:flutter/material.dart';
 
 
 class MainRouter {
@@ -47,8 +47,7 @@ class MainRouter {
         // Nếu đã đăng nhập thành công, chuyển tới trang home
         return '/home';
       }
-      return null;
-      // Không thay đổi trang nếu không có điều kiện nào khớp
+      return null; // Không thay đổi trang nếu không có điều kiện nào khớp
     },
   );
 }
