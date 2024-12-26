@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <key>CFBundleDevelopmentRegion</key>
 <string>$(DEVELOPMENT_LANGUAGE)</string>
 <key>CFBundleDisplayName</key>
@@ -107,4 +107,3 @@
 		<false/>
 	</dict>
 </plist>
->>>>>>> cf51554b14e0cff058e4bee8df5f2600962c9682

@@ -1,12 +1,14 @@
 import 'package:beauty/src/Screen/Onboarding_Signin_up_Splash/widgets/button/custom_button.dart';
 import 'package:beauty/src/Screen/Onboarding_Signin_up_Splash/widgets/text_fields/custom_text_field.dart';
+import 'package:beauty/src/api/auth_service.dart';
+import 'package:beauty/src/models/user/user_models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../bloc/login_bloc/login_bloc.dart';
 import '../../bloc/login_bloc/login_event.dart';
-import '../../bloc/login_bloc/login_state.dart'; // Import LoginBloc
+import '../../bloc/login_bloc/login_state.dart';
 
 class SigninScreen extends StatefulWidget {
   @override
@@ -41,18 +43,59 @@ class _SigninScreenState extends State<SigninScreen> {
     });
   }
 
-  void _submit() {
+  Future<void> _submit() async {
     _validateField('email');
     _validateField('password');
-    setState(() {}); // Rebuild to show the error messages if any
+    setState(() {});
     if (emailError == null && passwordError == null) {
-      // Gửi sự kiện LoginRequested để yêu cầu đăng nhập
-      context.read<LoginBloc>().add(
-            LoginRequested(
-              username: emailController.text.trim(),
-              password: passwordController.text.trim(),
-            ),
+      final userRequest = UserRequest(
+        name: '',
+        nickName: '',
+        email: emailController.text.trim(),
+        address: '',
+        phone: '',
+        password: passwordController.text.trim(),
+        passwordConfirmation: passwordController.text.trim(),
+        customerId: 1,
+      );
+      try {
+        final authService = AuthService();
+        final success = await authService.login(userRequest);
+        if (success) {
+          Fluttertoast.showToast(
+            msg: 'Đăng nhập thành công',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            textColor: Colors.white,
+            fontSize: 16.0,
           );
+          context.go('/bottomTab');
+        } else {
+          Fluttertoast.showToast(
+            msg: 'Đăng nhập thất bại',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
+        }
+      } catch (e) {}
+    } else if (emailError == null && passwordError == null) {
+      Fluttertoast.showToast(
+        msg: 'Vui lòng nhập đầy đủ thông tin',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+    } else {
+      Fluttertoast.showToast(
+        msg: 'Vui lòng kiểm tra thông tin đăng nhập',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
     }
   }
 
