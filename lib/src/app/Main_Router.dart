@@ -1,8 +1,5 @@
 // main_router.dart
 
-import 'package:beauty/src/Screen/Onboarding_Signin_up_Splash/Signin.dart';
-import 'package:beauty/src/Screen/Onboarding_Signin_up_Splash/Signup.dart';
-
 import '../Screen/Onboarding_Signin_up_Splash/splash_widget.dart';
 // main_router.dart
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,19 +11,18 @@ import '../bloc/login_bloc/login_state.dart';
 import '../bloc/BlocRefreshNotifier.dart';
 import 'package:flutter/material.dart';
 
-
 class MainRouter {
   final LoginBloc loginBloc;
 
   MainRouter({required this.loginBloc});
 
   late final GoRouter router = GoRouter(
-    initialLocation: '/signin', // Định nghĩa location ban đầu
+    initialLocation: '/splash', // Định nghĩa location ban đầu
     refreshListenable: BlocRefreshNotifier(loginBloc),
     routes: [
       GoRoute(
-        path: '/signin',
-        builder: (context, state) => SigninScreen(),
+        path: '/splash',
+        builder: (context, state) => SplashWidget(),
       ),
       // Kết hợp các routes từ AuthenRouter
       ...AuthenRouter.routes,
