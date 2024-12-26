@@ -3,8 +3,8 @@ import 'dart:async';
 // cua hunghung
 import 'package:beauty/logic/get_notify/get_notify_block.dart';
 import 'package:beauty/logic/get_notify/get_notify_event.dart';
-import 'package:beauty/logic/get_notify/get_notify_state.dart';
-import 'package:beauty/notification_helper/notification_helper.dart';
+// import 'package:beauty/logic/get_notify/get_notify_state.dart';
+// import 'package:beauty/notification_helper/notification_helper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/home/data_home_new.dart';
@@ -22,7 +22,7 @@ import 'widgets/ProductList.dart';
 import 'widgets/ProductSaleList.dart';
 import 'widgets/RadiantGlowSection.dart';
 import '../../app/tabs/bottom_nav_bar.dart';
-import '../../models/home/data_home_new.dart';
+// import '../../models/home/data_home_new.dart';
 import '../../models/home/CategoryModel.dart';
 import '../../models/home/ProductModel.dart';
 

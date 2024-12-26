@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+// import 'package:go_router/go_router.dart';
 
 class SettingDetailScreen extends StatelessWidget {
   // Giả sử bạn đã lấy dữ liệu setting từ API và truyền vào constructor

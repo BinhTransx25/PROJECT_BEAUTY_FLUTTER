@@ -1,7 +1,7 @@
 
 import 'package:beauty/src/Screen/Home/HomeScreen.dart';
 
-import '../Screen/Onboarding_Signin_up_Splash/splash_widget.dart';
+// import '../Screen/Onboarding_Signin_up_Splash/splash_widget.dart';
 // main_router.dart
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
