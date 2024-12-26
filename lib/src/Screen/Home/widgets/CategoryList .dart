@@ -25,7 +25,7 @@ class _CategoryListState extends State<CategoryList> {
     try {
       final fetchedCategories = await _categoryService.getCategories();
       setState(() {
-        categories = fetchedCategories;
+        categories = fetchedCategories.take(5).toList(); // giới hạn 
         isLoading = false;
       });
     } catch (e) {
