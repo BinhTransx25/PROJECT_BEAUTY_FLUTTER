@@ -79,7 +79,15 @@ class _SigninScreenState extends State<SigninScreen> {
             fontSize: 16.0,
           );
         }
-      } catch (e) {}
+      } catch (e) {
+        Fluttertoast.showToast(
+          msg: 'Có lỗi xảy ra: ${e.toString()}',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+      }
     } else if (emailError == null && passwordError == null) {
       Fluttertoast.showToast(
         msg: 'Vui lòng nhập đầy đủ thông tin',
