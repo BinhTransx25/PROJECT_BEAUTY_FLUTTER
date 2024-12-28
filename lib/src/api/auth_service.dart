@@ -43,6 +43,7 @@ class AuthService {
 
   Future<bool> login(UserRequest userRequest) async {
     const String url = 'https://api-core.dsp.one/login';
+    
 
     try {
       final response = await _dio.post(url, data: {

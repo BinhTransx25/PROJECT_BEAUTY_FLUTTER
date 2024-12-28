@@ -69,7 +69,7 @@ class _SigninScreenState extends State<SigninScreen> {
             textColor: Colors.white,
             fontSize: 16.0,
           );
-          context.go('/bottomTab');
+          context.go('/home');
         } else {
           Fluttertoast.showToast(
             msg: 'Đăng nhập thất bại',
