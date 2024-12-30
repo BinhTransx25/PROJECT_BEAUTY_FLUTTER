@@ -1,4 +1,4 @@
-import 'package:beauty/src_demo/retrofit/HomeScreen.dart';
+
 import 'package:go_router/go_router.dart';
 
 import '../../Screen/Cart/Cart.dart';
@@ -17,6 +17,7 @@ import '../../Screen/NewCard/new_card.dart';
 import '../../Screen/Notification/Notification.dart';
 import '../../Screen/FAQs/FAQs.dart';
 import '../../Screen/Help_Center/Help_Center.dart';
+import '../../Screen/Home/HomeScreen.dart';
 
 class AuthorRouter {
   static final List<GoRoute> routes = [

@@ -3,14 +3,14 @@ import 'package:dio/dio.dart';
 import 'api_client.dart'; // Đảm bảo bạn đã nhập đúng đường dẫn
 import './modul/category.dart'; // Import model Category
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomeScreenDemo extends StatefulWidget {
+  const HomeScreenDemo({Key? key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreenDemo> {
   late ApiClient apiClient;
   List<Category> categories = [];
   bool isLoading = true;
