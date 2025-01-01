@@ -1,12 +1,12 @@
-import 'package:beauty/logic/get_notify/get_notify_block.dart';
 import 'package:flutter/material.dart';
-
-// import 'src/Screen/Password_Recovery_Reset/VerificationCode.dart';
-// import 'src/app/app_router.dart';
-import 'notification_helper/notification_helper.dart';
-import 'src/app/Main_Router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'src/bloc/login_bloc/login_bloc.dart';
+import 'package:dio/dio.dart';
+
+import 'src/service/api_client.dart';
+import 'src/bloc/auth/auth_bloc.dart';
+import 'package:beauty/logic/get_notify/get_notify_block.dart';
+import 'notification_helper/notification_helper.dart';
+import 'src/app/main_router.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,45 +20,35 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => LoginBloc(),
+          create: (context) => AuthBloc(apiClient: apiClient()),
         ),
         BlocProvider(
-          create: (context) =>
-              GetNotifyBloc(), // Make sure GetNotifyBloc is defined
+          create: (context) => GetNotifyBloc(),
         ),
       ],
       child: Builder(
         builder: (context) {
-          final loginBloc = context.read<LoginBloc>();
-          final router = MainRouter(loginBloc: loginBloc).router;
+          final authBloc = context.read<AuthBloc>();
+          final router = MainRouter(authBloc: authBloc).router;
+
           return MaterialApp.router(
             routerConfig: router,
+            debugShowCheckedModeBanner: false,
+            title: 'Beauty App',
+            theme: ThemeData(
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
           );
         },
       ),
     );
   }
-}
 
-/**
-    class MyApp extends StatelessWidget {
-    final _appRouter = AppRouter();
-    @override
-    Widget build(BuildContext context) {
-    return MaterialApp.router(
-    // home: HomeScreennnn(),  Gọi màn hình mọi người đang code vào đây nha
-    routerConfig: _appRouter.router,
-
+  ApiClient apiClient() {
+    final dio = Dio();
+    dio.options = BaseOptions(
+      baseUrl: "http://10.0.2.2:41754",
     );
-    }
-    }
- */
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       home: Verificationcode(), // Gọi màn hình mọi người đang code vào đây nha
-//     );
-//   }
-// }
+    return ApiClient(dio);
+  }
+}

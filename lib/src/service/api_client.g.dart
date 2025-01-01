@@ -14,7 +14,7 @@ class _ApiClient implements ApiClient {
     this.baseUrl,
     this.errorLogger,
   }) {
-    baseUrl ??= 'https://trip-aura-server.vercel.app/category/';
+    baseUrl ??= 'http://localhost:9999';
   }
 
   final Dio _dio;
@@ -24,19 +24,20 @@ class _ApiClient implements ApiClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<CategoryResponse> getData() async {
+  Future<UserModel> loginUser(Map<String, String> credentials) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<CategoryResponse>(Options(
-      method: 'GET',
+    final _data = <String, dynamic>{};
+    _data.addAll(credentials);
+    final _options = _setStreamType<UserModel>(Options(
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          'api/getCategory',
+          '/users/login_user',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -46,9 +47,9 @@ class _ApiClient implements ApiClient {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late CategoryResponse _value;
+    late UserModel _value;
     try {
-      _value = CategoryResponse.fromJson(_result.data!);
+      _value = UserModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

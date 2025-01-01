@@ -110,7 +110,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       SizedBox(height: 10),
                       CustomButton(
                         title: 'Đăng nhập',
-                        onPress: () => context.go('/signin'),
+                        onPress: () => context.go('/signin_screen'),
                         textStyle: TextStyle(color: Colors.white, fontSize: 16),
                       )
                     ],

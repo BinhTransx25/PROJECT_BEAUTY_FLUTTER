@@ -8,6 +8,7 @@ import '../../Screen/Password_Recovery_Reset/PasswordRecoveryEmail.dart';
 import '../../Screen/Password_Recovery_Reset/PasswordRecoveryPhone.dart';
 import '../../Screen/Password_Recovery_Reset/ResetPassword.dart';
 import '../../Screen/Password_Recovery_Reset/VerificationCode.dart';
+import 'package:beauty/src/Screen/Onboarding_Signin_up_Splash/signin_screen.dart';
 
 class AuthenRouter {
   static final List<GoRoute> routes = [
@@ -46,6 +47,10 @@ class AuthenRouter {
     GoRoute(
       path: '/verificationcode',
       builder: (context, state) => Verificationcode(),
+    ),
+    GoRoute(
+      path: '/signin_screen',
+      builder: (context, state) => SignInScreen(),
     ),
   ];
 }

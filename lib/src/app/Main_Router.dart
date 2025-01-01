@@ -10,15 +10,18 @@ import '../bloc/login_bloc/login_bloc.dart';
 import '../bloc/login_bloc/login_state.dart';
 import '../bloc/BlocRefreshNotifier.dart';
 
+import '../bloc/auth/auth_bloc.dart';
+import '../bloc/auth/auth_state.dart';
 
 class MainRouter {
-  final LoginBloc loginBloc;
+  // final LoginBloc loginBloc;
+  final AuthBloc authBloc;
 
-  MainRouter({required this.loginBloc});
+  MainRouter({required this.authBloc});
 
   late final GoRouter router = GoRouter(
     initialLocation: '/splash', // Định nghĩa location ban đầu
-    refreshListenable: BlocRefreshNotifier(loginBloc),
+    refreshListenable: BlocRefreshNotifier(authBloc),
     routes: [
       GoRoute(
         path: '/splash',
@@ -30,16 +33,16 @@ class MainRouter {
       ...AuthorRouter.routes,
     ],
     redirect: (context, state) {
-      final loginState = context.read<LoginBloc>().state;
+      final authBloc = context.read<AuthBloc>().state;
 
       // Điều hướng dựa trên trạng thái đăng nhập
-      if ((loginState is LoginInitial || loginState is LoginFailure) &&
+      if ((authBloc is LoginInitial || authBloc is LoginFailure) &&
           state.uri.toString() == '/account') {
         // Khi ở trạng thái LoginInitial hoặc LoginFailure, chuyển về trang đăng nhập
         return '/signin';
       }
 
-      if (loginState is LoginSuccess && state.uri.toString() == '/signin') {
+      if (authBloc is LoginSuccess && state.uri.toString() == '/signin' && state.uri.toString() == '/splash' ) {
         // Nếu đã đăng nhập thành công, chuyển tới trang home
         return '/home';
       }
