@@ -4,26 +4,38 @@ import 'package:dio/dio.dart';
 
 import 'src/service/api_client.dart';
 import 'src/bloc/auth/auth_bloc.dart';
-import 'package:beauty/logic/get_notify/get_notify_block.dart';
+import 'src/repositories/auth_repository.dart';
 import 'notification_helper/notification_helper.dart';
 import 'src/app/main_router.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  NotificationHelper.init();
-  runApp(MyApp());
+
+  // Initialize notification helper
+  await NotificationHelper.init();
+
+  // Initialize Dio and ApiClient
+  final dio = Dio();
+  final apiClient = ApiClient(dio);
+
+  // Initialize AuthRepository
+  final authRepository = AuthRepository(apiClient);
+
+  // Run the app
+  runApp(MyApp(authRepository: authRepository));
 }
 
 class MyApp extends StatelessWidget {
+  final AuthRepository authRepository;
+
+  const MyApp({Key? key, required this.authRepository}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => AuthBloc(apiClient: apiClient()),
-        ),
-        BlocProvider(
-          create: (context) => GetNotifyBloc(),
+          create: (context) => AuthBloc(authRepository),
         ),
       ],
       child: Builder(
@@ -34,21 +46,14 @@ class MyApp extends StatelessWidget {
           return MaterialApp.router(
             routerConfig: router,
             debugShowCheckedModeBanner: false,
-            title: 'Beauty App',
+            title: 'Flutter App',
             theme: ThemeData(
+              primarySwatch: Colors.blue,
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
           );
         },
       ),
     );
-  }
-
-  ApiClient apiClient() {
-    final dio = Dio();
-    dio.options = BaseOptions(
-      baseUrl: "http://10.0.2.2:41754",
-    );
-    return ApiClient(dio);
   }
 }
