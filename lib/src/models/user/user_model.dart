@@ -15,15 +15,23 @@
 // }
 
 class UserModel {
-  final String token;
+ 
+  final String name;
   final String email;
+  final String password;
 
-  UserModel({required this.token, required this.email});
+  UserModel({
+   
+    required this.name, 
+    required this.email,
+    required this.password
+    });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      token: json['token'],
+      name: json['name'],
       email: json['email'],
+      password: json['password']
     );
   }
 }
