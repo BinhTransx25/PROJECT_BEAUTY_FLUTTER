@@ -14,11 +14,11 @@ class _SignInScreenState extends State<SignInScreen> {
   final AuthApi _authApi = AuthApi();
 
   void _handleLogin() async {
-    final email = _identifierController.text;
+    final identifier = _identifierController.text;
     final password = _passwordController.text;
 
     // Kiểm tra dữ liệu nhập
-    if (email.isEmpty || password.isEmpty) {
+    if (identifier.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Vui lòng điền đầy đủ thông tin!')),
       );
@@ -26,7 +26,7 @@ class _SignInScreenState extends State<SignInScreen> {
     }
 
     // Tạo model người dùng
-    final userModel = UserModel(email: email, password: password, name: '');
+    final userModel = UserModel(email: identifier, password: password, name: '');
 
     // Gọi API đăng nhập
     final isLoggedIn = await _authApi.login(userModel);
@@ -67,4 +67,5 @@ class _SignInScreenState extends State<SignInScreen> {
       ),
     );
   }
+  
 }

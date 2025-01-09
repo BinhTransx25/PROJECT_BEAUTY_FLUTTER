@@ -35,11 +35,19 @@
 import 'package:dio/dio.dart';
 
 class ApiClient {
-  final Dio _dio = Dio(BaseOptions(
-    baseUrl: "http://localhost:9999/", // Thay bằng URL của API
+  final Dio _dio = Dio(
+    BaseOptions(
+    baseUrl: "http://localhost:9999", // Thay bằng URL của API
     connectTimeout: const Duration(milliseconds: 1000), 
     receiveTimeout: const Duration(milliseconds: 1000),
   ));
 
-  Dio get dio => _dio;
+  Future<Response> post(String path, {Map<String, dynamic>? data}) async {
+    try {
+      return await _dio.post(path, data: data);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
+final apiClient = ApiClient();
